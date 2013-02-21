@@ -1,0 +1,1213 @@
+
+*** Output file name: stdout
+*** Input trace format: ascii
+*** I/O trace used: ./ssdmodel/valid/Iozone_vmm4.dis
+*** Synthgen to be used?: 0
+
+disksim_global Global {
+Init Seed = 42,
+Real Seed = 42,
+Stat definition file = statdefs
+} # end of Global spec
+
+disksim_iosim Sim {
+I/O Trace Time Scale = 1.000000
+} # end of Sim spec
+
+disksim_stats Stats {
+iodriver stats = disksim_iodriver_stats {
+Print driver size stats = 1,
+Print driver locality stats = 0,
+Print driver blocking stats = 0,
+Print driver interference stats = 0,
+Print driver queue stats = 1,
+Print driver crit stats = 0,
+Print driver idle stats = 1,
+Print driver intarr stats = 0,
+Print driver streak stats = 1,
+Print driver stamp stats = 1,
+Print driver per-device stats = 0
+   },
+bus stats = disksim_bus_stats {
+Print bus idle stats = 1,
+Print bus arbwait stats = 1
+   },
+ctlr stats = disksim_ctlr_stats {
+Print controller cache stats = 1,
+Print controller size stats = 1,
+Print controller locality stats = 1,
+Print controller blocking stats = 1,
+Print controller interference stats = 1,
+Print controller queue stats = 1,
+Print controller crit stats = 1,
+Print controller idle stats = 1,
+Print controller intarr stats = 0,
+Print controller streak stats = 1,
+Print controller stamp stats = 1,
+Print controller per-device stats = 1
+   },
+device stats = disksim_device_stats {
+Print device queue stats = 1,
+Print device crit stats = 0,
+Print device idle stats = 0,
+Print device intarr stats = 0,
+Print device size stats = 0,
+Print device seek stats = 1,
+Print device latency stats = 1,
+Print device xfer stats = 1,
+Print device acctime stats = 1,
+Print device interfere stats = 0,
+Print device buffer stats = 1
+   },
+process flow stats = disksim_pf_stats {
+Print per-process stats = 0,
+Print per-CPU stats = 0,
+Print all interrupt stats = 0,
+Print sleep stats = 0
+   }
+} # end of Stats spec
+
+disksim_iodriver DRIVER0 {
+type = 1,
+Constant access time = 0.0,
+Scheduler = disksim_ioqueue {
+Scheduling policy = 3,
+Cylinder mapping strategy = 1,
+Write initiation delay = 0.0,
+Read initiation delay = 0.0,
+Sequential stream scheme = 0,
+Maximum concat size = 128,
+Overlapping request scheme = 0,
+Sequential stream diff maximum = 0,
+Scheduling timeout scheme = 0,
+Timeout time/weight = 6,
+Timeout scheduling = 4,
+Scheduling priority scheme = 0,
+Priority scheduling = 4
+   },
+Use queueing in subsystem = 1
+} # end of DRIVER0 spec
+
+disksim_bus BUSTOP {
+type = 1,
+Arbitration type = 1,
+Arbitration time = 0.0,
+Read block transfer time = 0.0,
+Write block transfer time = 0.0,
+Print stats = 1
+} # end of BUSTOP spec
+
+disksim_bus BUSHBA {
+type = 2,
+Arbitration type = 1,
+Arbitration time = 0.001000,
+Read block transfer time = 0.0,
+Write block transfer time = 0.0,
+Print stats = 1
+} # end of BUSHBA spec
+
+disksim_ctlr CTLR0 {
+type = 1,
+Scale for delays = 0.0,
+Bulk sector transfer time = 0.0,
+Maximum queue length = 100,
+Print stats = 1
+} # end of CTLR0 spec
+
+ssdmodel_ssd SSD {
+Reserve pages percentage = 15,
+Minimum free blocks percentage = 5,
+Write policy = 2,
+Cleaning policy = 2,
+Planes per package = 8,
+Blocks per plane = 2048,
+Plane block mapping = 3,
+Copy back = 1,
+Number of parallel units = 1,
+Allocation pool logic = 1,
+Elements per gang = 1,
+Gang share = 1,
+Cleaning in background = 0,
+Command overhead = 0.0,
+Bus transaction latency = 0.0,
+Bulk sector transfer time = 0,
+Flash chip elements = 35,
+Page size = 8,
+Pages per block = 64,
+Blocks per element = 16384,
+Element stride pages = 1,
+Never disconnect = 1,
+Print stats = 1,
+Max queue length = 1000000,
+Scheduler = disksim_ioqueue {
+Scheduling policy = 1,
+Cylinder mapping strategy = 0,
+Write initiation delay = 0,
+Read initiation delay = 0.0,
+Sequential stream scheme = 0,
+Maximum concat size = 0,
+Overlapping request scheme = 0,
+Sequential stream diff maximum = 0,
+Scheduling timeout scheme = 0,
+Timeout time/weight = 0,
+Timeout scheduling = 0,
+Scheduling priority scheme = 0,
+Priority scheduling = 1
+   },
+Timing model = 1,
+Chip xfer latency = 0.000025,
+Page read latency = 0.025000,
+Page write latency = 0.200000,
+Block erase latency = 1.500000
+} # end of SSD spec
+
+instantiate [ 
+   simfoo
+] as Sim
+
+instantiate [ 
+   statfoo
+] as Stats
+
+instantiate [ 
+   ssd0x0
+] as SSD
+
+instantiate [ 
+   bustop
+] as BUSTOP
+
+instantiate [ 
+   busHBA0
+] as BUSHBA
+
+instantiate [ 
+   driver0
+] as DRIVER0
+
+instantiate [ 
+   ctlrHBA0
+] as CTLR0
+
+topospec disksim_iodriver driver0 [ 
+   disksim_bus bustop [ 
+      disksim_ctlr ctlrHBA0 [ 
+         disksim_bus busHBA0 [ 
+            ssdmodel_ssd ssd0x0 [ ]
+         ]
+      ]
+   ]
+]
+
+disksim_logorg org0 {
+Addressing mode = Array,
+Distribution scheme = Striped,
+Redundancy scheme = Noredun,
+devices = [ 
+      ssd0x0
+   ],
+Stripe unit = 128,
+Synch writes for safety = 0,
+Number of copies = 2,
+Copy choice on read = 6,
+RMW vs. reconstruct = 0.500000,
+Parity stripe unit = 128,
+Parity rotation type = 1,
+Time stamp interval = 0.0,
+Time stamp start time = 60000.000000,
+Time stamp stop time = 10000000000.000000,
+Time stamp file name = stamps
+} # end of org0 spec
+
+disksim_pf Proc {
+Number of processors = 1,
+Process-Flow Time Scale = 1.000000
+} # end of Proc spec
+
+disksim_synthio Synthio {
+Number of I/O requests to generate = 10000,
+Maximum time of trace generated = 1000.000000,
+System call/return with each request = 0,
+Think time from call to request = 0.0,
+Think time from request to return = 0.0,
+Generators = [ 
+      disksim_synthgen {
+Storage capacity per device = 6156008,
+devices = [ 
+            org0, 
+            org1, 
+            org2, 
+            org3, 
+            org4, 
+            org5, 
+            org6, 
+            org7, 
+            org8, 
+            org9, 
+            org10, 
+            org11, 
+            org12, 
+            org13
+         ],
+Blocking factor = 8,
+Probability of sequential access = 0.0,
+Probability of local access = 0.0,
+Probability of read access = 0.660000,
+Probability of time-critical request = 0.0,
+Probability of time-limited request = 0.0,
+Time-limited think times = [ 
+            normal, 
+            30.000000, 
+            100.000000
+         ],
+General inter-arrival times = [ 
+            exponential, 
+            0.0, 
+            5.000000
+         ],
+Sequential inter-arrival times = [ 
+            normal, 
+            0.0, 
+            0.0
+         ],
+Local inter-arrival times = [ 
+            exponential, 
+            0.0, 
+            0.0
+         ],
+Local distances = [ 
+            normal, 
+            0.0, 
+            40000.000000
+         ],
+Sizes = [ 
+            exponential, 
+            0.0, 
+            8.000000
+         ]
+      }
+   ]
+} # end of Synthio spec
+
+loadparams complete
+Initialization complete
+j_debug time= 1000.000000 (user_id = 1) blocks = 40 (Throughput 0.019531 MB/s)(blocks cnt) ios = 2 spare time= 499.183216
+j_debug time= 1000.000000 (user_id = 2) blocks = 1552 (Throughput 0.757812 MB/s)(blocks cnt) ios = 39 spare time= 494.601000
+j_debug time= 2000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 499.183216
+j_debug time= 2000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.601000
+j_debug time= 3000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 499.183216
+j_debug time= 3000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.601000
+j_debug time= 4000.000000 (user_id = 1) blocks = 41640 (Throughput 20.332031 MB/s)(blocks cnt) ios = 59 spare time= 441.868508
+j_debug time= 4000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.601000
+j_debug time= 5000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 441.868508
+j_debug time= 5000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.601000
+j_debug time= 6000.000000 (user_id = 1) blocks = 38304 (Throughput 18.703125 MB/s)(blocks cnt) ios = 40 spare time= 392.055688
+j_debug time= 6000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.601000
+j_debug time= 7000.000000 (user_id = 1) blocks = 3072 (Throughput 1.500000 MB/s)(blocks cnt) ios = 7 spare time= 389.032507
+j_debug time= 7000.000000 (user_id = 2) blocks = 136 (Throughput 0.066406 MB/s)(blocks cnt) ios = 1 spare time= 494.470400
+j_debug time= 8000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 389.032507
+j_debug time= 8000.000000 (user_id = 2) blocks = 1416 (Throughput 0.691406 MB/s)(blocks cnt) ios = 38 spare time= 489.473000
+j_debug time= 9000.000000 (user_id = 1) blocks = 72 (Throughput 0.035156 MB/s)(blocks cnt) ios = 4 spare time= 387.702577
+j_debug time= 9000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 10000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 387.702577
+j_debug time= 10000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 11000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 387.396977
+j_debug time= 11000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 12000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 387.396977
+j_debug time= 12000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 13000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 387.396977
+j_debug time= 13000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 14000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 387.396977
+j_debug time= 14000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 15000.000000 (user_id = 1) blocks = 83200 (Throughput 40.625000 MB/s)(blocks cnt) ios = 110 spare time= 279.449850
+j_debug time= 15000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 16000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 279.449850
+j_debug time= 16000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 17000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 279.449850
+j_debug time= 17000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 18000.000000 (user_id = 1) blocks = 71592 (Throughput 34.957031 MB/s)(blocks cnt) ios = 82 spare time= 179.008409
+j_debug time= 18000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 19000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 179.008409
+j_debug time= 19000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 20000.000000 (user_id = 1) blocks = 72 (Throughput 0.035156 MB/s)(blocks cnt) ios = 4 spare time= 177.235177
+j_debug time= 20000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 21000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 177.235177
+j_debug time= 21000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 22000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 176.716377
+j_debug time= 22000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 23000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 176.716377
+j_debug time= 23000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 24000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 176.716377
+j_debug time= 24000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 25000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 176.716377
+j_debug time= 25000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 26000.000000 (user_id = 1) blocks = 10472 (Throughput 5.113281 MB/s)(blocks cnt) ios = 15 spare time= 159.125230
+j_debug time= 26000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 27000.000000 (user_id = 1) blocks = 114136 (Throughput 55.730469 MB/s)(blocks cnt) ios = 146 spare time= 3.967989
+j_debug time= 27000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 28000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 3.967989
+j_debug time= 28000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 489.473000
+j_debug time= 29000.000000 (user_id = 1) blocks = 51752 (Throughput 25.269531 MB/s)(blocks cnt) ios = 60 spare time= 439.026961
+j_debug time= 29000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 30000.000000 (user_id = 1) blocks = 55696 (Throughput 27.195312 MB/s)(blocks cnt) ios = 63 spare time= 359.272961
+j_debug time= 30000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 31000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 359.272961
+j_debug time= 31000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 32000.000000 (user_id = 1) blocks = 72 (Throughput 0.035156 MB/s)(blocks cnt) ios = 4 spare time= 357.547640
+j_debug time= 32000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 33000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 357.547640
+j_debug time= 33000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 34000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 357.242040
+j_debug time= 34000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 35000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 357.242040
+j_debug time= 35000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 36000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 357.242040
+j_debug time= 36000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 37000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 357.242040
+j_debug time= 37000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 38000.000000 (user_id = 1) blocks = 19752 (Throughput 9.644531 MB/s)(blocks cnt) ios = 24 spare time= 327.653768
+j_debug time= 38000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 39000.000000 (user_id = 1) blocks = 146312 (Throughput 71.441406 MB/s)(blocks cnt) ios = 187 spare time= 126.926520
+j_debug time= 39000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 40000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 126.926520
+j_debug time= 40000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 41000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 126.926520
+j_debug time= 41000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 42000.000000 (user_id = 1) blocks = 153176 (Throughput 74.792969 MB/s)(blocks cnt) ios = 177 spare time= 421.409187
+j_debug time= 42000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 43000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 421.409187
+j_debug time= 43000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 44000.000000 (user_id = 1) blocks = 72 (Throughput 0.035156 MB/s)(blocks cnt) ios = 4 spare time= 420.086939
+j_debug time= 44000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 45000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 420.086939
+j_debug time= 45000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 46000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 420.086939
+j_debug time= 46000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 47000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 419.781339
+j_debug time= 47000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 48000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 419.781339
+j_debug time= 48000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 49000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 419.781339
+j_debug time= 49000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 50000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 419.781339
+j_debug time= 50000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 51000.000000 (user_id = 1) blocks = 105504 (Throughput 51.515625 MB/s)(blocks cnt) ios = 122 spare time= 272.116558
+j_debug time= 51000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 52000.000000 (user_id = 1) blocks = 102112 (Throughput 49.859375 MB/s)(blocks cnt) ios = 144 spare time= 137.075574
+j_debug time= 52000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 53000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 137.075574
+j_debug time= 53000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 54000.000000 (user_id = 1) blocks = 73376 (Throughput 35.828125 MB/s)(blocks cnt) ios = 81 spare time= 29.290203
+j_debug time= 54000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 55000.000000 (user_id = 1) blocks = 97128 (Throughput 47.425781 MB/s)(blocks cnt) ios = 116 spare time= 398.821939
+j_debug time= 55000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 56000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 398.821939
+j_debug time= 56000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 57000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 5 spare time= 397.208967
+j_debug time= 57000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 58000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 397.208967
+j_debug time= 58000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 59000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 397.208967
+j_debug time= 59000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 60000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 396.903367
+j_debug time= 60000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 61000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 396.903367
+j_debug time= 61000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 62000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 396.903367
+j_debug time= 62000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 63000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 396.903367
+j_debug time= 63000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 64000.000000 (user_id = 1) blocks = 124256 (Throughput 60.671875 MB/s)(blocks cnt) ios = 144 spare time= 231.627276
+j_debug time= 64000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 65000.000000 (user_id = 1) blocks = 124976 (Throughput 61.023438 MB/s)(blocks cnt) ios = 182 spare time= 45.542937
+j_debug time= 65000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 66000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 45.542937
+j_debug time= 66000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 67000.000000 (user_id = 1) blocks = 21968 (Throughput 10.726562 MB/s)(blocks cnt) ios = 29 spare time= 11.965975
+j_debug time= 67000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 68000.000000 (user_id = 1) blocks = 188488 (Throughput 92.035156 MB/s)(blocks cnt) ios = 217 spare time= 238.966087
+j_debug time= 68000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 69000.000000 (user_id = 1) blocks = 16408 (Throughput 8.011719 MB/s)(blocks cnt) ios = 22 spare time= 218.185287
+j_debug time= 69000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 70000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 218.185287
+j_debug time= 70000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 71000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 5 spare time= 216.561630
+j_debug time= 71000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 72000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.561630
+j_debug time= 72000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 73000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 216.256030
+j_debug time= 73000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 74000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.256030
+j_debug time= 74000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 75000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.256030
+j_debug time= 75000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 76000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.256030
+j_debug time= 76000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 77000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 215.950430
+j_debug time= 77000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 78000.000000 (user_id = 1) blocks = 129824 (Throughput 63.390625 MB/s)(blocks cnt) ios = 153 spare time= 28.741333
+j_debug time= 78000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 79000.000000 (user_id = 1) blocks = 159624 (Throughput 77.941406 MB/s)(blocks cnt) ios = 186 spare time= 306.336200
+j_debug time= 79000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 80000.000000 (user_id = 1) blocks = 1304 (Throughput 0.636719 MB/s)(blocks cnt) ios = 46 spare time= 291.700556
+j_debug time= 80000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 81000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 291.700556
+j_debug time= 81000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 82000.000000 (user_id = 1) blocks = 85832 (Throughput 41.910156 MB/s)(blocks cnt) ios = 100 spare time= 166.751422
+j_debug time= 82000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 83000.000000 (user_id = 1) blocks = 107720 (Throughput 52.597656 MB/s)(blocks cnt) ios = 125 spare time= 24.621238
+j_debug time= 83000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 84000.000000 (user_id = 1) blocks = 35352 (Throughput 17.261719 MB/s)(blocks cnt) ios = 55 spare time= 460.554952
+j_debug time= 84000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 85000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 460.554952
+j_debug time= 85000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 86000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 458.772432
+j_debug time= 86000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 87000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 458.772432
+j_debug time= 87000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 88000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 458.772432
+j_debug time= 88000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 89000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 458.466832
+j_debug time= 89000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 90000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 458.466832
+j_debug time= 90000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 91000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 458.466832
+j_debug time= 91000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 92000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 458.466832
+j_debug time= 92000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 93000.000000 (user_id = 1) blocks = 49440 (Throughput 24.140625 MB/s)(blocks cnt) ios = 56 spare time= 391.235265
+j_debug time= 93000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 94000.000000 (user_id = 1) blocks = 116944 (Throughput 57.101562 MB/s)(blocks cnt) ios = 130 spare time= 227.634782
+j_debug time= 94000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 95000.000000 (user_id = 1) blocks = 101032 (Throughput 49.332031 MB/s)(blocks cnt) ios = 126 spare time= 94.400187
+j_debug time= 95000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 96000.000000 (user_id = 1) blocks = 64776 (Throughput 31.628906 MB/s)(blocks cnt) ios = 120 spare time= 487.479576
+j_debug time= 96000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 97000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 487.479576
+j_debug time= 97000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 98000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 487.479576
+j_debug time= 98000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 99000.000000 (user_id = 1) blocks = 78792 (Throughput 38.472656 MB/s)(blocks cnt) ios = 96 spare time= 381.916624
+j_debug time= 99000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 100000.000000 (user_id = 1) blocks = 100856 (Throughput 49.246094 MB/s)(blocks cnt) ios = 119 spare time= 239.216973
+j_debug time= 100000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 101000.000000 (user_id = 1) blocks = 73088 (Throughput 35.687500 MB/s)(blocks cnt) ios = 99 spare time= 121.522559
+j_debug time= 101000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 102000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 121.522559
+j_debug time= 102000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 103000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 121.522559
+j_debug time= 103000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 104000.000000 (user_id = 1) blocks = 120 (Throughput 0.058594 MB/s)(blocks cnt) ios = 6 spare time= 119.555728
+j_debug time= 104000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 105000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 119.555728
+j_debug time= 105000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 106000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 119.250128
+j_debug time= 106000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 107000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 119.250128
+j_debug time= 107000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 108000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 119.250128
+j_debug time= 108000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 109000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 119.250128
+j_debug time= 109000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 110000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 118.944528
+j_debug time= 110000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 111000.000000 (user_id = 1) blocks = 162128 (Throughput 79.164062 MB/s)(blocks cnt) ios = 188 spare time= 392.937423
+j_debug time= 111000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 112000.000000 (user_id = 1) blocks = 168720 (Throughput 82.382812 MB/s)(blocks cnt) ios = 210 spare time= 156.815377
+j_debug time= 112000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 113000.000000 (user_id = 1) blocks = 43000 (Throughput 20.996094 MB/s)(blocks cnt) ios = 103 spare time= 90.306184
+j_debug time= 113000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 114000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 90.306184
+j_debug time= 114000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 115000.000000 (user_id = 1) blocks = 101968 (Throughput 49.789062 MB/s)(blocks cnt) ios = 121 spare time= 439.191662
+j_debug time= 115000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 116000.000000 (user_id = 1) blocks = 152304 (Throughput 74.367188 MB/s)(blocks cnt) ios = 203 spare time= 216.239230
+j_debug time= 116000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 117000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.239230
+j_debug time= 117000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 118000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 216.239230
+j_debug time= 118000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 119000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 214.893167
+j_debug time= 119000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 120000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 214.893167
+j_debug time= 120000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 121000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 214.893167
+j_debug time= 121000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 122000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 214.587567
+j_debug time= 122000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 123000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 214.587567
+j_debug time= 123000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 124000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 214.587567
+j_debug time= 124000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 125000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 214.587567
+j_debug time= 125000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 126000.000000 (user_id = 1) blocks = 113784 (Throughput 55.558594 MB/s)(blocks cnt) ios = 135 spare time= 47.749520
+j_debug time= 126000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 127000.000000 (user_id = 1) blocks = 182848 (Throughput 89.281250 MB/s)(blocks cnt) ios = 219 spare time= 293.500185
+j_debug time= 127000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 128000.000000 (user_id = 1) blocks = 118720 (Throughput 57.968750 MB/s)(blocks cnt) ios = 205 spare time= 98.785343
+j_debug time= 128000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 129000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 98.785343
+j_debug time= 129000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 130000.000000 (user_id = 1) blocks = 38368 (Throughput 18.734375 MB/s)(blocks cnt) ios = 48 spare time= 47.801928
+j_debug time= 130000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 131000.000000 (user_id = 1) blocks = 167856 (Throughput 81.960938 MB/s)(blocks cnt) ios = 194 spare time= 295.586487
+j_debug time= 131000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 132000.000000 (user_id = 1) blocks = 133704 (Throughput 65.285156 MB/s)(blocks cnt) ios = 179 spare time= 102.162431
+j_debug time= 132000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 133000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 102.162431
+j_debug time= 133000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 134000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 102.162431
+j_debug time= 134000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 135000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 100.300431
+j_debug time= 135000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 136000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 100.300431
+j_debug time= 136000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 137000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 100.300431
+j_debug time= 137000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 138000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 99.781631
+j_debug time= 138000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 139000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 99.781631
+j_debug time= 139000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 140000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 99.781631
+j_debug time= 140000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 141000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 99.781631
+j_debug time= 141000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 142000.000000 (user_id = 1) blocks = 133336 (Throughput 65.105469 MB/s)(blocks cnt) ios = 158 spare time= 410.745896
+j_debug time= 142000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 143000.000000 (user_id = 1) blocks = 177856 (Throughput 86.843750 MB/s)(blocks cnt) ios = 218 spare time= 138.957622
+j_debug time= 143000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 144000.000000 (user_id = 1) blocks = 145712 (Throughput 71.148438 MB/s)(blocks cnt) ios = 240 spare time= 410.734768
+j_debug time= 144000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 145000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 410.734768
+j_debug time= 145000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 146000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 410.734768
+j_debug time= 146000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 147000.000000 (user_id = 1) blocks = 150664 (Throughput 73.566406 MB/s)(blocks cnt) ios = 183 spare time= 192.689939
+j_debug time= 147000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 148000.000000 (user_id = 1) blocks = 114248 (Throughput 55.785156 MB/s)(blocks cnt) ios = 161 spare time= 14.217330
+j_debug time= 148000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 149000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 14.217330
+j_debug time= 149000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 150000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 14.217330
+j_debug time= 150000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 151000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 12.928886
+j_debug time= 151000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 152000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 12.928886
+j_debug time= 152000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 153000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 12.928886
+j_debug time= 153000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 154000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 12.623286
+j_debug time= 154000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 155000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 12.623286
+j_debug time= 155000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 156000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 12.623286
+j_debug time= 156000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 157000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 12.623286
+j_debug time= 157000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 158000.000000 (user_id = 1) blocks = 123272 (Throughput 60.191406 MB/s)(blocks cnt) ios = 154 spare time= 341.549056
+j_debug time= 158000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 159000.000000 (user_id = 1) blocks = 152016 (Throughput 74.226562 MB/s)(blocks cnt) ios = 185 spare time= 111.077899
+j_debug time= 159000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 160000.000000 (user_id = 1) blocks = 173320 (Throughput 84.628906 MB/s)(blocks cnt) ios = 218 spare time= 363.514150
+j_debug time= 160000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 161000.000000 (user_id = 1) blocks = 50008 (Throughput 24.417969 MB/s)(blocks cnt) ios = 136 spare time= 278.484566
+j_debug time= 161000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 162000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 278.484566
+j_debug time= 162000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 163000.000000 (user_id = 1) blocks = 87288 (Throughput 42.621094 MB/s)(blocks cnt) ios = 108 spare time= 140.891141
+j_debug time= 163000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 164000.000000 (user_id = 1) blocks = 174016 (Throughput 84.968750 MB/s)(blocks cnt) ios = 199 spare time= 397.848296
+j_debug time= 164000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 165000.000000 (user_id = 1) blocks = 134664 (Throughput 65.753906 MB/s)(blocks cnt) ios = 186 spare time= 196.910591
+j_debug time= 165000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 166000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 196.910591
+j_debug time= 166000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 167000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 196.910591
+j_debug time= 167000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 168000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 195.594070
+j_debug time= 168000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 169000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 195.594070
+j_debug time= 169000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 170000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 195.594070
+j_debug time= 170000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 171000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 195.288470
+j_debug time= 171000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 172000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 195.288470
+j_debug time= 172000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 173000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 195.288470
+j_debug time= 173000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 174000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 195.288470
+j_debug time= 174000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 175000.000000 (user_id = 1) blocks = 70624 (Throughput 34.484375 MB/s)(blocks cnt) ios = 91 spare time= 92.528988
+j_debug time= 175000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 176000.000000 (user_id = 1) blocks = 165832 (Throughput 80.972656 MB/s)(blocks cnt) ios = 204 spare time= 333.233561
+j_debug time= 176000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 177000.000000 (user_id = 1) blocks = 157848 (Throughput 77.074219 MB/s)(blocks cnt) ios = 198 spare time= 106.123346
+j_debug time= 177000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 178000.000000 (user_id = 1) blocks = 145792 (Throughput 71.187500 MB/s)(blocks cnt) ios = 259 spare time= 372.996530
+j_debug time= 178000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 179000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 372.996530
+j_debug time= 179000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 180000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 372.996530
+j_debug time= 180000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 181000.000000 (user_id = 1) blocks = 140352 (Throughput 68.531250 MB/s)(blocks cnt) ios = 177 spare time= 164.862946
+j_debug time= 181000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 182000.000000 (user_id = 1) blocks = 170168 (Throughput 83.089844 MB/s)(blocks cnt) ios = 213 spare time= 422.621760
+j_debug time= 182000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 183000.000000 (user_id = 1) blocks = 55640 (Throughput 27.167969 MB/s)(blocks cnt) ios = 91 spare time= 344.754803
+j_debug time= 183000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 184000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 344.754803
+j_debug time= 184000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 185000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 344.754803
+j_debug time= 185000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 186000.000000 (user_id = 1) blocks = 104 (Throughput 0.050781 MB/s)(blocks cnt) ios = 5 spare time= 343.109285
+j_debug time= 186000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 187000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 343.109285
+j_debug time= 187000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 188000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 343.109285
+j_debug time= 188000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 189000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 342.803685
+j_debug time= 189000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 190000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 342.803685
+j_debug time= 190000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 191000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 342.803685
+j_debug time= 191000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 192000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 342.803685
+j_debug time= 192000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 193000.000000 (user_id = 1) blocks = 95192 (Throughput 46.480469 MB/s)(blocks cnt) ios = 121 spare time= 194.515433
+j_debug time= 193000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 194000.000000 (user_id = 1) blocks = 161064 (Throughput 78.644531 MB/s)(blocks cnt) ios = 203 spare time= 458.917735
+j_debug time= 194000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 195000.000000 (user_id = 1) blocks = 143208 (Throughput 69.925781 MB/s)(blocks cnt) ios = 188 spare time= 250.475480
+j_debug time= 195000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 196000.000000 (user_id = 1) blocks = 150992 (Throughput 73.726562 MB/s)(blocks cnt) ios = 190 spare time= 31.612462
+j_debug time= 196000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 197000.000000 (user_id = 1) blocks = 31232 (Throughput 15.250000 MB/s)(blocks cnt) ios = 112 spare time= 457.007417
+j_debug time= 197000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 198000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 457.007417
+j_debug time= 198000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 199000.000000 (user_id = 1) blocks = 105256 (Throughput 51.394531 MB/s)(blocks cnt) ios = 133 spare time= 308.314527
+j_debug time= 199000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 200000.000000 (user_id = 1) blocks = 175504 (Throughput 85.695312 MB/s)(blocks cnt) ios = 203 spare time= 43.477791
+j_debug time= 200000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 201000.000000 (user_id = 1) blocks = 128376 (Throughput 62.683594 MB/s)(blocks cnt) ios = 185 spare time= 355.873259
+j_debug time= 201000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 202000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 355.873259
+j_debug time= 202000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 203000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 355.873259
+j_debug time= 203000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 204000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 354.523285
+j_debug time= 204000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 205000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 354.523285
+j_debug time= 205000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 206000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 354.523285
+j_debug time= 206000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 207000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 354.217685
+j_debug time= 207000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 208000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 354.217685
+j_debug time= 208000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 209000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 354.217685
+j_debug time= 209000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 210000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 354.217685
+j_debug time= 210000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 211000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 353.912085
+j_debug time= 211000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 212000.000000 (user_id = 1) blocks = 162648 (Throughput 79.417969 MB/s)(blocks cnt) ios = 209 spare time= 95.837542
+j_debug time= 212000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 213000.000000 (user_id = 1) blocks = 162792 (Throughput 79.488281 MB/s)(blocks cnt) ios = 191 spare time= 355.746281
+j_debug time= 213000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 214000.000000 (user_id = 1) blocks = 167392 (Throughput 81.734375 MB/s)(blocks cnt) ios = 220 spare time= 108.545750
+j_debug time= 214000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 215000.000000 (user_id = 1) blocks = 130304 (Throughput 63.625000 MB/s)(blocks cnt) ios = 236 spare time= 392.129315
+j_debug time= 215000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 216000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 392.129315
+j_debug time= 216000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 217000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 392.129315
+j_debug time= 217000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 218000.000000 (user_id = 1) blocks = 154200 (Throughput 75.292969 MB/s)(blocks cnt) ios = 190 spare time= 164.348442
+j_debug time= 218000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 219000.000000 (user_id = 1) blocks = 165848 (Throughput 80.980469 MB/s)(blocks cnt) ios = 226 spare time= 418.048322
+j_debug time= 219000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 220000.000000 (user_id = 1) blocks = 136 (Throughput 0.066406 MB/s)(blocks cnt) ios = 6 spare time= 416.100094
+j_debug time= 220000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 221000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 416.100094
+j_debug time= 221000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 222000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 416.100094
+j_debug time= 222000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 223000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 414.742367
+j_debug time= 223000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 224000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 414.742367
+j_debug time= 224000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 225000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 414.742367
+j_debug time= 225000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 226000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 414.436767
+j_debug time= 226000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 227000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 414.436767
+j_debug time= 227000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 228000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 414.436767
+j_debug time= 228000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 229000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 414.436767
+j_debug time= 229000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 230000.000000 (user_id = 1) blocks = 77296 (Throughput 37.742188 MB/s)(blocks cnt) ios = 102 spare time= 287.932360
+j_debug time= 230000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 231000.000000 (user_id = 1) blocks = 156392 (Throughput 76.363281 MB/s)(blocks cnt) ios = 183 spare time= 66.957509
+j_debug time= 231000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 232000.000000 (user_id = 1) blocks = 167384 (Throughput 81.730469 MB/s)(blocks cnt) ios = 213 spare time= 319.614289
+j_debug time= 232000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 233000.000000 (user_id = 1) blocks = 156904 (Throughput 76.613281 MB/s)(blocks cnt) ios = 209 spare time= 89.108862
+j_debug time= 233000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 234000.000000 (user_id = 1) blocks = 106640 (Throughput 52.070312 MB/s)(blocks cnt) ios = 219 spare time= 397.841612
+j_debug time= 234000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 235000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 397.841612
+j_debug time= 235000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 236000.000000 (user_id = 1) blocks = 21872 (Throughput 10.679688 MB/s)(blocks cnt) ios = 33 spare time= 368.423963
+j_debug time= 236000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 237000.000000 (user_id = 1) blocks = 152224 (Throughput 74.328125 MB/s)(blocks cnt) ios = 189 spare time= 147.115490
+j_debug time= 237000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 238000.000000 (user_id = 1) blocks = 158696 (Throughput 77.488281 MB/s)(blocks cnt) ios = 203 spare time= 410.243439
+j_debug time= 238000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 239000.000000 (user_id = 1) blocks = 78064 (Throughput 38.117188 MB/s)(blocks cnt) ios = 124 spare time= 274.807659
+j_debug time= 239000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 240000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 274.807659
+j_debug time= 240000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 241000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 274.807659
+j_debug time= 241000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 242000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 273.457545
+j_debug time= 242000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 243000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 273.457545
+j_debug time= 243000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 244000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 273.457545
+j_debug time= 244000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 245000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 273.151945
+j_debug time= 245000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 246000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 273.151945
+j_debug time= 246000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 247000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 273.151945
+j_debug time= 247000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 248000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 273.151945
+j_debug time= 248000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 249000.000000 (user_id = 1) blocks = 31680 (Throughput 15.468750 MB/s)(blocks cnt) ios = 47 spare time= 231.150742
+j_debug time= 249000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 250000.000000 (user_id = 1) blocks = 161192 (Throughput 78.707031 MB/s)(blocks cnt) ios = 204 spare time= 492.804800
+j_debug time= 250000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 251000.000000 (user_id = 1) blocks = 172784 (Throughput 84.367188 MB/s)(blocks cnt) ios = 210 spare time= 48.330154
+j_debug time= 251000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 252000.000000 (user_id = 1) blocks = 157024 (Throughput 76.671875 MB/s)(blocks cnt) ios = 204 spare time= 65.885941
+j_debug time= 252000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 253000.000000 (user_id = 1) blocks = 162232 (Throughput 79.214844 MB/s)(blocks cnt) ios = 201 spare time= 88.281834
+j_debug time= 253000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 254000.000000 (user_id = 1) blocks = 21400 (Throughput 10.449219 MB/s)(blocks cnt) ios = 123 spare time= 490.860000
+j_debug time= 254000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 255000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 490.860000
+j_debug time= 255000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 256000.000000 (user_id = 1) blocks = 82648 (Throughput 40.355469 MB/s)(blocks cnt) ios = 110 spare time= 240.006855
+j_debug time= 256000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 257000.000000 (user_id = 1) blocks = 153296 (Throughput 74.851562 MB/s)(blocks cnt) ios = 205 spare time= 276.700469
+j_debug time= 257000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 258000.000000 (user_id = 1) blocks = 157784 (Throughput 77.042969 MB/s)(blocks cnt) ios = 194 spare time= 302.054935
+j_debug time= 258000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 259000.000000 (user_id = 1) blocks = 127056 (Throughput 62.039062 MB/s)(blocks cnt) ios = 181 spare time= 420.623115
+j_debug time= 259000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 260000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 420.623115
+j_debug time= 260000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 261000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 420.623115
+j_debug time= 261000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 262000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 420.623115
+j_debug time= 262000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 263000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 417.687515
+j_debug time= 263000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 264000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 417.687515
+j_debug time= 264000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 265000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 417.687515
+j_debug time= 265000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 266000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 417.381915
+j_debug time= 266000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 267000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 417.381915
+j_debug time= 267000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 268000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 417.381915
+j_debug time= 268000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 269000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 417.381915
+j_debug time= 269000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 270000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 417.076315
+j_debug time= 270000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 271000.000000 (user_id = 1) blocks = 137416 (Throughput 67.097656 MB/s)(blocks cnt) ios = 172 spare time= 15.947978
+j_debug time= 271000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 272000.000000 (user_id = 1) blocks = 157600 (Throughput 76.953125 MB/s)(blocks cnt) ios = 206 spare time= 60.357297
+j_debug time= 272000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 273000.000000 (user_id = 1) blocks = 163280 (Throughput 79.726562 MB/s)(blocks cnt) ios = 210 spare time= 73.016460
+j_debug time= 273000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 274000.000000 (user_id = 1) blocks = 134424 (Throughput 65.636719 MB/s)(blocks cnt) ios = 190 spare time= 159.778305
+j_debug time= 274000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 275000.000000 (user_id = 1) blocks = 154560 (Throughput 75.468750 MB/s)(blocks cnt) ios = 244 spare time= 173.071320
+j_debug time= 275000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 276000.000000 (user_id = 1) blocks = 640 (Throughput 0.312500 MB/s)(blocks cnt) ios = 40 spare time= 164.624178
+j_debug time= 276000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 277000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 164.624178
+j_debug time= 277000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 278000.000000 (user_id = 1) blocks = 84024 (Throughput 41.027344 MB/s)(blocks cnt) ios = 113 spare time= 419.117616
+j_debug time= 278000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 279000.000000 (user_id = 1) blocks = 97520 (Throughput 47.617188 MB/s)(blocks cnt) ios = 119 spare time= 149.723935
+j_debug time= 279000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 280000.000000 (user_id = 1) blocks = 103776 (Throughput 50.671875 MB/s)(blocks cnt) ios = 125 spare time= 352.868742
+j_debug time= 280000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 281000.000000 (user_id = 1) blocks = 91816 (Throughput 44.832031 MB/s)(blocks cnt) ios = 126 spare time= 90.658261
+j_debug time= 281000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 282000.000000 (user_id = 1) blocks = 85624 (Throughput 41.808594 MB/s)(blocks cnt) ios = 127 spare time= 311.552959
+j_debug time= 282000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 283000.000000 (user_id = 1) blocks = 16648 (Throughput 8.128906 MB/s)(blocks cnt) ios = 35 spare time= 258.834477
+j_debug time= 283000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 284000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 258.834477
+j_debug time= 284000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 285000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 258.834477
+j_debug time= 285000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 286000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 257.530388
+j_debug time= 286000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 287000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 257.530388
+j_debug time= 287000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 288000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 257.530388
+j_debug time= 288000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 289000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 257.224788
+j_debug time= 289000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 290000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 257.224788
+j_debug time= 290000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 291000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 257.224788
+j_debug time= 291000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 292000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 257.224788
+j_debug time= 292000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 293000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 256.919188
+j_debug time= 293000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 294000.000000 (user_id = 1) blocks = 109632 (Throughput 53.531250 MB/s)(blocks cnt) ios = 142 spare time= 426.277940
+j_debug time= 294000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 295000.000000 (user_id = 1) blocks = 87872 (Throughput 42.906250 MB/s)(blocks cnt) ios = 126 spare time= 159.923458
+j_debug time= 295000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 296000.000000 (user_id = 1) blocks = 96000 (Throughput 46.875000 MB/s)(blocks cnt) ios = 122 spare time= 374.330916
+j_debug time= 296000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 297000.000000 (user_id = 1) blocks = 96536 (Throughput 47.136719 MB/s)(blocks cnt) ios = 118 spare time= 83.937053
+j_debug time= 297000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 298000.000000 (user_id = 1) blocks = 147632 (Throughput 72.085938 MB/s)(blocks cnt) ios = 192 spare time= 150.026860
+j_debug time= 298000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 299000.000000 (user_id = 1) blocks = 154328 (Throughput 75.355469 MB/s)(blocks cnt) ios = 208 spare time= 174.054867
+j_debug time= 299000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 300000.000000 (user_id = 1) blocks = 97608 (Throughput 47.660156 MB/s)(blocks cnt) ios = 224 spare time= 360.306879
+j_debug time= 300000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 301000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 360.306879
+j_debug time= 301000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 302000.000000 (user_id = 1) blocks = 22096 (Throughput 10.789062 MB/s)(blocks cnt) ios = 33 spare time= 290.186774
+j_debug time= 302000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 303000.000000 (user_id = 1) blocks = 163968 (Throughput 80.062500 MB/s)(blocks cnt) ios = 198 spare time= 331.235880
+j_debug time= 303000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 304000.000000 (user_id = 1) blocks = 153824 (Throughput 75.109375 MB/s)(blocks cnt) ios = 206 spare time= 349.796526
+j_debug time= 304000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 305000.000000 (user_id = 1) blocks = 117664 (Throughput 57.453125 MB/s)(blocks cnt) ios = 180 spare time= 487.423695
+j_debug time= 305000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 306000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 487.423695
+j_debug time= 306000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 307000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 487.423695
+j_debug time= 307000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 308000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 487.423695
+j_debug time= 308000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 309000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 486.092648
+j_debug time= 309000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 310000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 486.092648
+j_debug time= 310000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 311000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 486.092648
+j_debug time= 311000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 312000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 485.787048
+j_debug time= 312000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 313000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 485.787048
+j_debug time= 313000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 314000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 485.787048
+j_debug time= 314000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 315000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 485.787048
+j_debug time= 315000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 316000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 485.481448
+j_debug time= 316000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 317000.000000 (user_id = 1) blocks = 154200 (Throughput 75.292969 MB/s)(blocks cnt) ios = 193 spare time= 39.164943
+j_debug time= 317000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 318000.000000 (user_id = 1) blocks = 170472 (Throughput 83.238281 MB/s)(blocks cnt) ios = 219 spare time= 44.141443
+j_debug time= 318000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 319000.000000 (user_id = 1) blocks = 153808 (Throughput 75.101562 MB/s)(blocks cnt) ios = 214 spare time= 83.455173
+j_debug time= 319000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 320000.000000 (user_id = 1) blocks = 137576 (Throughput 67.175781 MB/s)(blocks cnt) ios = 187 spare time= 153.746180
+j_debug time= 320000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 321000.000000 (user_id = 1) blocks = 166760 (Throughput 81.425781 MB/s)(blocks cnt) ios = 212 spare time= 172.937327
+j_debug time= 321000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 322000.000000 (user_id = 1) blocks = 48264 (Throughput 23.566406 MB/s)(blocks cnt) ios = 165 spare time= 2.068866
+j_debug time= 322000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 323000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 2.068866
+j_debug time= 323000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 324000.000000 (user_id = 1) blocks = 79712 (Throughput 38.921875 MB/s)(blocks cnt) ios = 108 spare time= 260.190659
+j_debug time= 324000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 325000.000000 (user_id = 1) blocks = 149640 (Throughput 73.066406 MB/s)(blocks cnt) ios = 192 spare time= 321.736780
+j_debug time= 325000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 326000.000000 (user_id = 1) blocks = 146304 (Throughput 71.437500 MB/s)(blocks cnt) ios = 198 spare time= 382.724896
+j_debug time= 326000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 327000.000000 (user_id = 1) blocks = 151464 (Throughput 73.957031 MB/s)(blocks cnt) ios = 206 spare time= 413.407662
+j_debug time= 327000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 328000.000000 (user_id = 1) blocks = 79760 (Throughput 38.945312 MB/s)(blocks cnt) ios = 128 spare time= 146.293498
+j_debug time= 328000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 329000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.293498
+j_debug time= 329000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 330000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.293498
+j_debug time= 330000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 331000.000000 (user_id = 1) blocks = 104 (Throughput 0.050781 MB/s)(blocks cnt) ios = 5 spare time= 144.701688
+j_debug time= 331000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 332000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.701688
+j_debug time= 332000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 333000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.701688
+j_debug time= 333000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 334000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.701688
+j_debug time= 334000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 335000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 144.396088
+j_debug time= 335000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 336000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.396088
+j_debug time= 336000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 337000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.396088
+j_debug time= 337000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 338000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 144.396088
+j_debug time= 338000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 339000.000000 (user_id = 1) blocks = 67352 (Throughput 32.886719 MB/s)(blocks cnt) ios = 97 spare time= 431.123337
+j_debug time= 339000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 340000.000000 (user_id = 1) blocks = 149584 (Throughput 73.039062 MB/s)(blocks cnt) ios = 191 spare time= 498.000000
+j_debug time= 340000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 341000.000000 (user_id = 1) blocks = 162312 (Throughput 79.253906 MB/s)(blocks cnt) ios = 211 spare time= 8.214483
+j_debug time= 341000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 342000.000000 (user_id = 1) blocks = 141240 (Throughput 68.964844 MB/s)(blocks cnt) ios = 197 spare time= 75.804168
+j_debug time= 342000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 343000.000000 (user_id = 1) blocks = 127096 (Throughput 62.058594 MB/s)(blocks cnt) ios = 177 spare time= 170.071320
+j_debug time= 343000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 344000.000000 (user_id = 1) blocks = 92672 (Throughput 45.250000 MB/s)(blocks cnt) ios = 117 spare time= 409.594991
+j_debug time= 344000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 345000.000000 (user_id = 1) blocks = 105832 (Throughput 51.675781 MB/s)(blocks cnt) ios = 124 spare time= 111.713398
+j_debug time= 345000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 346000.000000 (user_id = 1) blocks = 26760 (Throughput 13.066406 MB/s)(blocks cnt) ios = 150 spare time= 494.165200
+j_debug time= 346000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 347000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 494.165200
+j_debug time= 347000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 348000.000000 (user_id = 1) blocks = 17512 (Throughput 8.550781 MB/s)(blocks cnt) ios = 24 spare time= 435.385650
+j_debug time= 348000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 349000.000000 (user_id = 1) blocks = 95944 (Throughput 46.847656 MB/s)(blocks cnt) ios = 132 spare time= 137.458319
+j_debug time= 349000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 350000.000000 (user_id = 1) blocks = 98632 (Throughput 48.160156 MB/s)(blocks cnt) ios = 122 spare time= 347.137210
+j_debug time= 350000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 351000.000000 (user_id = 1) blocks = 100216 (Throughput 48.933594 MB/s)(blocks cnt) ios = 136 spare time= 46.820339
+j_debug time= 351000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 352000.000000 (user_id = 1) blocks = 84248 (Throughput 41.136719 MB/s)(blocks cnt) ios = 110 spare time= 304.834498
+j_debug time= 352000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 353000.000000 (user_id = 1) blocks = 94200 (Throughput 45.996094 MB/s)(blocks cnt) ios = 126 spare time= 22.401101
+j_debug time= 353000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 354000.000000 (user_id = 1) blocks = 110896 (Throughput 54.148438 MB/s)(blocks cnt) ios = 169 spare time= 167.265171
+j_debug time= 354000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 355000.000000 (user_id = 1) blocks = 6288 (Throughput 3.070312 MB/s)(blocks cnt) ios = 15 spare time= 147.684479
+j_debug time= 355000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 356000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 147.684479
+j_debug time= 356000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 357000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 147.684479
+j_debug time= 357000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 358000.000000 (user_id = 1) blocks = 88 (Throughput 0.042969 MB/s)(blocks cnt) ios = 4 spare time= 146.352454
+j_debug time= 358000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 359000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.352454
+j_debug time= 359000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 360000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.352454
+j_debug time= 360000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 361000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.352454
+j_debug time= 361000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 362000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 146.046854
+j_debug time= 362000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 363000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.046854
+j_debug time= 363000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 364000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.046854
+j_debug time= 364000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 365000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 146.046854
+j_debug time= 365000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 366000.000000 (user_id = 1) blocks = 4336 (Throughput 2.117188 MB/s)(blocks cnt) ios = 8 spare time= 130.552219
+j_debug time= 366000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 367000.000000 (user_id = 1) blocks = 156624 (Throughput 76.476562 MB/s)(blocks cnt) ios = 204 spare time= 164.557763
+j_debug time= 367000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 368000.000000 (user_id = 1) blocks = 100192 (Throughput 48.921875 MB/s)(blocks cnt) ios = 121 spare time= 373.142017
+j_debug time= 368000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 369000.000000 (user_id = 1) blocks = 95304 (Throughput 46.535156 MB/s)(blocks cnt) ios = 133 spare time= 76.518727
+j_debug time= 369000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 370000.000000 (user_id = 1) blocks = 92856 (Throughput 45.339844 MB/s)(blocks cnt) ios = 119 spare time= 303.237651
+j_debug time= 370000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 371000.000000 (user_id = 1) blocks = 82328 (Throughput 40.199219 MB/s)(blocks cnt) ios = 113 spare time= 44.029341
+j_debug time= 371000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 372000.000000 (user_id = 1) blocks = 108216 (Throughput 52.839844 MB/s)(blocks cnt) ios = 143 spare time= 207.423503
+j_debug time= 372000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 373000.000000 (user_id = 1) blocks = 91560 (Throughput 44.707031 MB/s)(blocks cnt) ios = 124 spare time= 419.800863
+j_debug time= 373000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 374000.000000 (user_id = 1) blocks = 96848 (Throughput 47.289062 MB/s)(blocks cnt) ios = 125 spare time= 123.930293
+j_debug time= 374000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 375000.000000 (user_id = 1) blocks = 84424 (Throughput 41.222656 MB/s)(blocks cnt) ios = 126 spare time= 373.979956
+j_debug time= 375000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 376000.000000 (user_id = 1) blocks = 1688 (Throughput 0.824219 MB/s)(blocks cnt) ios = 96 spare time= 340.082432
+j_debug time= 376000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 377000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 340.082432
+j_debug time= 377000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 378000.000000 (user_id = 1) blocks = 46376 (Throughput 22.644531 MB/s)(blocks cnt) ios = 65 spare time= 192.003740
+j_debug time= 378000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 379000.000000 (user_id = 1) blocks = 148952 (Throughput 72.730469 MB/s)(blocks cnt) ios = 183 spare time= 282.759982
+j_debug time= 379000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 380000.000000 (user_id = 1) blocks = 95096 (Throughput 46.433594 MB/s)(blocks cnt) ios = 126 spare time= 0.000000
+j_debug time= 380000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 381000.000000 (user_id = 1) blocks = 92888 (Throughput 45.355469 MB/s)(blocks cnt) ios = 125 spare time= 221.178665
+j_debug time= 381000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 382000.000000 (user_id = 1) blocks = 87088 (Throughput 42.523438 MB/s)(blocks cnt) ios = 136 spare time= 444.898344
+j_debug time= 382000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 383000.000000 (user_id = 1) blocks = 1024 (Throughput 0.500000 MB/s)(blocks cnt) ios = 7 spare time= 440.100604
+j_debug time= 383000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 384000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 440.100604
+j_debug time= 384000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 385000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 440.100604
+j_debug time= 385000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 386000.000000 (user_id = 1) blocks = 104 (Throughput 0.050781 MB/s)(blocks cnt) ios = 5 spare time= 438.535963
+j_debug time= 386000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 387000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.535963
+j_debug time= 387000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 388000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.535963
+j_debug time= 388000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 389000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.535963
+j_debug time= 389000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 390000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 438.017163
+j_debug time= 390000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 391000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.017163
+j_debug time= 391000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 392000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.017163
+j_debug time= 392000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 393000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 438.017163
+j_debug time= 393000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 394000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 437.711563
+j_debug time= 394000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 395000.000000 (user_id = 1) blocks = 74264 (Throughput 36.261719 MB/s)(blocks cnt) ios = 106 spare time= 208.451113
+j_debug time= 395000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 396000.000000 (user_id = 1) blocks = 106952 (Throughput 52.222656 MB/s)(blocks cnt) ios = 124 spare time= 401.866968
+j_debug time= 396000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 397000.000000 (user_id = 1) blocks = 87560 (Throughput 42.753906 MB/s)(blocks cnt) ios = 121 spare time= 135.697132
+j_debug time= 397000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 398000.000000 (user_id = 1) blocks = 91440 (Throughput 44.648438 MB/s)(blocks cnt) ios = 123 spare time= 357.046710
+j_debug time= 398000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 399000.000000 (user_id = 1) blocks = 94112 (Throughput 45.953125 MB/s)(blocks cnt) ios = 124 spare time= 64.086868
+j_debug time= 399000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 400000.000000 (user_id = 1) blocks = 108624 (Throughput 53.039062 MB/s)(blocks cnt) ios = 143 spare time= 225.777862
+j_debug time= 400000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 401000.000000 (user_id = 1) blocks = 143256 (Throughput 69.949219 MB/s)(blocks cnt) ios = 200 spare time= 285.173104
+j_debug time= 401000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 402000.000000 (user_id = 1) blocks = 159784 (Throughput 78.019531 MB/s)(blocks cnt) ios = 208 spare time= 295.832782
+j_debug time= 402000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 403000.000000 (user_id = 1) blocks = 90040 (Throughput 43.964844 MB/s)(blocks cnt) ios = 233 spare time= 497.128800
+j_debug time= 403000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 404000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 497.128800
+j_debug time= 404000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 405000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 497.128800
+j_debug time= 405000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 406000.000000 (user_id = 1) blocks = 155568 (Throughput 75.960938 MB/s)(blocks cnt) ios = 209 spare time= 26.086433
+j_debug time= 406000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 407000.000000 (user_id = 1) blocks = 165192 (Throughput 80.660156 MB/s)(blocks cnt) ios = 209 spare time= 42.396108
+j_debug time= 407000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 408000.000000 (user_id = 1) blocks = 149176 (Throughput 72.839844 MB/s)(blocks cnt) ios = 195 spare time= 89.260210
+j_debug time= 408000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 409000.000000 (user_id = 1) blocks = 137640 (Throughput 67.207031 MB/s)(blocks cnt) ios = 194 spare time= 178.384253
+j_debug time= 409000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 410000.000000 (user_id = 1) blocks = 47672 (Throughput 23.277344 MB/s)(blocks cnt) ios = 82 spare time= 18.716565
+j_debug time= 410000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 411000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 18.716565
+j_debug time= 411000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 412000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 18.716565
+j_debug time= 412000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 413000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 18.716565
+j_debug time= 413000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 414000.000000 (user_id = 1) blocks = 120 (Throughput 0.058594 MB/s)(blocks cnt) ios = 5 spare time= 17.073422
+j_debug time= 414000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 415000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 17.073422
+j_debug time= 415000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 416000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 17.073422
+j_debug time= 416000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 417000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 17.073422
+j_debug time= 417000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 418000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 17.073422
+j_debug time= 418000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 419000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 16.767822
+j_debug time= 419000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 420000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 16.767822
+j_debug time= 420000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 421000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 16.767822
+j_debug time= 421000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 422000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 16.767822
+j_debug time= 422000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 423000.000000 (user_id = 1) blocks = 101552 (Throughput 49.585938 MB/s)(blocks cnt) ios = 135 spare time= 213.383640
+j_debug time= 423000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 424000.000000 (user_id = 1) blocks = 160296 (Throughput 78.269531 MB/s)(blocks cnt) ios = 204 spare time= 253.977008
+j_debug time= 424000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 425000.000000 (user_id = 1) blocks = 161392 (Throughput 78.804688 MB/s)(blocks cnt) ios = 211 spare time= 269.979878
+j_debug time= 425000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 426000.000000 (user_id = 1) blocks = 156816 (Throughput 76.570312 MB/s)(blocks cnt) ios = 217 spare time= 284.258453
+j_debug time= 426000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 427000.000000 (user_id = 1) blocks = 144656 (Throughput 70.632812 MB/s)(blocks cnt) ios = 197 spare time= 353.339025
+j_debug time= 427000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 428000.000000 (user_id = 1) blocks = 145608 (Throughput 71.097656 MB/s)(blocks cnt) ios = 189 spare time= 433.133112
+j_debug time= 428000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 429000.000000 (user_id = 1) blocks = 126944 (Throughput 61.984375 MB/s)(blocks cnt) ios = 267 spare time= 39.024002
+j_debug time= 429000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 430000.000000 (user_id = 1) blocks = 304 (Throughput 0.148438 MB/s)(blocks cnt) ios = 19 spare time= 33.217602
+j_debug time= 430000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 431000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 33.217602
+j_debug time= 431000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 432000.000000 (user_id = 1) blocks = 106176 (Throughput 51.843750 MB/s)(blocks cnt) ios = 145 spare time= 220.961238
+j_debug time= 432000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 433000.000000 (user_id = 1) blocks = 159000 (Throughput 77.636719 MB/s)(blocks cnt) ios = 204 spare time= 258.096146
+j_debug time= 433000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 434000.000000 (user_id = 1) blocks = 143384 (Throughput 70.011719 MB/s)(blocks cnt) ios = 195 spare time= 322.085948
+j_debug time= 434000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 435000.000000 (user_id = 1) blocks = 144184 (Throughput 70.402344 MB/s)(blocks cnt) ios = 207 spare time= 360.951040
+j_debug time= 435000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 436000.000000 (user_id = 1) blocks = 36512 (Throughput 17.828125 MB/s)(blocks cnt) ios = 60 spare time= 242.825391
+j_debug time= 436000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 437000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 242.825391
+j_debug time= 437000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 438000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 242.825391
+j_debug time= 438000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 439000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 242.825391
+j_debug time= 439000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 440000.000000 (user_id = 1) blocks = 120 (Throughput 0.058594 MB/s)(blocks cnt) ios = 5 spare time= 239.714584
+j_debug time= 440000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 441000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.714584
+j_debug time= 441000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 442000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.714584
+j_debug time= 442000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 443000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.714584
+j_debug time= 443000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 444000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 239.408984
+j_debug time= 444000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 445000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.408984
+j_debug time= 445000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 446000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.408984
+j_debug time= 446000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 447000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 239.408984
+j_debug time= 447000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 448000.000000 (user_id = 1) blocks = 16 (Throughput 0.007812 MB/s)(blocks cnt) ios = 1 spare time= 238.890184
+j_debug time= 448000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 449000.000000 (user_id = 1) blocks = 139008 (Throughput 67.875000 MB/s)(blocks cnt) ios = 183 spare time= 325.064271
+j_debug time= 449000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 450000.000000 (user_id = 1) blocks = 159976 (Throughput 78.113281 MB/s)(blocks cnt) ios = 203 spare time= 354.357500
+j_debug time= 450000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 451000.000000 (user_id = 1) blocks = 141488 (Throughput 69.085938 MB/s)(blocks cnt) ios = 183 spare time= 430.469554
+j_debug time= 451000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 452000.000000 (user_id = 1) blocks = 141792 (Throughput 69.234375 MB/s)(blocks cnt) ios = 190 spare time= 6.489158
+j_debug time= 452000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 453000.000000 (user_id = 1) blocks = 145144 (Throughput 70.871094 MB/s)(blocks cnt) ios = 210 spare time= 44.108997
+j_debug time= 453000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 454000.000000 (user_id = 1) blocks = 136096 (Throughput 66.453125 MB/s)(blocks cnt) ios = 183 spare time= 123.239195
+j_debug time= 454000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 455000.000000 (user_id = 1) blocks = 146344 (Throughput 71.457031 MB/s)(blocks cnt) ios = 188 spare time= 195.492937
+j_debug time= 455000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 456000.000000 (user_id = 1) blocks = 29424 (Throughput 14.367188 MB/s)(blocks cnt) ios = 171 spare time= 59.511957
+j_debug time= 456000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 457000.000000 (user_id = 1) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 59.511957
+j_debug time= 457000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 458000.000000 (user_id = 1) blocks = 56192 (Throughput 27.437500 MB/s)(blocks cnt) ios = 81 spare time= 390.037769
+j_debug time= 458000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 459000.000000 (user_id = 1) blocks = 158184 (Throughput 77.238281 MB/s)(blocks cnt) ios = 206 spare time= 427.191221
+j_debug time= 459000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000
+j_debug time= 460000.000000 (user_id = 1) blocks = 140552 (Throughput 68.628906 MB/s)(blocks cnt) ios = 171 spare time= 19.440336
+j_debug time= 460000.000000 (user_id = 2) blocks = 0 (Throughput 0.000000 MB/s)(blocks cnt) ios = 0 spare time= 500.000000

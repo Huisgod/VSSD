@@ -1,0 +1,51 @@
+二進位格式檔案 src/disksim 符合
+二進位格式檔案 src/syssim 符合
+二進位格式檔案 ssdmodel/libssdmodel.a 符合
+ssdmodel/ssd.c:495:    ASSERT(elem->media_busy == FALSE);
+ssdmodel/ssd.c:505:        elem->media_busy = 1;
+ssdmodel/ssd.c:522:        elem->stat.tot_clean_time += max_cost;
+ssdmodel/ssd.c:546:	req = ioqueue_show_next_request(elem->queue);
+ssdmodel/ssd.c:549:		elem->metadata.user_id_2 = req->user_id;
+ssdmodel/ssd.c:551:		elem->metadata.user_id = req->user_id;
+ssdmodel/ssd.c:554:		elem->metadata.user_id = 1;
+ssdmodel/ssd.c:560:    if (elem->media_busy == TRUE) {
+ssdmodel/ssd.c:564:    ASSERT(ioqueue_get_reqoutstanding(elem->queue) == 0);
+ssdmodel/ssd.c:571:	if (elem->metadata.reqs_waiting > 0)
+ssdmodel/ssd.c:585:    ASSERT(elem->metadata.reqs_waiting == ioqueue_get_number_in_queue(elem->queue));
+ssdmodel/ssd.c:587:    if (elem->metadata.reqs_waiting > 0) {
+ssdmodel/ssd.c:617:        while ((req = ioqueue_get_next_request(elem->queue)) != NULL) {
+ssdmodel/ssd.c:620:            elem->metadata.reqs_waiting --;
+ssdmodel/ssd.c:672:              elem->media_busy = TRUE;
+ssdmodel/ssd.c:704:              elem->media_busy = TRUE;
+ssdmodel/ssd.c:799:       elem->metadata.reqs_waiting ++;
+ssdmodel/ssd.c:802:       ioqueue_add_new_request(elem->queue, (ioreq_event *)tmp);
+ssdmodel/ssd.c:968:   if ((x = ioqueue_physical_access_done(elem->queue,curr)) == NULL) {
+ssdmodel/ssd.c:974:   if (ioqueue_get_reqoutstanding(elem->queue) == 0) {
+ssdmodel/ssd.c:975:    elem->media_busy = FALSE;
+ssdmodel/ssd_gang.c:94:        ASSERT(ioqueue_get_reqoutstanding(elem->queue) == 0);
+ssdmodel/ssd_gang.c:100:        if ((req = ioqueue_get_next_request(elem->queue)) != NULL) {
+ssdmodel/ssd_gang.c:228:        elem->stat.tot_reqs_issued ++;
+ssdmodel/ssd_gang.c:229:        elem->stat.tot_time_taken += acctime;
+ssdmodel/ssd_gang.c:368:                elem->stat.tot_reqs_issued ++;
+ssdmodel/ssd_gang.c:369:                elem->stat.tot_time_taken += acctime;
+ssdmodel/ssd_gang.c:440:                elem->media_busy = TRUE;
+ssdmodel/ssd_gang.c:450:                elem->stat.tot_reqs_issued ++;
+ssdmodel/ssd_gang.c:451:                elem->stat.tot_time_taken += reqs_queue[i][0]->acctime;
+ssdmodel/ssd_gang.c:666:       ioqueue_add_new_request(elem->queue, (ioreq_event *)tmp);
+ssdmodel/ssd_gang.c:762:   ASSERT(gang_num == elem->metadata.gang_num);
+ssdmodel/ssd_gang.c:764:   if ((x = ioqueue_physical_access_done(elem->queue,curr)) == NULL) {
+ssdmodel/ssd_gang.c:770:   if (ioqueue_get_reqoutstanding(elem->queue) == 0) {
+ssdmodel/ssd_gang.c:771:    elem->media_busy = FALSE;
+二進位格式檔案 ssdmodel/ssd_gang.o 符合
+ssdmodel/ssd_init.c:467:    elem->num_planes = s->params.planes_per_pkg;
+ssdmodel/ssd_init.c:470:    for (i = 0; i < elem->num_planes; i ++) {
+ssdmodel/ssd_init.c:471:        elem->plane[i].media_busy = FALSE;
+ssdmodel/ssd_init.c:472:        elem->plane[i].num_blocks = s->params.blocks_per_plane;
+ssdmodel/ssd_init.c:475:        elem->plane[i].pair_plane = i ^ 0x1;
+ssdmodel/ssd_init.c:580:             ioqueue_initialize (elem->queue, i);
+ssdmodel/ssd_init.c:583:             elem->media_busy = FALSE;
+ssdmodel/ssd_init.c:586:             elem->pin_busy = FALSE;
+ssdmodel/ssd_init.c:593:             memset(&elem->stat, 0, sizeof(elem->stat));
+ssdmodel/ssd_init.c:595:                ssd_element_metadata_init(j, &(elem->metadata), currdisk);
+ssdmodel/ssd_init.c:599:            memset(&elem->stat, 0, sizeof(ssd_element_stat));
+二進位格式檔案 ssdmodel/ssd.o 符合

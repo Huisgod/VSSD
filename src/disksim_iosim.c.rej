@@ -1,0 +1,11 @@
+--- src/disksim_iosim.c	2008-05-11 14:30:54.000000000 -0700
++++ src/disksim_iosim.c	2008-09-24 15:49:06.610400200 -0700
+@@ -258,6 +258,8 @@
+    case MEMS_BUS_INITIATE:
+    case MEMS_BUS_TRANSFER:
+    case MEMS_BUS_UPDATE:
++   case SSD_CLEAN_ELEMENT:
++   case SSD_CLEAN_GANG:
+      device_event_arrive(curr);
+      break;
+ 

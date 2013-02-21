@@ -1,0 +1,81 @@
+--- src/disksim_device.c	2008-09-24 16:16:35.663400200 -0700
++++ src/disksim_device.c	2008-05-11 14:30:53.000000000 -0700
+@@ -62,7 +62,6 @@
+ #include "disksim_simpledisk.h"
+ #include "memsmodel/mems_global.h"
+ #include "memsmodel/mems_disksim.h"
+-#include "ssdmodel/ssd.h"  /* SSD: */
+ #include "config.h"
+ 
+ #include "modules/modules.h"
+@@ -112,9 +111,6 @@
+       case DEVICETYPE_MEMS:
+ 	return (struct device_header *)getmems(devicenos[c]);
+ 	break;
+-      case DEVICETYPE_SSD: /* SSD: */
+-	return (struct device_header *)getssd(devicenos[c]);
+-	break;
+       }
+     }
+   }
+@@ -148,26 +144,14 @@
+   bzero(disksim->deviceinfo->devicenames + c, zerocnt * sizeof(char *));
+ 
+   devicenos = realloc(devicenos, newlen*sizeof(int));
+-#ifndef WIN32
+   bzero(devicenos + c, zerocnt * sizeof(int));
+-#else
+-  bzero(devicenos + c, zerocnt * sizeof(*(devicenos)));
+-#endif
+ 
+   devicetypes = realloc(devicetypes, newlen*sizeof(int));
+-#ifndef WIN32
+   bzero(devicetypes + c, zerocnt * sizeof(int));
+-#else
+-  bzero(devicetypes + c, zerocnt * sizeof(*(devicetypes)));
+-#endif
+ 
+   disksim->deviceinfo->devices = realloc(disksim->deviceinfo->devices, 
+ 					 newlen*sizeof(int));
+-#ifndef WIN32
+   bzero(disksim->deviceinfo->devices + c, zerocnt * sizeof(int));
+-#else
+-  bzero(disksim->deviceinfo->devices + c, zerocnt * sizeof(*(disksim->deviceinfo->devices)));
+-#endif
+ 
+   disksim->deviceinfo->devs_len = newlen;
+ 
+@@ -220,7 +204,6 @@
+   disk_initialize ();
+   simpledisk_initialize ();
+   mems_initialize ();
+-  ssd_initialize ();
+ }
+ 
+ void device_resetstats (void)
+@@ -229,7 +212,6 @@
+    disk_resetstats ();
+    simpledisk_resetstats ();
+    mems_resetstats ();
+-   ssd_resetstats ();
+ }
+ 
+ 
+@@ -239,7 +221,6 @@
+    disk_printstats ();
+    simpledisk_printstats ();
+    mems_printstats ();
+-   ssd_printstats ();
+ }
+ 
+ 
+@@ -270,9 +251,6 @@
+    case DEVICETYPE_MEMS:
+       mems_printsetstats (set, setsize, sourcestr);
+       break;
+-   case DEVICETYPE_SSD:
+-      ssd_printsetstats (set, setsize, sourcestr);
+-      break;
+    default:
+       fprintf(stderr, "Unknown value for device type: devicetype %d\n", devicetype);
+       assert(0);

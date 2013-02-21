@@ -1,0 +1,14 @@
+ssdmodel/ssd-patch:73:diff -Naur disksim-4.0/diskmodel/dm_config.h 4.0+ssd+Win/diskmodel/dm_config.h
+ssdmodel/ssd-patch:75:+++ 4.0+ssd+Win/diskmodel/dm_config.h	2008-08-15 18:31:18.000000000 -0700
+ssdmodel/ssd-patch:89:diff -Naur disksim-4.0/diskmodel/dm_types.h 4.0+ssd+Win/diskmodel/dm_types.h
+ssdmodel/ssd-patch:91:+++ 4.0+ssd+Win/diskmodel/dm_types.h	2008-08-16 13:08:48.000000000 -0700
+ssdmodel/ssd-patch:114:diff -Naur disksim-4.0/diskmodel/layout_g1.c 4.0+ssd+Win/diskmodel/layout_g1.c
+ssdmodel/ssd-patch:116:+++ 4.0+ssd+Win/diskmodel/layout_g1.c	2008-05-23 13:39:56.000000000 -0700
+ssdmodel/ssd-patch:129:diff -Naur disksim-4.0/diskmodel/layout_g4.c 4.0+ssd+Win/diskmodel/layout_g4.c
+ssdmodel/ssd-patch:131:+++ 4.0+ssd+Win/diskmodel/layout_g4.c	2008-09-24 16:34:41.251400200 -0700
+ssdmodel/ssd-patch:207:diff -Naur disksim-4.0/diskmodel/layout_g4_load.c 4.0+ssd+Win/diskmodel/layout_g4_load.c
+ssdmodel/ssd-patch:209:+++ 4.0+ssd+Win/diskmodel/layout_g4_load.c	2008-05-30 18:42:36.000000000 -0700
+ssdmodel/ssd-patch:222:diff -Naur disksim-4.0/diskmodel/layout_g4_tools/.paths 4.0+ssd+Win/diskmodel/layout_g4_tools/.paths
+ssdmodel/ssd-patch:224:+++ 4.0+ssd+Win/diskmodel/layout_g4_tools/.paths	2008-08-19 16:37:38.741939300 -0700
+ssdmodel/ssd-patch:236:diff -Naur disksim-4.0/diskmodel/layout_g4_tools/Makefile 4.0+ssd+Win/diskmodel/layout_g4_tools/Makefile
+ssdmodel/ssd-patch:238:+++ 4.0+ssd+Win/diskmodel/layout_g4_tools/Makefile	2008-08-19 16:38:55.881652500 -0700

@@ -1,0 +1,878 @@
+diskmodel/convert.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/dm.h:323:// |------------------------------access-time-----------------------------|
+diskmodel/dm_load.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/layout_g1.c:548:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c:558:  for (i = (b->numslips-1); i >= 0; i--) {
+diskmodel/layout_g1.c:725:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c:736:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c:814:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c:867:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c:876:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c:915: * potentially have the cross-product of sparing and mapping schemes,
+diskmodel/layout_g1.c:1308:  for(i = (b->numslips-1); i >= 0; i--) {
+diskmodel/layout_g1.c.orig:548:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:558:  for (i = (b->numslips-1); i >= 0; i--) {
+diskmodel/layout_g1.c.orig:725:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:736:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:814:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:867:  for (i=(b->numdefects-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:876:  for (i=(b->numslips-1); i>=0; i--) {
+diskmodel/layout_g1.c.orig:915: * potentially have the cross-product of sparing and mapping schemes,
+diskmodel/layout_g1.c.orig:1308:  for(i = (b->numslips-1); i >= 0; i--) {
+diskmodel/layout_g1.d:5: /usr/include/gnu/stubs-32.h /usr/include/stdint.h \
+diskmodel/layout_g1_load.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/layout_g2.d:5: /usr/include/gnu/stubs-32.h /usr/include/stdint.h \
+diskmodel/layout_g2_load.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/layout_g4.c:357:  max = l->parent->dm_sectors-1;
+diskmodel/layout_g4.c.orig:362:  max = l->parent->dm_sectors-1;
+diskmodel/layout_g4.d:5: /usr/include/gnu/stubs-32.h /usr/include/stdint.h \
+diskmodel/layout_g4_load.d:5: /usr/include/gnu/stubs-32.h /usr/include/stdint.h \
+diskmodel/marshal.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/mech_g1.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/mech_g1_load.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+diskmodel/mech_g1_seektime.c:166:    mult = (3*(cyls-1) / numcyls);
+diskmodel/mech_g1_seektime.d:5: /usr/include/gnu/stubs-32.h /usr/include/stdint.h \
+diskmodel/sqrt.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 doc/disksim4-manual.pdf 符合
+doc/disksim-doc.ps:2141:(.)92 b(27)87 4944 y(3.6)84 b(Pro)r(cess-Flo)n(w)25 b(P)n(arameters)80
+doc/disksim-doc.ps:2175:1899 y(5.2.1)i(Pro)r(cess-\015o)n(w)24 b(statistics)68
+doc/disksim-doc.ps:2887:10 14 bop -37 630 a Fq(F)-7 b(or)28 b(the)i(simple)f(pass-thru)f(con)n
+doc/disksim-doc.ps:3387:(disk.)37 b(0)26 b(dis-)-37 2862 y(ables)33 b(prefetc)n(hing.)56
+doc/disksim-doc.ps:4680:(mec)n(hanism\).)-37 3267 y Fn(3.6)112 b(Pro)s(cess-Flo)m(w)37
+doc/disksim-doc.ps:4694:(generation)e(mo)r(dule.)87 4307 y Fl(Pro)s(cess-Flo)m(w)37
+doc/disksim-doc.ps:4831:b(The)30 b(other)g(\\Pro)r(cess-Flo)n(w)d(Input)k(P)n(arameters")c(are)
+doc/disksim-doc.ps:5351:38 42 bop -37 630 a Fl(5.2.1)93 b(Pro)s(cess-\015o)m(w)31
+doc/disksim-doc.ps:6074:(aggregate)e(\\IOdriv)n(er")f(statis-)-37 4137 y(tics\).)41
+doc/disksim-doc.ps:6597: gsave /Times-Roman findfont 9.000000 scalefont setfont
+doc/disksim-doc.ps:7015: gsave /Times-Roman findfont 9.000000 scalefont setfont
+doc/disksim-doc.ps:7951: gsave /Times-Roman findfont 9.000000 scalefont setfont
+doc/disksim-doc.ps:8856: gsave /Times-Roman findfont 9.000000 scalefont setfont
+doc/disksim-doc.ps:9683: gsave /Times-Roman findfont 9.000000 scalefont setfont
+doc/disksim-doc.ps:10685:b(G.)26 b(Ganger,)g(Y.)e(P)n(att,)h(\\The)h(Pro)r(cess-Flo)n(w)h(Mo)r
+doc/Outline.txt:28:access->bcount = does not mean block count, see the comments in
+二進位格式檔案 lib/libdisksim.a 符合
+libparam/lex.libparam.c:111:/* The "const" storage-class-modifier is valid. */
+libparam/libparam.tab.c:1376:    yyerrstatus--;
+二進位格式檔案 memsmodel/libmemsmodel.a 符合
+memsmodel/mems_buffer.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+memsmodel/mems_disksim.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 memsmodel/mems_disksim.o 符合
+memsmodel/mems_event.c:255:      r->extents->completed_block_bus = r->extents->lastblock;
+memsmodel/mems_event.c:256:      r->extents->bus_done = TRUE;
+memsmodel/mems_event.c:259:	     r->extents->completed_block_bus);
+memsmodel/mems_event.c:1479:		  reqinfo->num_extents--;
+memsmodel/mems_event.c:1743:	  reqinfo->num_extents--;
+memsmodel/mems_event.d:4: /usr/include/gnu/stubs-32.h \
+二進位格式檔案 memsmodel/mems_event_loop.pdf 符合
+二進位格式檔案 memsmodel/mems_event.o 符合
+memsmodel/mems_hong_seek.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+memsmodel/mems_internals.c:756:    if (mems_equal_coords(begin, &s->begin) &&
+memsmodel/mems_internals.c:757:	mems_equal_coords(end, &s->end)) {
+memsmodel/mems_internals.c:758:      if (return_x_seek_time) *return_x_seek_time = s->x_seek_time;
+memsmodel/mems_internals.c:759:      if (return_y_seek_time) *return_y_seek_time = s->y_seek_time;
+memsmodel/mems_internals.c:760:      if (return_turnaround_time) *return_turnaround_time = s->turnaround_time;
+memsmodel/mems_internals.c:761:      if (return_turnaround_number) *return_turnaround_number = s->turnaround_number;
+memsmodel/mems_internals.c:762:      return s->time;
+memsmodel/mems_internals.c:767:  mems_coord_t_copy(begin, &s->begin);
+memsmodel/mems_internals.c:768:  mems_coord_t_copy(end, &s->end);
+memsmodel/mems_internals.c:769:  s->time = mems_seek_time(sled, &s->begin, &s->end, &s->x_seek_time, &s->y_seek_time, &s->turnaround_time, &s->turnaround_number);
+memsmodel/mems_internals.c:770:  if (return_x_seek_time) *return_x_seek_time = s->x_seek_time;
+memsmodel/mems_internals.c:771:  if (return_y_seek_time) *return_y_seek_time = s->y_seek_time;
+memsmodel/mems_internals.c:772:  if (return_turnaround_time) *return_turnaround_time = s->turnaround_time;
+memsmodel/mems_internals.c:773:  if (return_turnaround_number) *return_turnaround_number = s->turnaround_number;
+memsmodel/mems_internals.c:776:  // fprintf(stderr, "mems_seek_time_seekcache::  s->time = %f\n", s->time);
+memsmodel/mems_internals.c:777:  return s->time;
+memsmodel/mems_internals.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+memsmodel/mems_mapping.c:131:  cs->servo_start.x_pos     -= x_shift;
+memsmodel/mems_mapping.c:132:  cs->tipsector_start.x_pos -= x_shift;
+memsmodel/mems_mapping.c:133:  cs->tipsector_end.x_pos   -= x_shift;
+memsmodel/mems_mapping.c:137:  cs->servo_start.y_pos     -= y_shift;
+memsmodel/mems_mapping.c:138:  cs->tipsector_start.y_pos -= y_shift;
+memsmodel/mems_mapping.c:139:  cs->tipsector_end.y_pos   -= y_shift;
+memsmodel/mems_mapping.c.orig:131:  cs->servo_start.x_pos     -= x_shift;
+memsmodel/mems_mapping.c.orig:132:  cs->tipsector_start.x_pos -= x_shift;
+memsmodel/mems_mapping.c.orig:133:  cs->tipsector_end.x_pos   -= x_shift;
+memsmodel/mems_mapping.c.orig:137:  cs->servo_start.y_pos     -= y_shift;
+memsmodel/mems_mapping.c.orig:138:  cs->tipsector_start.y_pos -= y_shift;
+memsmodel/mems_mapping.c.orig:139:  cs->tipsector_end.y_pos   -= y_shift;
+memsmodel/mems_mapping.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+memsmodel/mems_piecewise_seek.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+memsmodel/mems_seektest.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+outputfile/Iozone_vmm4_blocku_non_disable_allocation_SB.txt:224:Process-Flow Time Scale = 1.000000
+outputfile/Iozone_vmm4_dieu_non_disable_allocation_SB.txt:224:Process-Flow Time Scale = 1.000000
+outputfile/Iozone_vmm4_pageu_non_disable_allocation_SB.txt:224:Process-Flow Time Scale = 1.000000
+outputfile/Iozone_vmm4_planeu_non_disable_allocation_SB.txt:224:Process-Flow Time Scale = 1.000000
+二進位格式檔案 src/disksim 符合
+src/disksim_bus.c:163:   currbus->depth = 0;
+src/disksim_bus.c:173:   for (i = 0; i < currbus->numslots; i++) {
+src/disksim_bus.c:174:     if ((currbus->slots[i].devno == ctlno) && (currbus->slots[i].devtype == CONTROLLER)) {
+src/disksim_bus.c:203:       if (currbus->depth == depth) {
+src/disksim_bus.c:207:	 for (slotno = 0; slotno < currbus->numslots; slotno++) {
+src/disksim_bus.c:211:	   devno = currbus->slots[slotno].devno;
+src/disksim_bus.c:213:	   switch (currbus->slots[slotno].devtype) {
+src/disksim_bus.c:255:   blktranstime = (read) ? currbus->readblktranstime : currbus->writeblktranstime;
+src/disksim_bus.c:284:      ASSERT(curr == currbus->arbwinner);
+src/disksim_bus.c:285:      currbus->arbwinner = NULL;
+src/disksim_bus.c:286:      stat_update (&currbus->arbwaitstats, (simtime - curr->wait_start));
+src/disksim_bus.c:317:   bus_event *ret = currbus->owners;
+src/disksim_bus.c:318:   ASSERT(currbus->owners != NULL);
+src/disksim_bus.c:319:   currbus->owners = ret->next;
+src/disksim_bus.c:326:   bus_event *ret = currbus->owners;
+src/disksim_bus.c:328:   ASSERT(currbus->owners != NULL);
+src/disksim_bus.c:329:   if (currbus->owners->next == NULL) {
+src/disksim_bus.c:330:      currbus->owners = NULL;
+src/disksim_bus.c:340:      if (ret == currbus->owners) {
+src/disksim_bus.c:341:         currbus->owners = ret->next;
+src/disksim_bus.c:344:	 trv = currbus->owners;
+src/disksim_bus.c:359:   switch (currbus->arbtype) {
+src/disksim_bus.c:401:   if (currbus->type == INTERLEAVED) {
+src/disksim_bus.c:406:   tmp->devno = currbus->slots[slotno].devno;
+src/disksim_bus.c:410:   if (currbus->state == BUS_FREE) {
+src/disksim_bus.c:411:      tmp->devtype = currbus->slots[slotno].devtype;
+src/disksim_bus.c:412:      tmp->time = simtime + currbus->arbtime;
+src/disksim_bus.c:416:      currbus->arbwinner = tmp;
+src/disksim_bus.c:418:      currbus->state = BUS_OWNED;
+src/disksim_bus.c:419:      currbus->runidletime += simtime - currbus->lastowned;
+src/disksim_bus.c:420:      stat_update (&currbus->busidlestats, (simtime - currbus->lastowned));
+src/disksim_bus.c:427:      if (currbus->owners) {
+src/disksim_bus.c:428:         bus_event *tail = currbus->owners;
+src/disksim_bus.c:434:         currbus->owners = tmp;
+src/disksim_bus.c:448:   ASSERT(currbus->arbwinner == NULL);
+src/disksim_bus.c:449:   if (currbus->owners == NULL) {
+src/disksim_bus.c:453:      currbus->state = BUS_FREE;
+src/disksim_bus.c:454:      currbus->lastowned = simtime;
+src/disksim_bus.c:457:      tmp->devtype = currbus->slots[tmp->slotno].devtype;
+src/disksim_bus.c:458:      tmp->time = simtime + currbus->arbtime;
+src/disksim_bus.c:462:      currbus->arbwinner = tmp;
+src/disksim_bus.c:474:   if (currbus->arbwinner) {
+src/disksim_bus.c:475:      if (curr == currbus->arbwinner->delayed_event) {
+src/disksim_bus.c:476:         if (removefromintq((event *)currbus->arbwinner) != TRUE) {
+src/disksim_bus.c:480:         addtoextraq((event *) currbus->arbwinner);
+src/disksim_bus.c:481:         currbus->arbwinner = NULL;
+src/disksim_bus.c:486:   if (curr == currbus->owners->delayed_event) {
+src/disksim_bus.c:487:      tmp = currbus->owners;
+src/disksim_bus.c:488:      currbus->owners = tmp->next;
+src/disksim_bus.c:490:      trv = currbus->owners;
+src/disksim_bus.c:507:   ASSERT2((slotno >= 0) && (slotno < currbus->numslots), 
+src/disksim_bus.c:513:   devno = currbus->slots[slotno].devno;
+src/disksim_bus.c:514:   switch (currbus->slots[slotno].devtype) {
+src/disksim_bus.c:545:      checkdevno = currbus->slots[(slotno.byte[depth] >> 4)].devno;
+src/disksim_bus.c:546:      switch (currbus->slots[(slotno.byte[depth] >> 4)].devtype) {
+src/disksim_bus.c:596:      currbus->lastowned = simtime;
+src/disksim_bus.c:597:      currbus->runidletime = 0.0;
+src/disksim_bus.c:598:      stat_reset (&currbus->busidlestats);
+src/disksim_bus.c:599:      stat_reset (&currbus->arbwaitstats);
+src/disksim_bus.c:616:      currbus->state = BUS_FREE;
+src/disksim_bus.c:617:      addlisttoextraq((event **) &currbus->owners);
+src/disksim_bus.c:618:      stat_initialize (statdeffile, "Arbitration wait time", &currbus->arbwaitstats);
+src/disksim_bus.c:619:      stat_initialize (statdeffile, "Bus idle period length", &currbus->busidlestats);
+src/disksim_bus.c:635:      if (currbus->printstats) {
+src/disksim_bus.c:636:         sprintf (prefix, "Bus #%d (%s) ", i, currbus->name);
+src/disksim_bus.c:638:         fprintf (outputfile, "Bus #%d Total utilization time: \t%.2f   \t%6.5f\n", i, (simtime - warmuptime - currbus->runidletime), ((simtime - warmuptime - currbus->runidletime) / (simtime - warmuptime)));
+src/disksim_bus.c:640:            stat_print (&currbus->busidlestats, prefix);
+src/disksim_bus.c:643:            fprintf (outputfile, "Bus #%d Number of arbitrations: \t%d\n", i, stat_get_count (&currbus->arbwaitstats));
+src/disksim_bus.c:644:            stat_print (&currbus->arbwaitstats, prefix);
+src/disksim_bus.c:658:      if (currbus->state == BUS_FREE) {
+src/disksim_bus.c:659:         currbus->runidletime += simtime - currbus->lastowned;
+src/disksim_bus.c:660:         stat_update (&currbus->busidlestats, (simtime - currbus->lastowned));
+src/disksim_bus.c:780:      if(!ts->type) continue;
+src/disksim_bus.c:783:    type = lp_mod_name(ts->type);
+src/disksim_bus.c:787:      if(!getctlrbyname(ts->name, &b->slots[slotnum].devno)) {
+src/disksim_bus.c:788:	fprintf(stderr, "*** error: failed to load controller \"%s\" into slot %d of bus %s: no such controller \"%s\".\n", ts->name, c, t->name, ts->name);
+src/disksim_bus.c:808:	if(!getdevbyname(ts->name, &b->slots[slotnum].devno, 0, 0)) {
+src/disksim_bus.c:810:		  ts->name, c, t->name, ts->name);
+src/disksim_bus.c:815:      fprintf(stderr, "Error loading topology spec -- slot must contain a device or a controller (not %s).\n", ts->type);
+src/disksim_bus.c.orig:163:   currbus->depth = 0;
+src/disksim_bus.c.orig:173:   for (i = 0; i < currbus->numslots; i++) {
+src/disksim_bus.c.orig:174:     if ((currbus->slots[i].devno == ctlno) && (currbus->slots[i].devtype == CONTROLLER)) {
+src/disksim_bus.c.orig:203:       if (currbus->depth == depth) {
+src/disksim_bus.c.orig:207:	 for (slotno = 0; slotno < currbus->numslots; slotno++) {
+src/disksim_bus.c.orig:211:	   devno = currbus->slots[slotno].devno;
+src/disksim_bus.c.orig:213:	   switch (currbus->slots[slotno].devtype) {
+src/disksim_bus.c.orig:255:   blktranstime = (read) ? currbus->readblktranstime : currbus->writeblktranstime;
+src/disksim_bus.c.orig:284:      ASSERT(curr == currbus->arbwinner);
+src/disksim_bus.c.orig:285:      currbus->arbwinner = NULL;
+src/disksim_bus.c.orig:286:      stat_update (&currbus->arbwaitstats, (simtime - curr->wait_start));
+src/disksim_bus.c.orig:317:   bus_event *ret = currbus->owners;
+src/disksim_bus.c.orig:318:   ASSERT(currbus->owners != NULL);
+src/disksim_bus.c.orig:319:   currbus->owners = ret->next;
+src/disksim_bus.c.orig:326:   bus_event *ret = currbus->owners;
+src/disksim_bus.c.orig:328:   ASSERT(currbus->owners != NULL);
+src/disksim_bus.c.orig:329:   if (currbus->owners->next == NULL) {
+src/disksim_bus.c.orig:330:      currbus->owners = NULL;
+src/disksim_bus.c.orig:340:      if (ret == currbus->owners) {
+src/disksim_bus.c.orig:341:         currbus->owners = ret->next;
+src/disksim_bus.c.orig:344:	 trv = currbus->owners;
+src/disksim_bus.c.orig:359:   switch (currbus->arbtype) {
+src/disksim_bus.c.orig:401:   if (currbus->type == INTERLEAVED) {
+src/disksim_bus.c.orig:406:   tmp->devno = currbus->slots[slotno].devno;
+src/disksim_bus.c.orig:410:   if (currbus->state == BUS_FREE) {
+src/disksim_bus.c.orig:411:      tmp->devtype = currbus->slots[slotno].devtype;
+src/disksim_bus.c.orig:412:      tmp->time = simtime + currbus->arbtime;
+src/disksim_bus.c.orig:416:      currbus->arbwinner = tmp;
+src/disksim_bus.c.orig:418:      currbus->state = BUS_OWNED;
+src/disksim_bus.c.orig:419:      currbus->runidletime += simtime - currbus->lastowned;
+src/disksim_bus.c.orig:420:      stat_update (&currbus->busidlestats, (simtime - currbus->lastowned));
+src/disksim_bus.c.orig:427:      if (currbus->owners) {
+src/disksim_bus.c.orig:428:         bus_event *tail = currbus->owners;
+src/disksim_bus.c.orig:434:         currbus->owners = tmp;
+src/disksim_bus.c.orig:448:   ASSERT(currbus->arbwinner == NULL);
+src/disksim_bus.c.orig:449:   if (currbus->owners == NULL) {
+src/disksim_bus.c.orig:453:      currbus->state = BUS_FREE;
+src/disksim_bus.c.orig:454:      currbus->lastowned = simtime;
+src/disksim_bus.c.orig:457:      tmp->devtype = currbus->slots[tmp->slotno].devtype;
+src/disksim_bus.c.orig:458:      tmp->time = simtime + currbus->arbtime;
+src/disksim_bus.c.orig:462:      currbus->arbwinner = tmp;
+src/disksim_bus.c.orig:474:   if (currbus->arbwinner) {
+src/disksim_bus.c.orig:475:      if (curr == currbus->arbwinner->delayed_event) {
+src/disksim_bus.c.orig:476:         if (removefromintq((event *)currbus->arbwinner) != TRUE) {
+src/disksim_bus.c.orig:480:         addtoextraq((event *) currbus->arbwinner);
+src/disksim_bus.c.orig:481:         currbus->arbwinner = NULL;
+src/disksim_bus.c.orig:486:   if (curr == currbus->owners->delayed_event) {
+src/disksim_bus.c.orig:487:      tmp = currbus->owners;
+src/disksim_bus.c.orig:488:      currbus->owners = tmp->next;
+src/disksim_bus.c.orig:490:      trv = currbus->owners;
+src/disksim_bus.c.orig:507:   ASSERT2((slotno >= 0) && (slotno < currbus->numslots), 
+src/disksim_bus.c.orig:513:   devno = currbus->slots[slotno].devno;
+src/disksim_bus.c.orig:514:   switch (currbus->slots[slotno].devtype) {
+src/disksim_bus.c.orig:545:      checkdevno = currbus->slots[(slotno.byte[depth] >> 4)].devno;
+src/disksim_bus.c.orig:546:      switch (currbus->slots[(slotno.byte[depth] >> 4)].devtype) {
+src/disksim_bus.c.orig:596:      currbus->lastowned = simtime;
+src/disksim_bus.c.orig:597:      currbus->runidletime = 0.0;
+src/disksim_bus.c.orig:598:      stat_reset (&currbus->busidlestats);
+src/disksim_bus.c.orig:599:      stat_reset (&currbus->arbwaitstats);
+src/disksim_bus.c.orig:616:      currbus->state = BUS_FREE;
+src/disksim_bus.c.orig:617:      addlisttoextraq((event **) &currbus->owners);
+src/disksim_bus.c.orig:618:      stat_initialize (statdeffile, "Arbitration wait time", &currbus->arbwaitstats);
+src/disksim_bus.c.orig:619:      stat_initialize (statdeffile, "Bus idle period length", &currbus->busidlestats);
+src/disksim_bus.c.orig:635:      if (currbus->printstats) {
+src/disksim_bus.c.orig:636:         sprintf (prefix, "Bus #%d (%s) ", i, currbus->name);
+src/disksim_bus.c.orig:638:         fprintf (outputfile, "Bus #%d Total utilization time: \t%.2f   \t%6.5f\n", i, (simtime - warmuptime - currbus->runidletime), ((simtime - warmuptime - currbus->runidletime) / (simtime - warmuptime)));
+src/disksim_bus.c.orig:640:            stat_print (&currbus->busidlestats, prefix);
+src/disksim_bus.c.orig:643:            fprintf (outputfile, "Bus #%d Number of arbitrations: \t%d\n", i, stat_get_count (&currbus->arbwaitstats));
+src/disksim_bus.c.orig:644:            stat_print (&currbus->arbwaitstats, prefix);
+src/disksim_bus.c.orig:658:      if (currbus->state == BUS_FREE) {
+src/disksim_bus.c.orig:659:         currbus->runidletime += simtime - currbus->lastowned;
+src/disksim_bus.c.orig:660:         stat_update (&currbus->busidlestats, (simtime - currbus->lastowned));
+src/disksim_bus.c.orig:780:      if(!ts->type) continue;
+src/disksim_bus.c.orig:783:    type = lp_mod_name(ts->type);
+src/disksim_bus.c.orig:787:      if(!getctlrbyname(ts->name, &b->slots[slotnum].devno)) {
+src/disksim_bus.c.orig:788:	fprintf(stderr, "*** error: failed to load controller \"%s\" into slot %d of bus %s: no such controller \"%s\".\n", ts->name, c, t->name, ts->name);
+src/disksim_bus.c.orig:808:	if(!getdevbyname(ts->name, &b->slots[slotnum].devno, 0, 0)) {
+src/disksim_bus.c.orig:810:		  ts->name, c, t->name, ts->name);
+src/disksim_bus.c.orig:815:      fprintf(stderr, "Error loading topology spec -- slot must contain a device or a controller (not %s).\n", ts->type);
+src/disksim_bus.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_bus.o 符合
+src/disksim_cache.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_cachedev.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_cachedev.o 符合
+src/disksim_cachemem.c:393:      if (segnum != (cache->numsegs-1)) {
+src/disksim_cachemem.c:415:      allocdesc->next = cache->linewaiters->next;
+src/disksim_cachemem.c:416:      cache->linewaiters->next = allocdesc;
+src/disksim_cachemem.c:580:      allocdesc = cache->linewaiters->next;
+src/disksim_cachemem.c:584:         cache->linewaiters->next = allocdesc->next;
+src/disksim_cachemem.c:2049:      if (tmp->req != tmp->waitees->req) {
+src/disksim_cachemem.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_cachemem.o 符合
+二進位格式檔案 src/disksim_cache.o 符合
+src/disksim_controller.c:811:    if(!strcmp(ts->type, disksim_mods[DISKSIM_MOD_BUS]->name)) {
+src/disksim_controller.c:812:      getbusbyname(ts->name, &ctlr->outbuses[c]);
+src/disksim_controller.c:815:	fprintf(stderr, "*** error: No such bus: %s\n", ts->name);
+src/disksim_controller.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+二進位格式檔案 src/disksim_controller.o 符合
+src/disksim_ctlrdumb.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_ctlrsmart.c:224:      curr = currctlr->hostwaiters->next;
+src/disksim_ctlrsmart.c:228:	 currctlr->hostwaiters->next = curr->next;
+src/disksim_ctlrsmart.c:252:         curr->next = currctlr->hostwaiters->next;
+src/disksim_ctlrsmart.c:253:         currctlr->hostwaiters->next = curr;
+src/disksim_ctlrsmart.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+src/disksim.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_device.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_device.o 符合
+src/disksim_diskcache.c:199:   if (effective && seg->access && (seg->access->flags & READ)) {
+src/disksim_diskcache.c:508:      fprintf (outputfile, "Ongoing hit: blkno %d  bcount %d  segstart %d  segstop %d  read %d\n", curr->blkno, curr->bcount, seg->startblkno, seg->endblkno, seg->access->type);
+src/disksim_diskcache.c:705:	      || (seg->access && (seg->access->flags & READ))) 
+src/disksim_diskcache.c:1051:       && !(seg->access->flags & READ) 
+src/disksim_diskcache.c:1127:		   seg->access && !(seg->access->flags & READ)) {
+src/disksim_diskcache.c:1306:	 if (is_read && currdiskreq->hittype != BUFFER_NOMATCH && !currdisk->readhitsonwritedata && seg->access && !(seg->access->flags & READ)) {
+src/disksim_diskcache.c:1434:	 seg->access->type = NULL_EVENT;
+src/disksim_diskcache.c:1554:         seg->access->flags = currioreq->flags;
+src/disksim_diskcache.c:1574:	    ASSERT1(((seg->access->type == NULL_EVENT) ||
+src/disksim_diskcache.c:1575:		     (seg->recyclereq == currdiskreq)),"seg->access->type",seg->access->type);
+src/disksim_diskcache.c:1578:               seg->access->blkno = currdiskreq->outblkno;
+src/disksim_diskcache.c:1595:               seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskcache.c:1604:		(seg->access->type == NULL_EVENT)){
+src/disksim_diskcache.c:1605:               seg->access->blkno = currdiskreq->inblkno;
+src/disksim_diskcache.c:1608:               seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskcache.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+二進位格式檔案 src/disksim_diskcache.o 符合
+src/disksim_diskctlr.c:408:      (currdisk->effectivehda->seg->access->flags & BUFFER_BACKGROUND) 
+src/disksim_diskctlr.c:409:      && (currdisk->effectivehda->seg->access->flags & READ);
+src/disksim_diskctlr.c:469:	       "HDA_OWNED set for fixed-access-time disk");
+src/disksim_diskctlr.c:525:	if(currdiskreq->seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c:539:	if(currdiskreq->seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c:872:    ddbg_assert2(seg->access->type == NULL_EVENT,
+src/disksim_diskctlr.c:873:	       "non-NULL seg->access->type found upon releasing hda");
+src/disksim_diskctlr.c:1759:  seg->access->flags = nextioreq->flags;
+src/disksim_diskctlr.c:1763:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c:1765:       *	if((seg->access->blkno != seg->endblkno) &&
+src/disksim_diskctlr.c:1766:       *	(seg->access->blkno != (seg->endblkno + 1)) &&
+src/disksim_diskctlr.c:1767:       *	(seg->access->blkno !=
+src/disksim_diskctlr.c:1769:       *	"non-NULL seg->access->type with incorrect
+src/disksim_diskctlr.c:1770:       *	seg->access->blkno found for read segment in
+src/disksim_diskctlr.c:1778:      seg->access->blkno = seg->endblkno;
+src/disksim_diskctlr.c:1798:      seg->access->blkno = nextdiskreq->outblkno;
+src/disksim_diskctlr.c:1813:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:1823:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c:1831:    } // if(seg->access->type != NULL_EVENT)
+src/disksim_diskctlr.c:1836:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c:1837:      fprintf(stderr, "non-NULL seg->access->type found"
+src/disksim_diskctlr.c:1844:       || (seg->access->flags & READ) 
+src/disksim_diskctlr.c:1845:       || (seg->access->blkno != nextdiskreq->ioreqlist->blkno) 
+src/disksim_diskctlr.c:1846:       || (seg->access->bcount != 1) 
+src/disksim_diskctlr.c:1847:       || (seg->access->time != simtime)) 
+src/disksim_diskctlr.c:1856:    seg->access->blkno = nextdiskreq->inblkno;
+src/disksim_diskctlr.c:1858:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:1965:      if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c:1967:	 * if((seg->access->blkno != seg->endblkno) &&
+src/disksim_diskctlr.c:1968:	 * (seg->access->blkno != (seg->endblkno + 1)) &&
+src/disksim_diskctlr.c:1969:	 * (seg->access->blkno != currdisk->firstblkontrack)) {
+src/disksim_diskctlr.c:1970:	 * fprintf(stderr, "non-NULL seg->access->type with
+src/disksim_diskctlr.c:1971:	 * incorrect seg->access->blkno found for pure read
+src/disksim_diskctlr.c:1976:	seg->access->blkno = seg->endblkno;
+src/disksim_diskctlr.c:1979:      seg->access->flags = READ | BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:1982:      if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c:2023:     && (seg->access->flags & BUFFER_BACKGROUND)) 
+src/disksim_diskctlr.c:2053:  ddbg_assert((seg->access->flags & BUFFER_BACKGROUND) &&
+src/disksim_diskctlr.c:2054:	 (seg->access->flags & READ));
+src/disksim_diskctlr.c:2056:  if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c:2060:		seg->access->type));
+src/disksim_diskctlr.c:2062:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:2104:  ddbg_assert(seg->access->flags & READ);
+src/disksim_diskctlr.c:2112:     && (seg->access->flags & BUFFER_BACKGROUND) 
+src/disksim_diskctlr.c:2129:      seg->access->flags = currioreq->flags;
+src/disksim_diskctlr.c:2138:	seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:2878:      if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c:2931:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:3082:  background = seg->access->flags & BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:3129:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3152:    hold_type = seg->access->type;
+src/disksim_diskctlr.c:3153:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3159:    seg->access->type = hold_type;
+src/disksim_diskctlr.c:3166:      seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3169:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c:3209:	hold_type = seg->access->type;
+src/disksim_diskctlr.c:3210:	seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3216:	seg->access->type = hold_type;
+src/disksim_diskctlr.c:3236:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3257:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3331:  fprintf (outputfile, "Entered disk_buffer_update_ongoing - devno %d\n", seg->access->devno);
+src/disksim_diskctlr.c:3836:    if((seg->access->type == DEVICE_GOT_REMAPPED_SECTOR) ||
+src/disksim_diskctlr.c:3837:	(seg->access->type == DEVICE_GOTO_REMAPPED_SECTOR)) 
+src/disksim_diskctlr.c:3842:    else if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c:3847:       && ((seg->access->type == DEVICE_BUFFER_SEEKDONE) 
+src/disksim_diskctlr.c:3853:		 "seg->access->type: %d", seg->access->type));
+src/disksim_diskctlr.c:3855:      if(seg->access->type == DEVICE_BUFFER_SEEKDONE) {
+src/disksim_diskctlr.c:3863:						     seg->access->blkno, 
+src/disksim_diskctlr.c:3868:	  seg->access->cause = pbn.sector;
+src/disksim_diskctlr.c:3874:	  // seg->access->time = seg->time + 
+src/disksim_diskctlr.c:3876:	  //               seg->access->tempptr1, 
+src/disksim_diskctlr.c:3878:          //               (seg->access->flags & READ), 
+src/disksim_diskctlr.c:3882:	  //               seg->access->cause,
+src/disksim_diskctlr.c:3883:	  //               seg->access->bcount, 0);
+src/disksim_diskctlr.c:3890:			(seg->access->flags & READ));
+src/disksim_diskctlr.c:3896:	  seg->access->time = seg->time + dm_time_itod(nsecs);
+src/disksim_diskctlr.c:3899:      disk_seek_stoptime = seg->access->time;
+src/disksim_diskctlr.c:3900:      seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c:3904:    if((seg->access->type == DEVICE_BUFFER_SEEKDONE) 
+src/disksim_diskctlr.c.orig:408:      (currdisk->effectivehda->seg->access->flags & BUFFER_BACKGROUND) 
+src/disksim_diskctlr.c.orig:409:      && (currdisk->effectivehda->seg->access->flags & READ);
+src/disksim_diskctlr.c.orig:469:	       "HDA_OWNED set for fixed-access-time disk");
+src/disksim_diskctlr.c.orig:525:	if(currdiskreq->seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c.orig:539:	if(currdiskreq->seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c.orig:872:    ddbg_assert2(seg->access->type == NULL_EVENT,
+src/disksim_diskctlr.c.orig:873:	       "non-NULL seg->access->type found upon releasing hda");
+src/disksim_diskctlr.c.orig:1759:  seg->access->flags = nextioreq->flags;
+src/disksim_diskctlr.c.orig:1763:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c.orig:1765:       *	if((seg->access->blkno != seg->endblkno) &&
+src/disksim_diskctlr.c.orig:1766:       *	(seg->access->blkno != (seg->endblkno + 1)) &&
+src/disksim_diskctlr.c.orig:1767:       *	(seg->access->blkno !=
+src/disksim_diskctlr.c.orig:1769:       *	"non-NULL seg->access->type with incorrect
+src/disksim_diskctlr.c.orig:1770:       *	seg->access->blkno found for read segment in
+src/disksim_diskctlr.c.orig:1778:      seg->access->blkno = seg->endblkno;
+src/disksim_diskctlr.c.orig:1798:      seg->access->blkno = nextdiskreq->outblkno;
+src/disksim_diskctlr.c.orig:1813:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:1823:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c.orig:1831:    } // if(seg->access->type != NULL_EVENT)
+src/disksim_diskctlr.c.orig:1836:    if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c.orig:1837:      fprintf(stderr, "non-NULL seg->access->type found"
+src/disksim_diskctlr.c.orig:1844:       || (seg->access->flags & READ) 
+src/disksim_diskctlr.c.orig:1845:       || (seg->access->blkno != nextdiskreq->ioreqlist->blkno) 
+src/disksim_diskctlr.c.orig:1846:       || (seg->access->bcount != 1) 
+src/disksim_diskctlr.c.orig:1847:       || (seg->access->time != simtime)) 
+src/disksim_diskctlr.c.orig:1856:    seg->access->blkno = nextdiskreq->inblkno;
+src/disksim_diskctlr.c.orig:1858:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:1965:      if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c.orig:1967:	 * if((seg->access->blkno != seg->endblkno) &&
+src/disksim_diskctlr.c.orig:1968:	 * (seg->access->blkno != (seg->endblkno + 1)) &&
+src/disksim_diskctlr.c.orig:1969:	 * (seg->access->blkno != currdisk->firstblkontrack)) {
+src/disksim_diskctlr.c.orig:1970:	 * fprintf(stderr, "non-NULL seg->access->type with
+src/disksim_diskctlr.c.orig:1971:	 * incorrect seg->access->blkno found for pure read
+src/disksim_diskctlr.c.orig:1976:	seg->access->blkno = seg->endblkno;
+src/disksim_diskctlr.c.orig:1979:      seg->access->flags = READ | BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:1982:      if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c.orig:2023:     && (seg->access->flags & BUFFER_BACKGROUND)) 
+src/disksim_diskctlr.c.orig:2053:  ddbg_assert((seg->access->flags & BUFFER_BACKGROUND) &&
+src/disksim_diskctlr.c.orig:2054:	 (seg->access->flags & READ));
+src/disksim_diskctlr.c.orig:2056:  if(seg->access->type != NULL_EVENT) {
+src/disksim_diskctlr.c.orig:2060:		seg->access->type));
+src/disksim_diskctlr.c.orig:2062:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:2104:  ddbg_assert(seg->access->flags & READ);
+src/disksim_diskctlr.c.orig:2112:     && (seg->access->flags & BUFFER_BACKGROUND) 
+src/disksim_diskctlr.c.orig:2129:      seg->access->flags = currioreq->flags;
+src/disksim_diskctlr.c.orig:2138:	seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:2878:      if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c.orig:2931:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:3082:  background = seg->access->flags & BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:3129:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3152:    hold_type = seg->access->type;
+src/disksim_diskctlr.c.orig:3153:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3159:    seg->access->type = hold_type;
+src/disksim_diskctlr.c.orig:3166:      seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3169:      seg->access->flags |= BUFFER_BACKGROUND;
+src/disksim_diskctlr.c.orig:3209:	hold_type = seg->access->type;
+src/disksim_diskctlr.c.orig:3210:	seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3216:	seg->access->type = hold_type;
+src/disksim_diskctlr.c.orig:3236:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3257:    seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3331:  fprintf (outputfile, "Entered disk_buffer_update_ongoing - devno %d\n", seg->access->devno);
+src/disksim_diskctlr.c.orig:3836:    if((seg->access->type == DEVICE_GOT_REMAPPED_SECTOR) ||
+src/disksim_diskctlr.c.orig:3837:	(seg->access->type == DEVICE_GOTO_REMAPPED_SECTOR)) 
+src/disksim_diskctlr.c.orig:3842:    else if(seg->access->type == NULL_EVENT) {
+src/disksim_diskctlr.c.orig:3847:       && ((seg->access->type == DEVICE_BUFFER_SEEKDONE) 
+src/disksim_diskctlr.c.orig:3853:		 "seg->access->type: %d", seg->access->type));
+src/disksim_diskctlr.c.orig:3855:      if(seg->access->type == DEVICE_BUFFER_SEEKDONE) {
+src/disksim_diskctlr.c.orig:3863:						     seg->access->blkno, 
+src/disksim_diskctlr.c.orig:3868:	  seg->access->cause = pbn.sector;
+src/disksim_diskctlr.c.orig:3874:	  // seg->access->time = seg->time + 
+src/disksim_diskctlr.c.orig:3876:	  //               seg->access->tempptr1, 
+src/disksim_diskctlr.c.orig:3878:          //               (seg->access->flags & READ), 
+src/disksim_diskctlr.c.orig:3882:	  //               seg->access->cause,
+src/disksim_diskctlr.c.orig:3883:	  //               seg->access->bcount, 0);
+src/disksim_diskctlr.c.orig:3890:			(seg->access->flags & READ));
+src/disksim_diskctlr.c.orig:3896:	  seg->access->time = seg->time + dm_time_itod(nsecs);
+src/disksim_diskctlr.c.orig:3899:      disk_seek_stoptime = seg->access->time;
+src/disksim_diskctlr.c.orig:3900:      seg->access->type = NULL_EVENT;
+src/disksim_diskctlr.c.orig:3904:    if((seg->access->type == DEVICE_BUFFER_SEEKDONE) 
+src/disksim_diskctlr.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_diskctlr.o 符合
+src/disksim_disk.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_disk.h:284:  // if true, uses constant access-time model,
+二進位格式檔案 src/disksim_disk.o 符合
+src/disksim_interface.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+src/disksim_intr.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_iodriver.c:778:   for (; numreqs>0; numreqs--) {
+src/disksim_iodriver.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_iodriver.h:113:/* the process-flow model (i.e., a system-level simulation rather than a   */
+二進位格式檔案 src/disksim_iodriver.o 符合
+src/disksim_ioqueue.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+二進位格式檔案 src/disksim_ioqueue.o 符合
+src/disksim_iosim.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+二進位格式檔案 src/disksim_iosim.o 符合
+src/disksim_iotrace.c:619:			//*jian check whether have idle spaces and bandwidths-end
+src/disksim_iotrace.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_loadparams.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_loadparams.o 符合
+src/disksim_logorg.c:872:   req->numreqs--;
+src/disksim_logorg.c:1152:	logorgs[i]->numdisks--;
+src/disksim_logorg.c:1539:	    "to be used with constant access-time disks "
+src/disksim_logorg.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_logorg.o 符合
+src/disksim_main.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_malloc.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim.pdb 符合
+src/disksim_pfdisp.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_pfface.h:108:/* Provided by process-flow simulator */
+src/disksim_pfsim.c:813:         currcpu->idleworktime += simtime - currcpu->idleevents->time;
+src/disksim_pfsim.c:814:         currcpu->idleevents->time = (cpu_ev->time - simtime) / currcpu->scale;
+src/disksim_pfsim.c:886:     curr->time = currcpu->idleevents->time;
+src/disksim_pfsim.c:887:     currcpu->idleevents->time = simtime;
+src/disksim_pfsim.c:1080:                      cpus[i].idleworktime += simtime - cpus[i].idleevents->time;
+src/disksim_pfsim.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_pfsim.h:106:/* Process-flow event types */
+二進位格式檔案 src/disksim_pfsim.o 符合
+src/disksim_rand48.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_redun.c:860:	       for (i=0; i<((tmpdep->numdeps-1)/10); i++) {
+src/disksim_redun.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_redun.o 符合
+src/disksim_simpledisk.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+src/disksim_stat.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+src/disksim_statload.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_statload.o 符合
+src/disksim_synthio.d:5: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/disksim_synthio.o 符合
+src/hplcomb.d:4: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+二進位格式檔案 src/libdisksim.a 符合
+src/raw_layout.c:314:		    cyl,linenum,currdisk->numcyls-1);
+src/raw_layout.c:319:		    head,linenum,currdisk->numsurfaces-1);
+src/raw_layout.d:4: /usr/include/gnu/stubs-32.h \
+src/rms.d:4: /usr/include/gnu/stubs-32.h \
+二進位格式檔案 src/syssim 符合
+src/syssim_driver.c:83:  s->n++;
+src/syssim_driver.c:84:  s->sum += x;
+src/syssim_driver.c:85:  s->sqr += x*x;
+src/syssim_driver.c:94:  avg = s->sum/s->n;
+src/syssim_driver.c:95:  std = sqrt((s->sqr - 2*avg*s->sum + s->n*avg*avg) / s->n);
+src/syssim_driver.c:96:  printf("%s: n=%d average=%f std. deviation=%f\n", title, s->n, avg, std);
+src/syssim_driver.d:4: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 ssdmodel/libssdmodel.a 符合
+ssdmodel/ssd.c:418:        //blkno = blkno - ( ptr->first_log_blk_address * s->params.pages_per_block * s->params.page_size);
+ssdmodel/ssd.c:419:        blkno = blkno - ( ptr->first_log_blk_address * SSD_DATA_PAGES_PER_BLOCK(s) * s->params.page_size);
+ssdmodel/ssd.c:420:	apn = blkno/s->params.page_size;
+ssdmodel/ssd.c:421:	lpn = ((apn - (apn % (s->params.element_stride_pages * ptr->element_allcating_count)))/
+ssdmodel/ssd.c:422:                      ptr->element_allcating_count) + (apn % s->params.element_stride_pages);
+ssdmodel/ssd.c:430:	//blkno = blkno - ( ptr_2->first_log_blk_address * s->params.pages_per_block * s->params.page_size);
+ssdmodel/ssd.c:431:        blkno = blkno - ( ptr_2->first_log_blk_address * SSD_DATA_PAGES_PER_BLOCK(s) * s->params.page_size);
+ssdmodel/ssd.c:432:	apn = blkno/s->params.page_size;
+ssdmodel/ssd.c:436:	(blkno/(s->params.element_stride_pages*s->params.page_size)) % allocating_infor_head[user_id]->plane_allcating_count % s->params.nelements;
+ssdmodel/ssd.c:441:	lpn += (apn % allocating_infor_head[user_id]->plane_allcating_count) / s->params.nelements;
+ssdmodel/ssd.c:446:    apn = blkno/s->params.page_size;
+ssdmodel/ssd.c:454:    //lpn = ((apn - (apn % (s->params.element_stride_pages * s->params.nelements)))/
+ssdmodel/ssd.c:455:    //                  s->params.nelements) + (apn % s->params.element_stride_pages);
+ssdmodel/ssd.c:456:    //lpn = apn / s->params.nelements;
+ssdmodel/ssd.c:487:    ssd_element *elem = &s->elements[elem_num];
+ssdmodel/ssd.c:488:    ssd_element_metadata *metadata = &s->elements[elem_num].metadata;//*jian add
+ssdmodel/ssd.c:507:        tmp->devno = s->devno;
+ssdmodel/ssd.c:515:        stat_update (&s->stat.acctimestats, max_cost);
+ssdmodel/ssd.c:1328:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd.c:1335:    n = s->params.blocks_per_element;
+ssdmodel/ssd.c:1339:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd.c:1409:        if (s->params.write_policy == DISKSIM_SSD_WRITE_POLICY_OSR) {
+ssdmodel/ssd.c:1411:            elts_count += s->params.nelements;
+ssdmodel/ssd.c:1413:            for (j = 0; j < s->params.nelements; j ++) {
+ssdmodel/ssd.c:1419:                ssd_element_stat *stat = &(s->elements[j].stat);
+ssdmodel/ssd.c:1424:                    sourcestr, set[i], j, s->elements[j].stat.tot_reqs_issued);
+ssdmodel/ssd.c:1426:                    sourcestr, set[i], j, s->elements[j].stat.tot_time_taken);
+ssdmodel/ssd.c:1427:                if (s->elements[j].stat.tot_time_taken > 0) {
+ssdmodel/ssd.c:1428:                    elem_iops = ((s->elements[j].stat.tot_reqs_issued*1000.0)/s->elements[j].stat.tot_time_taken);
+ssdmodel/ssd.c:1434:                    sourcestr, set[i], j, s->elements[j].stat.num_clean);
+ssdmodel/ssd.c:1436:                    sourcestr, set[i], j, s->elements[j].stat.tot_clean_time);
+ssdmodel/ssd.c:1438:                    sourcestr, set[i], j, s->elements[j].metadata.tot_migrations);
+ssdmodel/ssd.c:1440:                    sourcestr, set[i], j, s->elements[j].metadata.tot_pgs_migrated);
+ssdmodel/ssd.c:1442:                    sourcestr, set[i], j, s->elements[j].metadata.mig_cost);
+ssdmodel/ssd.c:1445:                if (s->elements[j].stat.tot_clean_time > 0) {
+ssdmodel/ssd.c:1446:                    elem_clean_iops = ((s->elements[j].stat.num_clean*1000.0)/s->elements[j].stat.tot_clean_time);
+ssdmodel/ssd.c:1452:                    sourcestr, set[i], j, ((s->elements[j].stat.num_clean+s->elements[j].stat.tot_reqs_issued)*1000.0)/(s->elements[j].stat.tot_clean_time+s->elements[j].stat.tot_time_taken));
+ssdmodel/ssd.c:1457:                    sourcestr, set[i], j, s->elements[j].metadata.tot_free_blocks);
+ssdmodel/ssd.c:1476:                for (plane_num = 0; plane_num < s->params.planes_per_pkg; plane_num ++) {
+ssdmodel/ssd.c:1478:                        plane_num, s->elements[j].metadata.plane_meta[plane_num].num_cleans);
+ssdmodel/ssd.c:1490:            //  sourcestr, set[i], tot_elts / s->params.nelements);
+ssdmodel/ssd_clean.c:38:        xfer_cost = ssd_data_transfer_cost(s, s->params.page_size);
+ssdmodel/ssd_clean.c:50:    ssd_element_metadata *metadata = &s->elements[elem_num].metadata;
+ssdmodel/ssd_clean.c:51:    switch(s->params.copy_back) {
+ssdmodel/ssd_clean.c:73:                s->params.copy_back);
+ssdmodel/ssd_clean.c:92:    cost += s->params.page_read_latency;
+ssdmodel/ssd_clean.c:109:    s->elements[elem_num].stat.pages_moved ++;
+ssdmodel/ssd_clean.c:110:    s->elements[elem_num].stat.tot_xfer_cost += xfer_cost;
+ssdmodel/ssd_clean.c:251:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:253:    bitpos = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_clean.c:254:    for (i = bitpos; i < bitpos + (int)s->params.blocks_per_plane; i ++) {
+ssdmodel/ssd_clean.c:260:    return (tot_lifetime / s->params.blocks_per_plane);
+ssdmodel/ssd_clean.c:271:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:273:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:277:    return (tot_lifetime / s->params.blocks_per_element);
+ssdmodel/ssd_clean.c:302:    ASSERT(s->params.cleaning_policy == DISKSIM_SSD_CLEANING_POLICY_GREEDY_WEAR_AWARE);
+ssdmodel/ssd_clean.c:333:    ASSERT(s->params.cleaning_policy == DISKSIM_SSD_CLEANING_POLICY_GREEDY_WEAR_AWARE);
+ssdmodel/ssd_clean.c:433:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:444:        for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:459:        bitpos = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_clean.c:460:        for (i = bitpos; i < bitpos + (int)s->params.blocks_per_plane; i ++) {
+ssdmodel/ssd_clean.c:491:    cost += metadata->block_usage[from_blk].num_valid * s->params.page_read_latency;
+ssdmodel/ssd_clean.c:493:    cost += metadata->block_usage[from_blk].num_valid * s->params.page_write_latency;
+ssdmodel/ssd_clean.c:499:		metadata->tot_free_pages[user_id] -= metadata->plane_meta[metadata->block_usage[from_blk].plane_num].active_page[metadata->user_id]%s->params.pages_per_block;	//*jian for dynamic page level mapping
+ssdmodel/ssd_clean.c:514:    for (i = 0; i < s->params.pages_per_block; i ++) {
+ssdmodel/ssd_clean.c:517:            //ASSERT(metadata->lba_table[lpn] == (from_blk * s->params.pages_per_block + i));
+ssdmodel/ssd_clean.c:518:            //metadata->lba_table[lpn] = to_blk * s->params.pages_per_block + i;
+ssdmodel/ssd_clean.c:519:            ASSERT(page_level_mapping_table[lpn] == (from_blk * s->params.pages_per_block + i + metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block));
+ssdmodel/ssd_clean.c:520:            page_level_mapping_table[lpn] = to_blk * s->params.pages_per_block + i + metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block;
+ssdmodel/ssd_clean.c:571:    ASSERT(s->params.cleaning_policy == DISKSIM_SSD_CLEANING_POLICY_GREEDY_WEAR_AWARE);
+ssdmodel/ssd_clean.c:600:    int min_valid = s->params.pages_per_block - 1; // one page goes for the summary info
+ssdmodel/ssd_clean.c:610:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:651:        if (s->params.cleaning_policy == DISKSIM_SSD_CLEANING_POLICY_GREEDY_WEAR_AGNOSTIC) {
+ssdmodel/ssd_clean.c:685:    int min_valid = s->params.pages_per_block - 1; // one page goes for the summary info
+ssdmodel/ssd_clean.c:687:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:717:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:750:        for (i = 0; i < s->params.pages_per_block; i ++) {
+ssdmodel/ssd_clean.c:765:        cost += s->params.block_erase_latency;
+ssdmodel/ssd_clean.c:780:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:816:    s->elements[elem_num].stat.num_clean ++;
+ssdmodel/ssd_clean.c:830:    ssd_element_metadata *metadata = &s->elements[elem_num].metadata;
+ssdmodel/ssd_clean.c:847:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:852:    table = (usage_table *) malloc(sizeof(usage_table) * (s->params.pages_per_block + 1));
+ssdmodel/ssd_clean.c:853:    memset(table, 0, sizeof(usage_table) * (s->params.pages_per_block + 1));
+ssdmodel/ssd_clean.c:856:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:862:    for (i = 0; i <= s->params.pages_per_block; i ++) {
+ssdmodel/ssd_clean.c:868:    for (i = 0; i < s->params.blocks_per_element; i ++) {
+ssdmodel/ssd_clean.c:883:    for (i = 0; i <= s->params.pages_per_block; i ++) {
+ssdmodel/ssd_clean.c:902:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:906:        blk = DISKSIM_lrand48() % s->params.blocks_per_element;
+ssdmodel/ssd_clean.c:921:            if (valid_pages == s->params.pages_per_block) {
+ssdmodel/ssd_clean.c:954:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:968:    for (i = 0; i <= s->params.pages_per_block; i ++) {
+ssdmodel/ssd_clean.c:995:                if (s->params.cleaning_policy == DISKSIM_SSD_CLEANING_POLICY_GREEDY_WEAR_AWARE) {
+ssdmodel/ssd_clean.c:1036:            plane_num, elem_num, s->devno);
+ssdmodel/ssd_clean.c:1050:    switch(s->params.cleaning_policy) {
+ssdmodel/ssd_clean.c:1062:                s->params.cleaning_policy);
+ssdmodel/ssd_clean.c:1075:    switch(s->params.cleaning_policy) {
+ssdmodel/ssd_clean.c:1084:                s->params.cleaning_policy);
+ssdmodel/ssd_clean.c:1102:    ssd_element_metadata *metadata = &s->elements[elem_num].metadata;
+ssdmodel/ssd_clean.c:1144:    if (s->params.copy_back == SSD_COPY_BACK_DISABLE) {
+ssdmodel/ssd_clean.c:1162:    start = s->elements[elem_num].metadata.parunits[parunit_num].plane_to_clean;
+ssdmodel/ssd_clean.c:1165:        ASSERT(parunit_num == s->elements[elem_num].metadata.plane_meta[i].parunit_num);
+ssdmodel/ssd_clean.c:1167:            s->elements[elem_num].metadata.parunits[parunit_num].plane_to_clean = \
+ssdmodel/ssd_clean.c:1185:	//if(s->elements[elem_num].metadata.plane_meta[plane_num].free_blocks < low)
+ssdmodel/ssd_clean.c:1191:        ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_clean.c:1193:        for(i=0;i<s->params.planes_per_pkg;i++)
+ssdmodel/ssd_clean.c:1196:              free_pages_in_act_blk += s->params.pages_per_block - (pm->active_page[user_id]%s->params.pages_per_block);
+ssdmodel/ssd_clean.c:1198:        tmp = metadata->tot_free_blocks * s->params.pages_per_block + free_pages_in_act_blk;
+ssdmodel/ssd_clean.c:1206:	int user_id = s->elements[elem_num].metadata.user_id;
+ssdmodel/ssd_clean.c:1215:		free_blocks_t = s->elements[elem_num].metadata.tot_free_blocks;
+ssdmodel/ssd_clean.c:1221:				free_sum = ptr->aloc_block_cnt/s->params.nelements;
+ssdmodel/ssd_clean.c:1222:				free_sum -= s->elements[elem_num].metadata.user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1234:		free_blocks_t = s->elements[elem_num].metadata.plane_meta[plane_num].free_blocks;
+ssdmodel/ssd_clean.c:1241:				//free_sum = ptr->aloc_block_cnt/(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1242:				free_sum = s->elements[elem_num].metadata.plane_meta[plane_num].user_allocating_blocks[ptr->user_id];
+ssdmodel/ssd_clean.c:1244:				free_sum -= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[ptr->user_id];
+ssdmodel/ssd_clean.c:1249:					if(s->elements[elem_num].metadata.plane_meta[plane_num].user_allocating_blocks[user_id]\
+ssdmodel/ssd_clean.c:1250:					>= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[user_id])
+ssdmodel/ssd_clean.c:1254:			else if(s->elements[elem_num].metadata.plane_meta[plane_num].user_allocating_blocks[user_id]\
+ssdmodel/ssd_clean.c:1255:                        >= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[user_id])
+ssdmodel/ssd_clean.c:1269:	if(s->elements[elem_num].metadata.element_user_id != s->elements[elem_num].metadata.user_id_2)
+ssdmodel/ssd_clean.c:1273:        return (s->elements[elem_num].metadata.tot_free_blocks < low);
+ssdmodel/ssd_clean.c:1276:	if(s->elements[elem_num].metadata.element_user_id != s->elements[elem_num].metadata.user_id_2)
+ssdmodel/ssd_clean.c:1280:	if(s->elements[elem_num].metadata.plane_meta[plane_num].user_id != s->elements[elem_num].metadata.user_id)
+ssdmodel/ssd_clean.c:1284:        return (s->elements[elem_num].metadata.plane_meta[plane_num].free_blocks < low);
+ssdmodel/ssd_clean.c:1299:	int user_id = s->elements[elem_num].metadata.user_id;
+ssdmodel/ssd_clean.c:1307:                free_blocks_t = s->elements[elem_num].metadata.tot_free_blocks;
+ssdmodel/ssd_clean.c:1313:				free_sum = ptr->aloc_block_cnt/s->params.nelements;
+ssdmodel/ssd_clean.c:1314:				free_sum -= s->elements[elem_num].metadata.user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1326:                free_blocks_t = s->elements[elem_num].metadata.plane_meta[plane_num].free_blocks;
+ssdmodel/ssd_clean.c:1332:				//free_sum = ptr->aloc_block_cnt/(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1333:				free_sum = s->elements[elem_num].metadata.plane_meta[plane_num].user_allocating_blocks[ptr->user_id];
+ssdmodel/ssd_clean.c:1335:				free_sum -= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1352:        return (s->elements[elem_num].metadata.tot_free_blocks >= high);
+ssdmodel/ssd_clean.c:1355:        return (s->elements[elem_num].metadata.plane_meta[plane_num].free_blocks >= high);
+ssdmodel/ssd_clean.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 ssdmodel/ssd_clean.o 符合
+ssdmodel/ssd.d:6: /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+ssdmodel/ssd_gang.c:15:    gang_metadata *g = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:22:    for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.c:23:        elem_num = gang_num * s->params.elements_per_gang + i;
+ssdmodel/ssd_gang.c:27:        s->elements[elem_num].stat.tot_clean_time += max_cost;
+ssdmodel/ssd_gang.c:46:        tmp->devno = s->devno;
+ssdmodel/ssd_gang.c:54:        stat_update (&s->stat.acctimestats, max_cost);
+ssdmodel/ssd_gang.c:63:    return ((elem_num+1)%s->params.elements_per_gang + \
+ssdmodel/ssd_gang.c:64:        gang_num*s->params.elements_per_gang);
+ssdmodel/ssd_gang.c:77:    g = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:80:    start = gang_num * s->params.elements_per_gang;
+ssdmodel/ssd_gang.c:93:        elem = &s->elements[i];
+ssdmodel/ssd_gang.c:95:        j = i % s->params.elements_per_gang;
+ssdmodel/ssd_gang.c:127:                stat_update (&s->stat.acctimestats, 0);
+ssdmodel/ssd_gang.c:150:    int page = blk / s->params.page_size;
+ssdmodel/ssd_gang.c:153:    return ((page/s->params.elements_per_gang) % num_gangs);
+ssdmodel/ssd_gang.c:158:    int page = blk/s->params.page_size;
+ssdmodel/ssd_gang.c:159:    int i = page/s->params.elements_per_gang;
+ssdmodel/ssd_gang.c:168:    int page = blk / s->params.page_size;
+ssdmodel/ssd_gang.c:170:    gang_metadata *gm = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:175:    elem_num = (gang_num)*s->params.elements_per_gang + page%s->params.elements_per_gang;
+ssdmodel/ssd_gang.c:176:    j = (page % s->params.elements_per_gang) * s->data_pages_per_elem + pg_index_in_gang;
+ssdmodel/ssd_gang.c:179:    ASSERT((elem_num >= (gang_num)*s->params.elements_per_gang) && (elem_num < (gang_num+1)*s->params.elements_per_gang));
+ssdmodel/ssd_gang.c:201:    g = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:216:        elem = &s->elements[elem_num];
+ssdmodel/ssd_gang.c:220:            acctime = s->params.page_read_latency;
+ssdmodel/ssd_gang.c:225:        acctime += ssd_data_transfer_cost(s, s->params.page_size);
+ssdmodel/ssd_gang.c:230:        stat_update (&s->stat.acctimestats, acctime);
+ssdmodel/ssd_gang.c:237:        blk += s->params.page_size;
+ssdmodel/ssd_gang.c:238:        count -= s->params.page_size;
+ssdmodel/ssd_gang.c:252:    g = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:257:    if (s->params.cleaning_in_background) {
+ssdmodel/ssd_gang.c:269:        if (!s->params.cleaning_in_background) {
+ssdmodel/ssd_gang.c:310:            pg = req->blkno / s->params.page_size;
+ssdmodel/ssd_gang.c:311:            start_pg = pg - pg % s->params.elements_per_gang;
+ssdmodel/ssd_gang.c:315:                blk = start_pg * s->params.page_size;
+ssdmodel/ssd_gang.c:322:                    if ((req->blkno <= blk) && ((blk+s->params.page_size-1) < (req->blkno+req->bcount))) {
+ssdmodel/ssd_gang.c:329:                        // read_time += ssd_data_transfer_cost(s, s->params.page_size);
+ssdmodel/ssd_gang.c:332:                    count -= s->params.page_size;
+ssdmodel/ssd_gang.c:333:                    blk += s->params.page_size;
+ssdmodel/ssd_gang.c:336:                read_time += s->params.page_read_latency;
+ssdmodel/ssd_gang.c:343:            blk = start_pg * s->params.page_size;
+ssdmodel/ssd_gang.c:356:                elem = &s->elements[elem_num];
+ssdmodel/ssd_gang.c:358:                elem_req[0]->count = s->params.page_size;
+ssdmodel/ssd_gang.c:366:                xfertime = ssd_data_transfer_cost(s, s->params.page_size);
+ssdmodel/ssd_gang.c:370:                stat_update (&s->stat.acctimestats, acctime);
+ssdmodel/ssd_gang.c:374:                if (elem_req[0]->acctime > (xfertime + s->params.page_write_latency)) {
+ssdmodel/ssd_gang.c:379:                blk += s->params.page_size;
+ssdmodel/ssd_gang.c:380:                count -= s->params.page_size;
+ssdmodel/ssd_gang.c:386:                req_time += 2 * s->params.page_write_latency;
+ssdmodel/ssd_gang.c:388:                req_time += s->params.page_write_latency;
+ssdmodel/ssd_gang.c:417:    first = (ssd_req ***) malloc (s->params.elements_per_gang * sizeof(ssd_req **));
+ssdmodel/ssd_gang.c:418:    for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.c:428:        for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.c:436:                elem_num = gang_num * s->params.elements_per_gang + i;
+ssdmodel/ssd_gang.c:437:                elem = &s->elements[elem_num];
+ssdmodel/ssd_gang.c:454:                stat_update (&s->stat.acctimestats, reqs_queue[i][0]->acctime);
+ssdmodel/ssd_gang.c:473:                if (s->params.gang_share == SSD_SHARED_BUS_GANG) {
+ssdmodel/ssd_gang.c:488:        if (skip == s->params.elements_per_gang) {
+ssdmodel/ssd_gang.c:494:    for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.c:512:    g = &s->gang_meta[gang_num];
+ssdmodel/ssd_gang.c:517:    if (s->params.cleaning_in_background) {
+ssdmodel/ssd_gang.c:531:        if (!s->params.cleaning_in_background) {
+ssdmodel/ssd_gang.c:540:        rd_q = (ssd_req ***) malloc(s->params.elements_per_gang * sizeof (ssd_req **));
+ssdmodel/ssd_gang.c:541:        wr_q = (ssd_req ***) malloc(s->params.elements_per_gang * sizeof (ssd_req **));
+ssdmodel/ssd_gang.c:542:        for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.c:559:        for (i = 0; i < s->params.elements_per_gang; i ++) {
+ssdmodel/ssd_gang.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 ssdmodel/ssd_gang.o 符合
+ssdmodel/ssd.h:418:#define SSD_PAGE_TO_BLOCK(pnum, s)      ((pnum)/(s->params.pages_per_block))
+ssdmodel/ssd_init.c:469:    elem->num_planes = s->params.planes_per_pkg;
+ssdmodel/ssd_init.c:474:        elem->plane[i].num_blocks = s->params.blocks_per_plane;
+ssdmodel/ssd_init.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 ssdmodel/ssd_init.o 符合
+ssdmodel/ssd-patch:937:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:1108:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:1664:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:1871:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:2405:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:2591:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:2778:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:3072:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:3288:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd-patch:3513:+<?xml version="1.0" encoding="Windows-1252"?>
+ssdmodel/ssd_timing.c:28:    	lpn = blkno /(tt->params->element_stride_pages * tt->params->page_size);
+ssdmodel/ssd_timing.c:41:		for(i=0;i<tt->params->nelements;i++)
+ssdmodel/ssd_timing.c:62:			for(i=0;i<tt->params->nelements;i++)
+ssdmodel/ssd_timing.c:83:	//blkno = blkno - ( ptr->first_log_blk_address * tt->params->pages_per_block * tt->params->page_size );
+ssdmodel/ssd_timing.c:84:	blkno = blkno - ( ptr->first_log_blk_address * SSD_DATA_PAGES_PER_BLOCK(currdisk) * tt->params->page_size );
+ssdmodel/ssd_timing.c:85:	blkno = (blkno /(tt->params->element_stride_pages * tt->params->page_size)) % ptr->element_allcating_count ;
+ssdmodel/ssd_timing.c:86:	int choose_elem_cnt = (ptr->init_element_no + blkno) % tt->params->nelements;
+ssdmodel/ssd_timing.c:109:        //blkno = blkno - ( ptr_2->first_log_blk_address * tt->params->pages_per_block * tt->params->page_size );
+ssdmodel/ssd_timing.c:110:        blkno = blkno - ( ptr_2->first_log_blk_address * SSD_DATA_PAGES_PER_BLOCK(currdisk) * tt->params->page_size );
+ssdmodel/ssd_timing.c:113:	return ((blkno/(tt->params->element_stride_pages*tt->params->page_size)) % allocating_infor_head[user_id]->plane_allcating_count + ptr_2->init_elem_no) % tt->params->nelements;
+ssdmodel/ssd_timing.c:115:    return (blkno/(tt->params->element_stride_pages*tt->params->page_size)) % tt->params->nelements;*/
+ssdmodel/ssd_timing.c:137:    struct my_timing_t *tt = (struct my_timing_t *)(s->timing_t);
+ssdmodel/ssd_timing.c:145:    int ppb = tt->params->pages_per_block;
+ssdmodel/ssd_timing.c:147:    int apn = blkno/tt->params->page_size;
+ssdmodel/ssd_timing.c:148:    int pn = ((apn - (apn % (tt->params->element_stride_pages*tt->params->nelements)))/
+ssdmodel/ssd_timing.c:149:                      tt->params->nelements) + (apn % tt->params->element_stride_pages);
+ssdmodel/ssd_timing.c:156:        cost = tt->params->page_write_latency;
+ssdmodel/ssd_timing.c:159:        cost += (pn-last_pn) * (tt->params->page_read_latency + tt->params->page_write_latency);
+ssdmodel/ssd_timing.c:165:        cost = tt->params->page_write_latency;
+ssdmodel/ssd_timing.c:168:        cost += tt->params->block_erase_latency;
+ssdmodel/ssd_timing.c:171:        s->elements[elem_num].stat.num_clean ++;
+ssdmodel/ssd_timing.c:174:        cost += blockpos * (tt->params->page_read_latency + tt->params->page_write_latency);
+ssdmodel/ssd_timing.c:182:                (tt->params->page_read_latency + tt->params->page_write_latency);
+ssdmodel/ssd_timing.c:196:    s->elements[elem_num].stat.pages_moved += pages_moved;
+ssdmodel/ssd_timing.c:206:    double cost = s->params.page_read_latency;
+ssdmodel/ssd_timing.c:223:    int start = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:224:    for (i = start; i < start + (int)s->params.blocks_per_plane; i ++) {
+ssdmodel/ssd_timing.c:255:    for (i = 0; i < s->params.planes_per_pkg; i ++) {
+ssdmodel/ssd_timing.c:266:    int prev_block = prev_page / s->params.pages_per_block;
+ssdmodel/ssd_timing.c:267:    int active_block = active_page / s->params.pages_per_block;
+ssdmodel/ssd_timing.c:309:    int start_bitpos = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:311:    for (i = start_bitpos; i < (start_bitpos + (int)s->params.blocks_per_plane); i ++) {
+ssdmodel/ssd_timing.c:324:    return (sectors_count * (SSD_BYTES_PER_SECTOR) * s->params.chip_xfer_latency);
+ssdmodel/ssd_timing.c:329:    return (((page_num + 1) % s->params.pages_per_block) == 0);
+ssdmodel/ssd_timing.c:336:    switch(s->params.plane_block_mapping) {
+ssdmodel/ssd_timing.c:343:            int plane_pair = bitpos / (s->params.blocks_per_plane*2);
+ssdmodel/ssd_timing.c:344:            int stripe_no = (bitpos/2) % s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:347:            block = plane_pair * (s->params.blocks_per_plane*2)  + \
+ssdmodel/ssd_timing.c:355:            int stripe_no = bitpos % s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:356:            int col_no = bitpos / s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:357:            block = (stripe_no * s->params.planes_per_pkg) + col_no;
+ssdmodel/ssd_timing.c:362:            fprintf(stderr, "Error: unknown plane_block_mapping %d\n", s->params.plane_block_mapping);
+ssdmodel/ssd_timing.c:414:    return (bitpos / s->params.blocks_per_plane);
+ssdmodel/ssd_timing.c:429:    unsigned int pagepos_in_block = active_page % s->params.pages_per_block;
+ssdmodel/ssd_timing.c:432:    pre_page_metadata = &(s->elements[ page_level_mapping_table[lpn]/(s->params.blocks_per_element * s->params.pages_per_block) ].metadata);
+ssdmodel/ssd_timing.c:442:        unsigned int prev_page = page_level_mapping_table[lpn] % (s->params.blocks_per_element * s->params.pages_per_block);
+ssdmodel/ssd_timing.c:444:        unsigned int pagepos_in_prev_block = prev_page % s->params.pages_per_block;
+ssdmodel/ssd_timing.c:476:    page_level_mapping_table[lpn] = active_page + metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block;
+ssdmodel/ssd_timing.c:488:    if (metadata->block_usage[active_block].num_valid >= s->params.pages_per_block) {
+ssdmodel/ssd_timing.c:490:            metadata->block_usage[active_block].num_valid, active_block, s->params.pages_per_block);
+ssdmodel/ssd_timing.c:495:    cost = s->params.page_write_latency;
+ssdmodel/ssd_timing.c:509:        cost += s->params.page_write_latency;
+ssdmodel/ssd_timing.c:513:        metadata->block_usage[active_block].page[s->params.pages_per_block - 1] = -1;
+ssdmodel/ssd_timing.c:531:    ssd_element_metadata *metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_timing.c:545:    bitpos = ssd_find_zero_bit(free_blocks, s->params.blocks_per_element, prev_pos);
+ssdmodel/ssd_timing.c:552:			plane_num = ( plane_num + 1 ) % s->params.planes_per_pkg;
+ssdmodel/ssd_timing.c:554:			bitpos = ssd_find_zero_bit(free_blocks, s->params.blocks_per_element, prev_pos);
+ssdmodel/ssd_timing.c:564:    if((bitpos < 0) || (bitpos >= s->params.blocks_per_element))
+ssdmodel/ssd_timing.c:567:    	ASSERT((bitpos >= 0) && (bitpos < s->params.blocks_per_element));
+ssdmodel/ssd_timing.c:579:            metadata->plane_meta[plane_num].block_alloc_pos = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:581:            bitpos = ssd_find_zero_bit(free_blocks, s->params.blocks_per_element, prev_pos);
+ssdmodel/ssd_timing.c:582:            ASSERT((bitpos >= 0) && (bitpos < s->params.blocks_per_element));
+ssdmodel/ssd_timing.c:592:            (plane_num * s->params.blocks_per_plane) + ((bitpos+1) % s->params.blocks_per_plane);
+ssdmodel/ssd_timing.c:594:        metadata->block_alloc_pos = (bitpos+1) % s->params.blocks_per_element;
+ssdmodel/ssd_timing.c:659:        metadata->block_usage[active_block].bsn[user_id] = s->bsn++;
+ssdmodel/ssd_timing.c:663:        pm->active_page[user_id] = active_block * s->params.pages_per_block;
+ssdmodel/ssd_timing.c:701:    	    pre_page_metadata = &(s->elements[ page_level_mapping_table[lpn]/(s->params.blocks_per_element * s->params.pages_per_block) ].metadata);
+ssdmodel/ssd_timing.c:702:            prev_page = page_level_mapping_table[lpn] - pre_page_metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block;
+ssdmodel/ssd_timing.c:748:    	    pre_page_metadata = &(s->elements[ page_level_mapping_table[lpn]/(s->params.blocks_per_element * s->params.pages_per_block) ].metadata);
+ssdmodel/ssd_timing.c:749:            prev_page = page_level_mapping_table[lpn] - pre_page_metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block;
+ssdmodel/ssd_timing.c:754:            if (s->params.alloc_pool_logic == SSD_ALLOC_POOL_PLANE) {
+ssdmodel/ssd_timing.c:771:				j = (j+1) % s->params.planes_per_pkg;
+ssdmodel/ssd_timing.c:820:                        free_pages_in_act_blk = s->params.pages_per_block - ((pm->active_page[user_id]%s->params.pages_per_block) + additive);
+ssdmodel/ssd_timing.c:822:                        tmp = pm->free_blocks * s->params.pages_per_block + free_pages_in_act_blk;
+ssdmodel/ssd_timing.c:826:                        tmp = pm->free_blocks * s->params.pages_per_block + free_pages_in_act_blk;
+ssdmodel/ssd_timing.c:831:				tmp -= (pm->user_allocating_blocks[ptr->user_id] - pm->user_using_blocks[ptr->user_id]) * s->params.pages_per_block;
+ssdmodel/ssd_timing.c:834:			tmp = (pm->user_allocating_blocks[user_id] - pm->user_using_blocks[user_id]) * s->params.pages_per_block + free_pages_in_act_blk;
+ssdmodel/ssd_timing.c:849:                    j = (j+1) % s->params.planes_per_pkg;
+ssdmodel/ssd_timing.c:855:                metadata->plane_to_write[user_id] = (plane_num+1) % s->params.planes_per_pkg;
+ssdmodel/ssd_timing.c:899:    metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_timing.c:956:                    parunit_op_cost[i] = s->params.page_read_latency;
+ssdmodel/ssd_timing.c:971:                ASSERT(r->count <= s->params.page_size);
+ssdmodel/ssd_timing.c:981:                        r->acctime = parunit_op_cost[i] + ssd_data_transfer_cost(s,s->params.page_size);
+ssdmodel/ssd_timing.c:982:                        r->schtime = parunit_tot_cost[i] + (op_count-1)*ssd_data_transfer_cost(s,s->params.page_size) + r->acctime;
+ssdmodel/ssd_timing.c:984:                        r->acctime = ssd_data_transfer_cost(s,s->params.page_size);
+ssdmodel/ssd_timing.c:985:                        r->schtime = parunit_tot_cost[i] + op_count*ssd_data_transfer_cost(s,s->params.page_size) + parunit_op_cost[i];
+ssdmodel/ssd_timing.c:989:                    r->acctime = parunit_op_cost[i] + ssd_data_transfer_cost(s,s->params.page_size);
+ssdmodel/ssd_timing.c:990:                    r->schtime = parunit_tot_cost[i] + (op_count-1)*ssd_data_transfer_cost(s,s->params.page_size) + r->acctime;
+ssdmodel/ssd_timing.c:1027:    metadata = &(s->elements[elem_num].metadata);
+ssdmodel/ssd_timing.c:1046:            if (s->params.cleaning_in_background) {
+ssdmodel/ssd_timing.c:1095:        switch(s->params.write_policy) {
+ssdmodel/ssd_timing.c:1104:                    s->params.write_policy);
+ssdmodel/ssd_timing.c:1108:        switch(s->params.write_policy) {
+ssdmodel/ssd_timing.c:1119:                    s->params.write_policy);
+ssdmodel/ssd_timing.c:1160:    if (s->params.copy_back == SSD_COPY_BACK_DISABLE) {
+ssdmodel/ssd_timing.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+二進位格式檔案 ssdmodel/ssd_timing.o 符合
+ssdmodel/ssd_utils.d:6: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+valid/3disks2.parv:207:   Process-Flow Time Scale =  1.0
+valid/3disks.parv:207:   Process-Flow Time Scale =  1.0
+二進位格式檔案 valid/ajw.1week.srt 符合
+valid/ascii.parv:314:   Process-Flow Time Scale =  1.0
+valid/atlas10k.parv:159:   Process-Flow Time Scale =  1.0
+valid/atlas_III.parv:151:   Process-Flow Time Scale =  1.0
+valid/barracuda.parv:151:   Process-Flow Time Scale =  1.0
+valid/cheetah4LP.parv:151:   Process-Flow Time Scale =  1.0
+valid/cheetah9LP.parv:151:   Process-Flow Time Scale =  1.0
+valid/dec_rz26.parv:151:   Process-Flow Time Scale =  1.0
+valid/hp_c2247a.parv:151:   Process-Flow Time Scale =  1.0
+valid/hp_c2490a.parv:151:   Process-Flow Time Scale =  1.0
+valid/hp_c3323a.parv:151:   Process-Flow Time Scale =  1.0
+valid/hplajw.parv:161:   Process-Flow Time Scale =  1.0
+valid/ibm18es.parv:151:   Process-Flow Time Scale =  1.0
+valid/mems.g1.parv:160:   Process-Flow Time Scale =  1.0
+valid/mems.g2.parv:160:   Process-Flow Time Scale =  1.0
+valid/mems.g3.parv:160:   Process-Flow Time Scale =  1.0
+valid/st41601n.parv:156:   Process-Flow Time Scale =  1.0
+valid/syntharrays.parv:265:   Process-Flow Time Scale =  1.0
+valid/synthcachedev.parv:187:   Process-Flow Time Scale =  1.0
+valid/synthcachemem.parv:191:   Process-Flow Time Scale =  1.0
+valid/synthclosed.parv:159:   Process-Flow Time Scale =  1.0
+valid/synthmixed.parv:157:   Process-Flow Time Scale =  1.0
+valid/synthopen.parv:203:   Process-Flow Time Scale =  1.0
+valid/synthraid5.parv:218:   Process-Flow Time Scale =  1.0
+valid/synthsimpledisk.parv:177:   Process-Flow Time Scale =  1.0
+w32build/disksim.vcproj:1:<?xml version="1.0" encoding="Windows-1252"?>
+w32build/disksim.vcproj.orig:1:<?xml version="1.0" encoding="Windows-1252"?>
+w32build/disksim.vcproj.rej:4:+<?xml version="1.0" encoding="Windows-1252"?>

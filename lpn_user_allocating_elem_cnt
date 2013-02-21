@@ -1,0 +1,498 @@
+二進位格式檔案 lib/libdisksim.a 符合
+libparam/libparam.tab.c:392:	YYCOPY (&yyptr->Stack_alloc, Stack, yysize);			\
+libparam/libparam.tab.c:393:	Stack = &yyptr->Stack_alloc;					\
+二進位格式檔案 memsmodel/libmemsmodel.a 符合
+memsmodel/mems_event.c:228:      next_event_ptr = event_ptr->batch_next;
+memsmodel/mems_event.c:229:      free(((mems_reqinfo_t *)event_ptr->mems_reqinfo)->extents);
+memsmodel/mems_event.c:231:      if (event_ptr->mems_reqinfo != r) 
+memsmodel/mems_event.c:233:	  free(event_ptr->mems_reqinfo);
+memsmodel/mems_event.c:235:	  //addtoextraq(event_ptr->mems_reqinfo);
+memsmodel/mems_event.c:269:      extent_ptr->next = mems_get_new_extent(event_ptr);
+memsmodel/mems_event.c:270:      extent_ptr->next->prev = extent_ptr;
+memsmodel/mems_event.c:272:      if ((event_ptr->flags & 0x1) == DISKSIM_WRITE)
+memsmodel/mems_event.c:277:	  extent_ptr->next->completed_block_bus = extent_ptr->next->lastblock;
+memsmodel/mems_event.c:278:	  extent_ptr->next->bus_done = TRUE;
+memsmodel/mems_event.c:281:		 extent_ptr->next->completed_block_bus);
+memsmodel/mems_event.c:289:      event_ptr->mems_reqinfo = NULL;
+memsmodel/mems_event.c:290:      event_ptr = event_ptr->batch_next;
+memsmodel/mems_event.c:291:      extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:313:  while (event_ptr->batch_next != NULL)
+memsmodel/mems_event.c:315:      event_ptr = event_ptr->batch_next;
+memsmodel/mems_event.c:316:      extent_ptr->next = mems_get_new_extent(event_ptr);
+memsmodel/mems_event.c:458:	     i, extent_ptr->firstblock, extent_ptr->lastblock);
+memsmodel/mems_event.c:460:	     extent_ptr->next_block_start, extent_ptr->next_block_end);
+memsmodel/mems_event.c:462:	     extent_ptr->completed_block_media, extent_ptr->completed_block_bus);
+memsmodel/mems_event.c:464:	     extent_ptr->media_done, extent_ptr->bus_done);
+memsmodel/mems_event.c:465:      extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:694:	  if (mems_buffer_check(extent_ptr->firstblock,
+memsmodel/mems_event.c:695:				extent_ptr->lastblock, sled->dev)) {
+memsmodel/mems_event.c:698:	    extent_ptr->completed_block_media = extent_ptr->lastblock;
+memsmodel/mems_event.c:699:	    extent_ptr->media_done = TRUE;
+memsmodel/mems_event.c:996:	  if (extent_ptr->media_done == TRUE)
+memsmodel/mems_event.c:998:	      extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1002:	  if (extent_ptr->completed_block_media == -1)
+memsmodel/mems_event.c:1004:	      extent_ptr->next_block_start = extent_ptr->firstblock;
+memsmodel/mems_event.c:1008:	      extent_ptr->next_block_start = extent_ptr->completed_block_media + 1;
+memsmodel/mems_event.c:1015:	      mems_lbn_to_position(extent_ptr->next_block_start,
+memsmodel/mems_event.c:1027:	  mems_lbn_to_position(extent_ptr->next_block_start,
+memsmodel/mems_event.c:1029:			       &extent_ptr->coordset_up,
+memsmodel/mems_event.c:1030:			       &extent_ptr->coordset_dn,
+memsmodel/mems_event.c:1031:			       &extent_ptr->tipset,
+memsmodel/mems_event.c:1035:				    &extent_ptr->coordset_up) == FALSE)
+memsmodel/mems_event.c:1037:	      extent_ptr->next_block_start = -1;
+memsmodel/mems_event.c:1038:	      extent_ptr->next_block_end = -1;
+memsmodel/mems_event.c:1039:	      extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1043:	  if (sled->tipset.num_tips + extent_ptr->tipset.num_tips
+memsmodel/mems_event.c:1047:	      extent_ptr->next_block_start = -1;
+memsmodel/mems_event.c:1048:	      extent_ptr->next_block_end = -1;
+memsmodel/mems_event.c:1049:	      extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1053:	  sled->tipset.num_tips += extent_ptr->tipset.num_tips;
+memsmodel/mems_event.c:1054:	  extent_ptr->next_block_end = extent_ptr->next_block_start;
+memsmodel/mems_event.c:1058:	  for (block = extent_ptr->next_block_end + 1;
+memsmodel/mems_event.c:1059:	       block <= extent_ptr->lastblock;
+memsmodel/mems_event.c:1065:		  (block > extent_ptr->completed_block_bus))
+memsmodel/mems_event.c:1096:	      extent_ptr->next_block_end = block;
+memsmodel/mems_event.c:1098:	  extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1349:	  if (!(extent_ptr->request->flags & READ) &&
+memsmodel/mems_event.c:1350:	      (extent_ptr->next_block_start > extent_ptr->completed_block_bus))
+memsmodel/mems_event.c:1358:	  extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1438:	  next_extent = extent_ptr->next;
+memsmodel/mems_event.c:1439:	  extent_ptr->completed_block_media = extent_ptr->next_block_end;
+memsmodel/mems_event.c:1441:	  if (extent_ptr->request->flags & READ) {
+memsmodel/mems_event.c:1442:	    mems_buffer_insert(extent_ptr->next_block_start, 
+memsmodel/mems_event.c:1443:			       extent_ptr->next_block_end, sled->dev);      
+memsmodel/mems_event.c:1448:	  if ((extent_ptr->request->flags & READ) &&
+memsmodel/mems_event.c:1456:	      assert(extent_ptr->bus_done == FALSE);
+memsmodel/mems_event.c:1459:	  if (extent_ptr->completed_block_media >= extent_ptr->lastblock)
+memsmodel/mems_event.c:1461:	      extent_ptr->media_done = TRUE;
+memsmodel/mems_event.c:1465:	      if (extent_ptr->bus_done == TRUE)
+memsmodel/mems_event.c:1467:		  if (extent_ptr->prev)
+memsmodel/mems_event.c:1469:		      extent_ptr->prev->next = extent_ptr->next;
+memsmodel/mems_event.c:1473:		      reqinfo->extents = extent_ptr->next;
+memsmodel/mems_event.c:1475:		  if (extent_ptr->next)
+memsmodel/mems_event.c:1477:		      extent_ptr->next->prev = extent_ptr->prev;
+memsmodel/mems_event.c:1493:		  mems_request_complete(extent_ptr->request, latency);
+memsmodel/mems_event.c:1494:		  addtoextraq((event *)extent_ptr->request);
+memsmodel/mems_event.c:1507:		 extent_ptr->completed_block_media, extent_ptr->lastblock);
+memsmodel/mems_event.c:1614:	  if (extent_ptr->completed_block_bus == -1)
+memsmodel/mems_event.c:1618:	      //        extent_ptr->firstblock);
+memsmodel/mems_event.c:1621:	  extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1772:		 extent_ptr->firstblock,
+memsmodel/mems_event.c:1773:		 extent_ptr->completed_block_bus,
+memsmodel/mems_event.c:1774:		 (((extent_ptr->request->flags & 0x1) == DISKSIM_READ) ? ("R") : ("W")),
+memsmodel/mems_event.c:1775:		 extent_ptr->completed_block_media);
+memsmodel/mems_event.c:1778:	  if (extent_ptr->completed_block_bus == -1)
+memsmodel/mems_event.c:1780:	      if (((extent_ptr->request->flags & 0x1) == DISKSIM_READ)
+memsmodel/mems_event.c:1782:		  (extent_ptr->completed_block_media != -1))
+memsmodel/mems_event.c:1786:	      else if ((extent_ptr->request->flags & 0x1) == DISKSIM_WRITE)
+memsmodel/mems_event.c:1791:	  extent_ptr = extent_ptr->next;
+memsmodel/mems_event.c:1798:		 extent_ptr->firstblock);
+二進位格式檔案 memsmodel/mems_event.o 符合
+二進位格式檔案 src/disksim 符合
+src/disksim.c:145:		if(ptr->element_no == element_no)
+src/disksim.c:147:		ptr=ptr->next;
+src/disksim.c:159:                if(ptr->user_id == new_user_id)
+src/disksim.c:161:                ptr=ptr->next;
+src/disksim.c:175:        new_ptr->time = 0;
+src/disksim.c:176:        new_ptr->request_cnt = 0;
+src/disksim.c:177:	new_ptr->gc_overhead_time = 0.0;
+src/disksim.c:178:	new_ptr->gc_overhead_cnt = 0;
+src/disksim.c:179:        new_ptr->user_id = new_user_id;
+src/disksim.c:181:	new_ptr->init_elem_no = 0;
+src/disksim.c:182:	new_ptr->init_plane_no = 0; 
+src/disksim.c:197:        new_ptr->bandwidth = user_request_bandwidth;
+src/disksim.c:198:        new_ptr->aloc_block_cnt = user_request_real_space;
+src/disksim.c:199:        new_ptr->aloc_log_block_cnt = user_request_log_space;
+src/disksim.c:200:	new_ptr->first_log_blk_address = first_log_blk_address;
+src/disksim.c:202:	new_ptr->using_block_cnt = user_request_log_space;//*jian init full logical blocks
+src/disksim.c:204:	//new_ptr->using_block_cnt = 0;//*jian real simulate
+src/disksim.c:205:	new_ptr->using_spare_block_cnt = 0;
+src/disksim.c:207:        new_ptr->next = user_time;
+src/disksim.c:208:        new_ptr->prev = user_time->prev;
+src/disksim.c:212:	new_ptr->last_quota = 0;
+src/disksim.c:213:        new_ptr->curr_quota = ALLOCATING_TIME_UNIT * ((double)new_ptr->bandwidth/100);
+src/disksim.c:214:	new_ptr->waiting_request_cnt = 0;
+src/disksim.c:215:	new_ptr->blocks_per_sec = 0;
+src/disksim.c:216:	new_ptr->total_finished_blocks = 0;
+src/disksim.c:217:	new_ptr->ios_per_sec = 0;
+src/disksim.c:237:        del_ptr->time = 0.0;
+src/disksim.c:238:        del_ptr->request_cnt = 0;
+src/disksim.c:239:        del_ptr->user_id = 0;
+src/disksim.c:241:        del_ptr->next->prev = del_ptr->prev;
+src/disksim.c:242:        del_ptr->prev->next = del_ptr->next;
+src/disksim.c:245:	free (del_ptr->lpn_to_elem);
+src/disksim.c:246:	free (del_ptr->lpn_user_allocating_elem_cnt);
+src/disksim.c:262:                if(ptr->request_cnt!=0)
+src/disksim.c:263:                        temp=ptr->time/ptr->request_cnt;
+src/disksim.c:265:                ptr->user_id,ptr->request_cnt,temp);
+src/disksim.c:266:        	fprintf(outputfile,"j_debug User(%d)-GC overhead time (Total) : %f \n",ptr->user_id,ptr->gc_overhead_time);
+src/disksim.c:267:        	fprintf(outputfile,"j_debug User(%d)-GC overhead cnt (Total) : %d \n",ptr->user_id,ptr->gc_overhead_cnt);
+src/disksim.c:268:		temp1 = ptr->total_finished_blocks;
+src/disksim.c:269:		temp2 = simtime_f[ptr->user_id]*2.048;
+src/disksim.c:271:		ptr->user_id,temp1/temp2,ptr->total_finished_blocks,simtime_f[ptr->user_id]);
+src/disksim.c:272:                total_cnt += ptr->request_cnt;
+src/disksim.c:273:                total_time += ptr->time;
+src/disksim.c:274:                ptr=ptr->next;
+src/disksim.c:312:		while( (ptr->next != NULL) && (ptr->next->time <= curr->time) )
+src/disksim.c:313:			ptr = ptr->next;
+src/disksim.c:314:		if((ptr->time <= curr->time) && (ptr->next==NULL))
+src/disksim.c:316:			ptr->next = malloc(sizeof(ioreq_event));
+src/disksim.c:317:			memcpy(ptr->next, curr, sizeof(ioreq_event));
+src/disksim.c:318:			ptr->next->prev = ptr;
+src/disksim.c:319:			ptr->next->next = NULL;
+src/disksim.c:320:			ptr_user->queue_insert_ptr = ptr->next;
+src/disksim.c:324:		fprintf(stderr,"jdebug error ptr->time = %f\tcurr->time = %f \n",queue_head->time,curr->time);
+src/disksim.c:327:			temp->prev = ptr->prev;
+src/disksim.c:329:			ptr->prev = temp;
+src/disksim.c:345:	ptr->next=NULL;
+src/disksim.c:1018:               fprintf(stderr,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \n"\
+src/disksim.c:1049:		ptr->queue_per_user = ioreq_event_add_new_request(ptr_event->user_id,ptr_event);
+src/disksim.c:1052:		ptr->waiting_request_cnt++;
+src/disksim.c:1053://	fprintf(outputfile,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \t",ptr->user_id,ptr->curr_quota,ptr->waiting_request_cnt);
+src/disksim.c:1114:			double temp_troughput = (double)ptr->blocks_per_sec/2048;
+src/disksim.c:1116:				 simtime, ptr->user_id, ptr->blocks_per_sec,temp_troughput, ptr->ios_per_sec);
+src/disksim.c:1118:				if(ptr->curr_quota>=0)
+src/disksim.c:1119:				fprintf(outputfile," spare time= %f\n",ptr->curr_quota);
+src/disksim.c:1127:			,ptr->user_id,ptr->using_block_cnt,ptr->using_spare_block_cnt,simtime,SSDSIME_STOP_TIME);//*jian check
+src/disksim.c:1129:			ptr->blocks_per_sec = 0;
+src/disksim.c:1130:			ptr->ios_per_sec = 0;
+src/disksim.c:1131:			ptr = ptr->next;
+src/disksim.c:1168:				//if(ptr->curr_quota >= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) ) )
+src/disksim.c:1169:				if(ptr->curr_quota > 0 )
+src/disksim.c:1171:					temp_event = ptr->queue_per_user;
+src/disksim.c:1174:						//fprintf(outputfile,"j_debug (254) temp_event->bcount %d(user_id %d)\n",temp_event->bcount,ptr->user_id);
+src/disksim.c:1187:				ptr = ptr->next;
+src/disksim.c:1200:							if(ptr->queue_per_user != NULL)
+src/disksim.c:1202:		                	                ptr_event = ptr->queue_per_user;
+src/disksim.c:1203:                			                ptr->queue_per_user = ptr_event->next;
+src/disksim.c:1204:                	                		temp_event = ptr->queue_per_user;
+src/disksim.c:1211:                			                ptr->curr_quota -= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) );
+src/disksim.c:1212:                	                		ptr->waiting_request_cnt--;
+src/disksim.c:1226:				ptr_event = ptr->queue_per_user;
+src/disksim.c:1227:		        	ptr->queue_per_user = ptr_event->next;
+src/disksim.c:1228:				temp_event = ptr->queue_per_user;
+src/disksim.c:1235:				ptr->curr_quota -= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) );
+src/disksim.c:1236:				ptr->waiting_request_cnt--;
+src/disksim.c:1249:					if(ptr->curr_quota >= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) ) )
+src/disksim.c:1250:					if(ptr->waiting_request_cnt > 0)
+src/disksim.c:1254:	                	        ptr = ptr->next;
+src/disksim.c:1274:				//	fprintf(outputfile,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \t"\
+src/disksim.c:1275:				//	,ptr->user_id,ptr->curr_quota,ptr->waiting_request_cnt);
+src/disksim.c:1276:                                //	ptr = ptr->next;
+src/disksim.c:1293:	//	fprintf(outputfile,"j_debug ptr->curr_quota = %f (%d)\n",ptr->curr_quota,ptr->user_id);
+src/disksim.c:1294:		if(ptr->curr_quota == 500.0)
+src/disksim.c:1295:		if(ptr->queue_per_user != NULL)
+src/disksim.c:1297:	//		fprintf(outputfile,"j_debug bcount = %f (time = %f)\n",ptr->queue_per_user->bcount,ptr->queue_per_user->time);
+src/disksim.c:1299:		ptr->last_quota = ptr->curr_quota;
+src/disksim.c:1302:			ptr->curr_quota = ALLOCATING_TIME_UNIT * ((double)ptr->bandwidth/total_bandwidth);
+src/disksim.c:1305:			ptr->curr_quota = ALLOCATING_TIME_UNIT * ((double)ptr->bandwidth/100);
+src/disksim.c:1307:			if(ptr->last_quota < 0)
+src/disksim.c:1308:			ptr->curr_quota -= ptr->last_quota;
+src/disksim.c:1309:		ptr=ptr->next;
+src/disksim.c.orig:139:                if(ptr->user_id == new_user_id)
+src/disksim.c.orig:141:                ptr=ptr->next;
+src/disksim.c.orig:155:        new_ptr->time = 0;
+src/disksim.c.orig:156:        new_ptr->request_cnt = 0;
+src/disksim.c.orig:157:        new_ptr->user_id = new_user_id;
+src/disksim.c.orig:164:        new_ptr->aloc_bandwidth = allocating_bandwidth;
+src/disksim.c.orig:165:        new_ptr->aloc_block_cnt = allocating_block_cnt;
+src/disksim.c.orig:169:        new_ptr->free_bandwidth = user_time->free_bandwidth;
+src/disksim.c.orig:170:        new_ptr->free_block_cnt = user_time->free_block_cnt;
+src/disksim.c.orig:172:        new_ptr->next = user_time;
+src/disksim.c.orig:173:        new_ptr->prev = user_time->prev;
+src/disksim.c.orig:177:	new_ptr->last_quota = 0;
+src/disksim.c.orig:178:        new_ptr->curr_quota = ALLOCATING_TIME_UNIT * ((double)new_ptr->aloc_bandwidth/100);
+src/disksim.c.orig:179:	new_ptr->waiting_request_cnt = 0;
+src/disksim.c.orig:180:	new_ptr->blocks_per_sec = 0;
+src/disksim.c.orig:181:	new_ptr->ios_per_sec = 0;
+src/disksim.c.orig:197:        del_ptr->time = 0.0;
+src/disksim.c.orig:198:        del_ptr->request_cnt = 0;
+src/disksim.c.orig:199:        del_ptr->user_id = 0;
+src/disksim.c.orig:201:        del_ptr->next->prev = del_ptr->prev;
+src/disksim.c.orig:202:        del_ptr->prev->next = del_ptr->next;
+src/disksim.c.orig:215:                if(ptr->request_cnt!=0)
+src/disksim.c.orig:216:                        temp=ptr->time/ptr->request_cnt;
+src/disksim.c.orig:218:                ptr->user_id,ptr->request_cnt,temp);
+src/disksim.c.orig:219:                total_cnt += ptr->request_cnt;
+src/disksim.c.orig:220:                total_time += ptr->time;
+src/disksim.c.orig:221:                ptr=ptr->next;
+src/disksim.c.orig:260:		while( (ptr->next != NULL) && (ptr->next->time <= curr->time) )
+src/disksim.c.orig:261:			ptr = ptr->next;
+src/disksim.c.orig:262:		if((ptr->time <= curr->time) && (ptr->next==NULL))
+src/disksim.c.orig:264:			ptr->next = malloc(sizeof(ioreq_event));
+src/disksim.c.orig:265:			memcpy(ptr->next, curr, sizeof(ioreq_event));
+src/disksim.c.orig:266:			ptr->next->prev = ptr;
+src/disksim.c.orig:267:			ptr->next->next = NULL;
+src/disksim.c.orig:268:			ptr_user->queue_insert_ptr = ptr->next;
+src/disksim.c.orig:272:		fprintf(stderr,"jdebug error ptr->time = %f\tcurr->time = %f \n",queue_head->time,curr->time);
+src/disksim.c.orig:275:			temp->prev = ptr->prev;
+src/disksim.c.orig:277:			ptr->prev = temp;
+src/disksim.c.orig:293:	ptr->next=NULL;
+src/disksim.c.orig:971:               fprintf(outputfile,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \n"\
+src/disksim.c.orig:1008:		ptr->queue_per_user = ioreq_event_add_new_request(ptr_event->user_id,ptr_event);
+src/disksim.c.orig:1011:		ptr->waiting_request_cnt++;
+src/disksim.c.orig:1012://	fprintf(outputfile,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \t",ptr->user_id,ptr->curr_quota,ptr->waiting_request_cnt);
+src/disksim.c.orig:1067:		//fprintf(outputfile,"j_debug (user_id=%d)quota=%f simtime=%f\n",ptr->user_id,ptr->curr_quota,simtime);
+src/disksim.c.orig:1069:				 simtime, ptr->user_id, ptr->blocks_per_sec, ptr->blocks_per_sec * bytes_per_block);
+src/disksim.c.orig:1071:				 simtime, ptr->user_id, ptr->blocks_per_sec, ptr->ios_per_sec);
+src/disksim.c.orig:1073:			ptr->blocks_per_sec = 0;
+src/disksim.c.orig:1074:			ptr->ios_per_sec = 0;
+src/disksim.c.orig:1075:			ptr = ptr->next;
+src/disksim.c.orig:1114:				if(ptr->curr_quota >= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->aloc_bandwidth) ) )
+src/disksim.c.orig:1116:					temp_event = ptr->queue_per_user;
+src/disksim.c.orig:1119:						//fprintf(outputfile,"j_debug (254) temp_event->bcount %d(user_id %d)\n",temp_event->bcount,ptr->user_id);
+src/disksim.c.orig:1132:				ptr = ptr->next;
+src/disksim.c.orig:1138:				ptr_event = ptr->queue_per_user;
+src/disksim.c.orig:1139:		        	ptr->queue_per_user = ptr_event->next;
+src/disksim.c.orig:1140:				temp_event = ptr->queue_per_user;
+src/disksim.c.orig:1147:				ptr->curr_quota -= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->aloc_bandwidth) );
+src/disksim.c.orig:1148:				ptr->waiting_request_cnt--;
+src/disksim.c.orig:1160:					if(ptr->curr_quota >= ( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->aloc_bandwidth) ) )
+src/disksim.c.orig:1161:					if(ptr->waiting_request_cnt > 0)
+src/disksim.c.orig:1165:	                	        ptr = ptr->next;
+src/disksim.c.orig:1184:				//	fprintf(outputfile,"j_debug 2 (user_id = %d) ptr->curr_quota=%f ptr->waiting_request_cnt=%d \t"\
+src/disksim.c.orig:1185:				//	,ptr->user_id,ptr->curr_quota,ptr->waiting_request_cnt);
+src/disksim.c.orig:1186:                                //	ptr = ptr->next;
+src/disksim.c.orig:1202:	//	fprintf(outputfile,"j_debug ptr->curr_quota = %f (%d)\n",ptr->curr_quota,ptr->user_id);
+src/disksim.c.orig:1203:		if(ptr->curr_quota == 500.0)
+src/disksim.c.orig:1204:		if(ptr->queue_per_user != NULL)
+src/disksim.c.orig:1206:	//		fprintf(outputfile,"j_debug bcount = %f (time = %f)\n",ptr->queue_per_user->bcount,ptr->queue_per_user->time);
+src/disksim.c.orig:1208:		ptr->last_quota = ptr->curr_quota;
+src/disksim.c.orig:1209:		ptr->curr_quota = ALLOCATING_TIME_UNIT * ((double)ptr->aloc_bandwidth/total_bandwidth);
+src/disksim.c.orig:1210:		ptr=ptr->next;
+src/disksim_iodriver.c:692:fprintf (outputfile, "%f, Interrupt arriving - cause = %d, blkno %d\n", simtime, infoptr->cause, infoptr->blkno);
+src/disksim_iodriver.c:695:      intrp->time = iodriver_get_time_to_handle_interrupt(iodrivers[iodriverno], infoptr->cause, (infoptr->flags & READ));
+src/disksim_iodriver.c:696:      iodriver_check_c700_based_status(iodrivers[iodriverno], infoptr->devno, infoptr->cause, IO_INTERRUPT_ARRIVE, infoptr->blkno);
+src/disksim_iodriver.c:712:      if (infoptr->cause == COMPLETION) {
+src/disksim_iodriver.c:721:      tmp->time = iodriver_get_time_to_respond_to_device(iodrivers[iodriverno], infoptr->cause, intrp->time);
+src/disksim_ioqueue.c:192:	printf("   %d\n", event_ptr->blkno);
+src/disksim_ioqueue.c:193:	event_ptr = event_ptr->batch_next;
+src/disksim_ioqueue.c:569:      while (event_ptr->batch_next != NULL) {
+src/disksim_ioqueue.c:570:	event_ptr = event_ptr->batch_next;
+src/disksim_ioqueue.c:573:      event_ptr->batch_next = new_iobuf->iolist;
+src/disksim_ioqueue.c:574:      event_ptr->batch_next->batch_prev = event_ptr;
+src/disksim_ioqueue.c:575:      event_ptr->batch_next->batch_next = NULL;
+src/disksim_ioqueue.c:2793:	  while (batch_ptr->batchno == temp->batchno) {
+src/disksim_ioqueue.c:2794:	    if (batch_ptr->state == PENDING) {
+src/disksim_ioqueue.c:2797:	    if (batch_ptr->starttime == -1.0) {
+src/disksim_ioqueue.c:2798:	      batch_ptr->starttime = simtime;
+src/disksim_ioqueue.c:2801:	    batch_ptr->state = PENDING;
+src/disksim_ioqueue.c:2802:	    batch_ptr = batch_ptr->next;
+src/disksim_ioqueue.c:2946:	 if ((batch_ptr->blkno == done->blkno) && 
+src/disksim_ioqueue.c:2947:	     (batch_ptr->opid == done->opid) &&
+src/disksim_ioqueue.c:2948:	     ((batch_ptr->flags & READ) == (done->flags & READ))) {
+src/disksim_ioqueue.c:2953:	     tmp->batch_list = batch_ptr->batch_next;
+src/disksim_ioqueue.c:2954:	     batch_ptr->batch_next->batch_prev = NULL;
+src/disksim_ioqueue.c:2958:	     batch_ptr->batch_prev->batch_next = batch_ptr->batch_next;
+src/disksim_ioqueue.c:2959:	     if (batch_ptr->batch_next != NULL) {
+src/disksim_ioqueue.c:2960:	       batch_ptr->batch_next->batch_prev = batch_ptr->batch_prev;
+src/disksim_ioqueue.c:2966:	 batch_ptr = batch_ptr->batch_next;
+二進位格式檔案 src/disksim.o 符合
+src/disksim_stat.c:107:   return(statptr->count);
+src/disksim_stat.c:118:      count += statptr->count;
+src/disksim_stat.c:126:   return(statptr->runval);
+src/disksim_stat.c:133:   int  start = statptr->distbrks[0];
+src/disksim_stat.c:134:   int  step = statptr->distbrks[1];
+src/disksim_stat.c:135:   int  grow = statptr->distbrks[2];
+src/disksim_stat.c:136:   int  equals = statptr->equals;
+src/disksim_stat.c:137:   int  buckets = statptr->distbrks[(DISTSIZE-1)];
+src/disksim_stat.c:138:   int  intval = (int) (value * (double) statptr->scale);
+src/disksim_stat.c:140:   statptr->count++;
+src/disksim_stat.c:141:   if (statptr->maxval < value) {
+src/disksim_stat.c:142:      statptr->maxval = value;
+src/disksim_stat.c:144:   statptr->runval += value;
+src/disksim_stat.c:145:   statptr->runsquares += (value*value);
+src/disksim_stat.c:161:            if (intval == statptr->largediststarts[i]) {
+src/disksim_stat.c:168:            if (intval < statptr->largediststarts[top]) {
+src/disksim_stat.c:172:                  if (intval < statptr->largediststarts[(i+1)]) {
+src/disksim_stat.c:182:      statptr->largedistvals[i]++;
+src/disksim_stat.c:186:         if ((i < equals) && (value == (double) statptr->distbrks[i])) {
+src/disksim_stat.c:188:         } else if ((i >= equals) && (intval < statptr->distbrks[i])) {
+src/disksim_stat.c:193:      statptr->smalldistvals[i]++;
+src/disksim_stat.c:202:   int  step = statptr->distbrks[1];
+src/disksim_stat.c:203:   int  grow = statptr->distbrks[2];
+src/disksim_stat.c:204:   int  buckets = statptr->distbrks[(DISTSIZE-1)];
+src/disksim_stat.c:205:   int  bucketno = statptr->distbrks[0];
+src/disksim_stat.c:206:   double scale = (double) statptr->scale;
+src/disksim_stat.c:215:   fprintf (outputfile, "%s%s distribution\n", identstr, statptr->statdesc);
+src/disksim_stat.c:221:            bucketcnt += statptr->largedistvals[i];
+src/disksim_stat.c:224:         bucketcnt = statptr->largedistvals[i];
+src/disksim_stat.c:247:   int buckets = statptr->distbrks[(DISTSIZE-1)];
+src/disksim_stat.c:248:   double scale = (double) statptr->scale;
+src/disksim_stat.c:249:   int intval = statptr->distbrks[(DISTSIZE-2)];
+src/disksim_stat.c:250:   char *statdesc = statptr->statdesc;
+src/disksim_stat.c:255:   if (statptr->count > 0) {
+src/disksim_stat.c:256:      avg = statptr->runval / (double) statptr->count;
+src/disksim_stat.c:257:      runsquares = statptr->runsquares / (double) statptr->count - (avg*avg);
+src/disksim_stat.c:262:   if (statptr->maxval == (double) ((int)statptr->maxval)) {
+src/disksim_stat.c:263:      fprintf(outfile, "%s%s maximum:\t%d\n", identstr, statdesc, ((int)statptr->maxval));
+src/disksim_stat.c:265:      fprintf(outfile, "%s%s maximum:\t%f\n", identstr, statdesc, statptr->maxval);
+src/disksim_stat.c:268:      stat_print_large_dist(&statptr, 1, statptr->count, identstr);
+src/disksim_stat.c:273:      if (i >= statptr->equals) {
+src/disksim_stat.c:276:      if (statptr->scale == 1) {
+src/disksim_stat.c:277:         fprintf(outfile, "   %c%3d ", distchar, statptr->distbrks[i]);
+src/disksim_stat.c:279:         fprintf(outfile, "  %c%4.1f ", distchar, ((double) statptr->distbrks[i] / scale));
+src/disksim_stat.c:282:   if (statptr->equals == (DISTSIZE-1)) {
+src/disksim_stat.c:287:      count += statptr->smalldistvals[i];
+src/disksim_stat.c:288:      fprintf(outfile, " %6d ", statptr->smalldistvals[i]);
+src/disksim_stat.c:291:   ASSERT(count == statptr->count);
+src/disksim_stat.c:300:   char *statdesc = statptr->statdesc;
+src/disksim_stat.c:301:   int buckets = statptr->distbrks[(DISTSIZE-1)];
+src/disksim_stat.c:302:   int intval = statptr->distbrks[(DISTSIZE-2)];
+src/disksim_stat.c:306:   double maxval = statptr->maxval;
+src/disksim_stat.c:307:   double scale = (double) statptr->scale;
+src/disksim_stat.c:314:      if (statptr->count > 0) {
+src/disksim_stat.c:315:         runcount += statptr->count;
+src/disksim_stat.c:316:         runval += statptr->runval;
+src/disksim_stat.c:317:         runsquares += statptr->runsquares;
+src/disksim_stat.c:318:         if (maxval < statptr->maxval) {
+src/disksim_stat.c:319:            maxval = statptr->maxval;
+src/disksim_stat.c:344:      if (i >= statptr->equals) {
+src/disksim_stat.c:347:      if (statptr->scale == 1) {
+src/disksim_stat.c:348:         fprintf(outputfile, "   %c%3d ", distchar, statptr->distbrks[i]);
+src/disksim_stat.c:350:         fprintf(outputfile, "  %c%4.1f ", distchar, ((double) statptr->distbrks[i] / (double) scale));
+src/disksim_stat.c:353:   if (statptr->equals == (DISTSIZE-1)) {
+src/disksim_stat.c:363:         smalldistvals[j] += statptr->smalldistvals[j];
+src/disksim_stat.c:377:   int buckets = statptr->distbrks[(DISTSIZE-1)];
+src/disksim_stat.c:380:   statptr->count = 0;
+src/disksim_stat.c:381:   statptr->runval = 0.0;
+src/disksim_stat.c:382:   statptr->runsquares = 0.0;
+src/disksim_stat.c:383:   statptr->maxval = 0.0;
+src/disksim_stat.c:386:         statptr->largedistvals[i] = 0;
+src/disksim_stat.c:390:         statptr->smalldistvals[i] = 0;
+src/disksim_stat.c:401:   statptr->largedistvals = (int *) DISKSIM_malloc(buckets*sizeof(int));
+src/disksim_stat.c:402:   ASSERT(statptr->largedistvals != NULL);
+src/disksim_stat.c:408:   if (sscanf(line, "Start %d  step %d  grow %d", &statptr->distbrks[0], &statptr->distbrks[1], &statptr->distbrks[2]) != 3) {
+src/disksim_stat.c:413:      statptr->largedistvals[i] = 0;
+src/disksim_stat.c:415:   if (statptr->distbrks[2]) {
+src/disksim_stat.c:416:      int grow = statptr->distbrks[2];
+src/disksim_stat.c:417:      int step = statptr->distbrks[1];
+src/disksim_stat.c:418:      int bucketval = statptr->distbrks[0];
+src/disksim_stat.c:421:      statptr->largediststarts = (int *) DISKSIM_malloc(buckets*sizeof(int));
+src/disksim_stat.c:422:      ASSERT(statptr->largediststarts != NULL);
+src/disksim_stat.c:425:         statptr->largediststarts[i] = bucketval;
+src/disksim_stat.c:469:   if (sscanf(line, "Scale/Equals: %d/%d\n", &statptr->scale, &statptr->equals) != 2) {
+src/disksim_stat.c:474:   statptr->count = 0;
+src/disksim_stat.c:475:   statptr->runval = 0.0;
+src/disksim_stat.c:476:   statptr->runsquares = 0.0;
+src/disksim_stat.c:477:   statptr->maxval = 0.0;
+src/disksim_stat.c:478:   statptr->statdesc = DISKSIM_malloc (strlen(statdesc)+1);
+src/disksim_stat.c:479:   strcpy (statptr->statdesc, statdesc);
+src/disksim_stat.c:481:      statptr->distbrks[i] = 0;
+src/disksim_stat.c:482:      statptr->smalldistvals[i] = 0;
+src/disksim_stat.c:484:   statptr->distbrks[(DISTSIZE-1)] = buckets;
+src/disksim_stat.c:485:   statptr->largedistvals = NULL;
+src/disksim_stat.c:486:   statptr->largediststarts = NULL;
+src/disksim_stat.c:493:       if (fscanf(statdef_file, "%d", &statptr->distbrks[i]) != 1) {
+二進位格式檔案 src/disksim_stat.o 符合
+src/disksim_synthio.c:314:   evptr->time = 0.0;
+src/disksim_synthio.c:315:   evptr->type = SYNTHIO_EVENT;
+src/disksim_synthio.c:316:   evptr->next = NULL;
+二進位格式檔案 src/libdisksim.a 符合
+二進位格式檔案 src/syssim 符合
+二進位格式檔案 ssdmodel/libssdmodel.a 符合
+ssdmodel/ssd.c:337:		if(ptr->user_id == 0)
+ssdmodel/ssd.c:338:		fprintf(outputfile, "j_debug err user updata time\tptr_user_id=%d\tcurr_user_id=%d\n",ptr->user_id,curr->user_id);
+ssdmodel/ssd.c:339:		ptr->time += (simtime - curr->time);//add request response time
+ssdmodel/ssd.c:340:		ptr->request_cnt++;//add finished requests
+ssdmodel/ssd.c:348:		ptr->blocks_per_sec += curr->bcount;
+ssdmodel/ssd.c:349:		ptr->total_finished_blocks += curr->bcount;
+ssdmodel/ssd.c:350:		ptr->ios_per_sec ++;
+ssdmodel/ssd.c:355:			ptr->curr_quota +=(( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) ) - (simtime - curr->time));
+ssdmodel/ssd.c:356:		else if(ptr->waiting_request_cnt > 0)
+ssdmodel/ssd.c:357:			ptr->curr_quota +=(( MAX_RESEPONCE_TIME * (total_bandwidth/(double)ptr->bandwidth) ) - (simtime - curr->time));
+ssdmodel/ssd.c:418:        blkno = blkno - ( ptr->first_log_blk_address * s->params.pages_per_block * s->params.page_size);
+ssdmodel/ssd.c:421:	lpn = ((apn - (apn % (s->params.element_stride_pages * ptr->element_allcating_count)))/
+ssdmodel/ssd.c:422:                      ptr->element_allcating_count) + (apn % s->params.element_stride_pages);
+ssdmodel/ssd.c:425:	lpn = ((apn - (apn % (s->params.element_stride_pages * ptr->lpn_user_allocating_elem_cnt[apn])))/
+ssdmodel/ssd.c:426:                      ptr->lpn_user_allocating_elem_cnt[apn]) + (apn % s->params.element_stride_pages);
+ssdmodel/ssd.c:444:	lpn = apn / allocating_infor_head[user_id]->plane_allcating_count * ptr->plane_allcating_count;
+ssdmodel/ssd.c:446:	lpn += ptr->start_page_no;
+ssdmodel/ssd.c:1710:	ptr->element_allcating_count = allocating_element_count;
+ssdmodel/ssd.c:1711:	ptr->init_element_no = allocating_element_ptr;
+ssdmodel/ssd.c:1713:		if((ptr->lpn_to_elem = (unsigned char*)malloc(lpn_size * sizeof(unsigned char))) == NULL)
+ssdmodel/ssd.c:1715:			fprintf(stderr,"ptr->lpn_to_elem allocating error!\n");
+ssdmodel/ssd.c:1718:		if((ptr->lpn_user_allocating_elem_cnt = (unsigned char*)malloc(lpn_size * sizeof(unsigned char))) == NULL)
+ssdmodel/ssd.c:1720:			fprintf(stderr,"ptr->lpn_to_elem allocating error!\n");
+ssdmodel/ssd.c:1725:			ptr->lpn_to_elem[i] = (unsigned char)((i % ptr->element_allcating_count) + ptr->init_element_no);
+ssdmodel/ssd.c:1726:			ptr->lpn_user_allocating_elem_cnt[i] = ptr->element_allcating_count;
+ssdmodel/ssd.c:1769:	for(j = ptr->init_element_no ; j<(ptr->element_allcating_count+ptr->init_element_no) ; j++ )
+ssdmodel/ssd.c:1867:						ptr->next = malloc(sizeof(allocating_infor));
+ssdmodel/ssd.c:1868:						ptr->next->element_no = i;
+ssdmodel/ssd.c:1869:						ptr->next->plane_allcating_count = 0;
+ssdmodel/ssd.c:1870:						ptr->next->start_page_no = allocating_page_no_per_element[i];
+ssdmodel/ssd.c:1871:						allocating_infor_head[curr->user_id]->prev = ptr->next;
+ssdmodel/ssd.c:1872:						ptr->next->next = allocating_infor_head[curr->user_id];
+ssdmodel/ssd.c:1873:						ptr->next->prev = ptr;
+ssdmodel/ssd.c:1874:						ptr = ptr->next;
+ssdmodel/ssd.c:1877:					ptr->plane_allcating_count++;
+ssdmodel/ssd.c:1926:		i = ptr->start_page_no;
+ssdmodel/ssd.c:1927:		export_size = usable_blocks_per_plane  * ptr->plane_allcating_count * SSD_DATA_PAGES_PER_BLOCK(currdisk) ;
+ssdmodel/ssd.c:1932:    		while ((i-ptr->start_page_no) < export_size) {
+ssdmodel/ssd.c:2130:		if(ptr->user_id == user_id) ptr = ptr->next;
+ssdmodel/ssd.c:2131:		if(ptr == user_time) ptr = ptr->next;
+ssdmodel/ssd.c:2174:			metadata->element_user_id = ptr->user_id;
+ssdmodel/ssd.c:2175:			ptr->element_allcating_count++;
+ssdmodel/ssd.c:2176:			ptr=ptr->next;
+ssdmodel/ssd_clean.c:164:	    if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) <= ptr->aloc_block_cnt)
+ssdmodel/ssd_clean.c:166:		ptr->using_spare_block_cnt--;
+ssdmodel/ssd_clean.c:168:	    else if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) > ptr->aloc_block_cnt)
+ssdmodel/ssd_clean.c:171:        	ptr->using_spare_block_cnt--;
+ssdmodel/ssd_clean.c:173:	    else if( ptr->using_block_cnt <= 0 )
+ssdmodel/ssd_clean.c:174:		ptr->using_block_cnt--;
+ssdmodel/ssd_clean.c:377:	if(ptr->using_spare_block_cnt > 0)
+ssdmodel/ssd_clean.c:386:	else if(ptr->using_block_cnt > 0)
+ssdmodel/ssd_clean.c:508:        if( ptr->using_block_cnt < ptr->aloc_log_block_cnt) //*jian if user self space is enough
+ssdmodel/ssd_clean.c:510:                ptr->using_block_cnt++;//*jian allocating self block
+ssdmodel/ssd_clean.c:512:        else if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) < ptr->aloc_block_cnt ) //*jian if user self space is enough
+ssdmodel/ssd_clean.c:514:                ptr->using_spare_block_cnt++;//*jian allocating self block
+ssdmodel/ssd_clean.c:516:        else if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) >= ptr->aloc_block_cnt )
+ssdmodel/ssd_clean.c:519:                ptr->using_spare_block_cnt++;
+ssdmodel/ssd_clean.c:760:    ptr->gc_overhead_time += cost;
+ssdmodel/ssd_clean.c:761:    ptr->gc_overhead_cnt ++;
+ssdmodel/ssd_clean.c:1188:			if(ptr->user_id != user_id)
+ssdmodel/ssd_clean.c:1190:				free_sum = ptr->aloc_block_cnt/s->params.nelements;
+ssdmodel/ssd_clean.c:1191:				free_sum -= s->elements[elem_num].metadata.user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1196:			ptr=ptr->next;
+ssdmodel/ssd_clean.c:1207:			if(ptr->user_id != user_id)
+ssdmodel/ssd_clean.c:1210:				free_sum = ptr->aloc_block_cnt/(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1211:				if((ptr->aloc_log_block_cnt/(s->params.nelements*s->params.planes_per_pkg))\
+ssdmodel/ssd_clean.c:1212:				 < s->elements[elem_num].metadata.plane_meta[plane_num].user_live_blocks_cnt[ptr->user_id])
+ssdmodel/ssd_clean.c:1215:				int remain_block = ptr->aloc_block_cnt%(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1222:				free_sum -= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[ptr->user_id];
+ssdmodel/ssd_clean.c:1226:			ptr=ptr->next;
+ssdmodel/ssd_clean.c:1279:			if(ptr->user_id != user_id)
+ssdmodel/ssd_clean.c:1281:				free_sum = ptr->aloc_block_cnt/s->params.nelements;
+ssdmodel/ssd_clean.c:1282:				free_sum -= s->elements[elem_num].metadata.user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1287:			ptr=ptr->next;
+ssdmodel/ssd_clean.c:1298:			if(ptr->user_id != user_id)
+ssdmodel/ssd_clean.c:1300:				free_sum = ptr->aloc_block_cnt/(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1301:				if((ptr->aloc_log_block_cnt/(s->params.nelements*s->params.planes_per_pkg))\
+ssdmodel/ssd_clean.c:1302:				 < s->elements[elem_num].metadata.plane_meta[plane_num].user_live_blocks_cnt[ptr->user_id])
+ssdmodel/ssd_clean.c:1305:				int remain_block = ptr->aloc_block_cnt%(s->params.nelements*s->params.planes_per_pkg);
+ssdmodel/ssd_clean.c:1312:				free_sum -= s->elements[elem_num].metadata.plane_meta[plane_num].user_using_blocks[ptr->user_id];//find other user's logical free blocks
+ssdmodel/ssd_clean.c:1322:			ptr=ptr->next;
+二進位格式檔案 ssdmodel/ssd.o 符合
+ssdmodel/ssd_timing.c:24:	blkno = blkno - ( ptr->first_log_blk_address * tt->params->pages_per_block * tt->params->page_size );
+ssdmodel/ssd_timing.c:30:	blkno = (blkno /(tt->params->element_stride_pages*tt->params->page_size)) % ptr->element_allcating_count ;
+ssdmodel/ssd_timing.c:31:	choose_elem_cnt = (ptr->init_element_no + blkno) % tt->params->nelements;
+ssdmodel/ssd_timing.c:41:		choose_elem_cnt = ptr->lpn_to_elem[blkno_2];
+ssdmodel/ssd_timing.c:45:	j=ptr->init_element_no;
+ssdmodel/ssd_timing.c:46:	for(i=0;i<ptr->lpn_user_allocating_elem_cnt[blkno_2];i++)
+ssdmodel/ssd_timing.c:397:        pre_lpn = ((metadata->pre_apn - (metadata->pre_apn % (s->params.element_stride_pages * (int)ptr->lpn_user_allocating_elem_cnt[metadata->pre_apn])))/
+ssdmodel/ssd_timing.c:398:        	(int)ptr->lpn_user_allocating_elem_cnt[metadata->pre_apn]) + (metadata->pre_apn % s->params.element_stride_pages);
+ssdmodel/ssd_timing.c:399:	pre_metadata = &(s->elements[ptr->lpn_to_elem[metadata->pre_apn]].metadata);
+ssdmodel/ssd_timing.c:429:        	ptr->lpn_to_elem[metadata->pre_apn] =  metadata->elem_num;//update table
+ssdmodel/ssd_timing.c:430:        	ptr->lpn_user_allocating_elem_cnt[metadata->pre_apn] = ptr->element_allcating_count;//update table
+ssdmodel/ssd_timing.c:644:	if( ptr->using_block_cnt < ptr->aloc_log_block_cnt) //*jian if user self space is enough
+ssdmodel/ssd_timing.c:646:		ptr->using_block_cnt++;//*jian allocating self block
+ssdmodel/ssd_timing.c:648:	else if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) < ptr->aloc_block_cnt ) //*jian if user self space is enough
+ssdmodel/ssd_timing.c:650:		ptr->using_spare_block_cnt++;//*jian allocating self block
+ssdmodel/ssd_timing.c:652:	else if( (ptr->using_spare_block_cnt+ptr->using_block_cnt) >= ptr->aloc_block_cnt )
+ssdmodel/ssd_timing.c:655:		ptr->using_spare_block_cnt++;
+ssdmodel/ssd_timing.c:761:	    blkno = blkno - ( ptr->first_log_blk_address * s->params.pages_per_block * s->params.page_size);
+ssdmodel/ssd_timing.c:763:	    pre_lpn = ((apn - (apn % (s->params.element_stride_pages * (int)ptr->lpn_user_allocating_elem_cnt[apn])))/
+ssdmodel/ssd_timing.c:764:                      (int)ptr->lpn_user_allocating_elem_cnt[apn]) + (apn % s->params.element_stride_pages);
+ssdmodel/ssd_timing.c:768:	    pre_metadata = &(s->elements[ptr->lpn_to_elem[apn]].metadata);
+ssdmodel/ssd_timing.c:770:	    //ptr->lpn_to_elem[apn] = elem_num;//update table
+ssdmodel/ssd_timing.c:771:            //ptr->lpn_user_allocating_elem_cnt[apn] = ptr->element_allcating_count;//update table

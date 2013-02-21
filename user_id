@@ -1,0 +1,465 @@
+二進位格式檔案 src/disksim 符合
+二進位格式檔案 src/syssim 符合
+二進位格式檔案 ssdmodel/libssdmodel.a 符合
+ssdmodel/ssd.c:1318:        int rem_lifetime = metadata->block_usage[i].rem_lifetime;
+ssdmodel/ssd.c:1322:        if (metadata->block_usage[i].rem_lifetime == 0) {
+ssdmodel/ssd.c:1963:			if(metadata->element_user_id == 0)
+ssdmodel/ssd.c:1965:				metadata->element_user_id = user_id;
+ssdmodel/ssd.c:1970:					metadata->plane_meta[j].free_pages[user_id] += currdisk->params.blocks_per_plane * SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:1971:					metadata->plane_meta[j].free_pages[0] -= currdisk->params.blocks_per_plane * SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:1974:				ASSERT(metadata->plane_meta[j].free_pages[0] >= 0);
+ssdmodel/ssd.c:1996:		fprintf(stderr,"e=%d id=%d \t ",i,metadata->element_user_id);
+ssdmodel/ssd.c:2011:		metadata->user_id_2 = user_id;
+ssdmodel/ssd.c:2012:		metadata->user_id = user_id;
+ssdmodel/ssd.c:2013:		g = &currdisk->gang_meta[metadata->gang_num];
+ssdmodel/ssd.c:2026:            			metadata->block_usage[block].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd.c:2032:		    		plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2033:		 		metadata->plane_meta[plane_num].free_blocks--;
+ssdmodel/ssd.c:2034:				metadata->tot_free_blocks--;
+ssdmodel/ssd.c:2044:			+ (metadata->element_number * currdisk->params.blocks_per_element * currdisk->params.pages_per_block);
+ssdmodel/ssd.c:2054:            			ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd.c:2055:            			metadata->block_usage[block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd.c:2056:        	    		metadata->block_usage[block].bsn[user_id] = metadata->bsn++;	//*jian modify
+ssdmodel/ssd.c:2057:	    			metadata->block_usage[block].user_id = metadata->user_id;
+ssdmodel/ssd.c:2061:        		plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2062:        		metadata->block_usage[block].page[pp_index] = lpn + (j-ptr->init_element_no) + (i*ptr->element_allcating_count);
+ssdmodel/ssd.c:2066:			metadata->block_usage[block].page_user_id[pp_index] = curr->user_id;
+ssdmodel/ssd.c:2069:        		metadata->block_usage[block].num_valid ++;
+ssdmodel/ssd.c:2070:        		metadata->plane_meta[plane_num].valid_pages ++;
+ssdmodel/ssd.c:2071:			metadata->plane_meta[plane_num].free_pages[user_id] --;
+ssdmodel/ssd.c:2075:			metadata->active_page[metadata->user_id] = ppage;//*jian add
+ssdmodel/ssd.c:2076:        		metadata->plane_meta[plane_num].active_page[metadata->user_id] = ppage;
+ssdmodel/ssd.c:2109:				if(metadata->plane_meta[j].user_id == 0)
+ssdmodel/ssd.c:2129:					metadata->plane_meta[j].user_id = curr->user_id;
+ssdmodel/ssd.c:2132:					metadata->plane_meta[j].free_pages[user_id] += currdisk->params.blocks_per_plane * SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:2133:					metadata->plane_meta[j].free_pages[0] -= currdisk->params.blocks_per_plane * SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:2135:					ASSERT(metadata->plane_meta[j].free_pages[0] >= 0);
+ssdmodel/ssd.c:2180:		g = &currdisk->gang_meta[metadata->gang_num];
+ssdmodel/ssd.c:2181:		metadata->user_id_2 = user_id;
+ssdmodel/ssd.c:2182:		metadata->user_id = user_id;
+ssdmodel/ssd.c:2187:    		ppage = metadata->active_page[user_id];
+ssdmodel/ssd.c:2196:			metadata->block_usage[block].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd.c:2201:		    block = ssd_bitpos_to_block(metadata->block_alloc_pos, currdisk);
+ssdmodel/ssd.c:2202:		    while(metadata->plane_meta[plane_num_init[elem_num]].user_id != user_id)
+ssdmodel/ssd.c:2207:		    prev_pos = metadata->plane_meta[plane_num_init[elem_num]].block_alloc_pos;
+ssdmodel/ssd.c:2211:		    bitpos = ssd_find_zero_bit(metadata->free_blocks, currdisk->params.blocks_per_element, prev_pos);
+ssdmodel/ssd.c:2217:		    plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2218:		    metadata->plane_meta[plane_num].free_blocks--;
+ssdmodel/ssd.c:2219:		    metadata->tot_free_blocks--;
+ssdmodel/ssd.c:2221:		    metadata->plane_meta[plane_num_init[elem_num]].block_alloc_pos = \
+ssdmodel/ssd.c:2226:		    metadata->block_alloc_pos = metadata->plane_meta[plane_num_init[elem_num]].block_alloc_pos;
+ssdmodel/ssd.c:2230:		plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2239:		+ (metadata->element_number * currdisk->params.blocks_per_element * currdisk->params.pages_per_block);
+ssdmodel/ssd.c:2251:        	    ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd.c:2252:	            metadata->block_usage[block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd.c:2253:        	    metadata->block_usage[block].bsn[user_id] = metadata->bsn++;	//*jian modify
+ssdmodel/ssd.c:2254:		    metadata->block_usage[block].user_id = user_id;
+ssdmodel/ssd.c:2258:        	plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2259:	        metadata->block_usage[block].page[pp_index] = j+lpn;
+ssdmodel/ssd.c:2263:		metadata->block_usage[block].page_user_id[pp_index] = curr->user_id;
+ssdmodel/ssd.c:2266:        	metadata->block_usage[block].num_valid ++;
+ssdmodel/ssd.c:2267:	        metadata->plane_meta[plane_num].valid_pages ++;
+ssdmodel/ssd.c:2268:		metadata->plane_meta[plane_num].free_pages[user_id] --;
+ssdmodel/ssd.c:2272:		metadata->active_page[user_id] = ppage;//*jian add
+ssdmodel/ssd.c:2273:		metadata->plane_meta[plane_num].active_page[user_id] = ppage;
+ssdmodel/ssd.c:2292:		metadata->plane_meta[plane_num].user_allocating_blocks[user_id]++;
+ssdmodel/ssd.c:2294:		metadata->plane_meta[plane_num].free_pages[0] -= SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:2295:		metadata->plane_meta[plane_num].free_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(currdisk);
+ssdmodel/ssd.c:2297:		ASSERT(metadata->plane_meta[plane_num].free_pages[0] >= 0);
+ssdmodel/ssd.c:2317:		g = &currdisk->gang_meta[metadata->gang_num];
+ssdmodel/ssd.c:2318:		metadata->user_id_2 = user_id;
+ssdmodel/ssd.c:2319:		metadata->user_id = user_id;
+ssdmodel/ssd.c:2322:    		ppage = metadata->active_page[user_id];
+ssdmodel/ssd.c:2331:			metadata->block_usage[block].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd.c:2336:		    block = ssd_bitpos_to_block(metadata->block_alloc_pos, currdisk);
+ssdmodel/ssd.c:2337:		    plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2338:		    prev_pos = metadata->plane_meta[plane_num].block_alloc_pos;
+ssdmodel/ssd.c:2342:		    bitpos = ssd_find_zero_bit(metadata->free_blocks, currdisk->params.blocks_per_element, prev_pos);
+ssdmodel/ssd.c:2348:		    metadata->plane_meta[plane_num].block_alloc_pos = \
+ssdmodel/ssd.c:2350:		    metadata->block_alloc_pos = metadata->plane_meta[(plane_num+1)%currdisk->params.planes_per_pkg].block_alloc_pos;
+ssdmodel/ssd.c:2353:		    metadata->user_using_blocks[user_id]++;
+ssdmodel/ssd.c:2354:		    metadata->plane_meta[plane_num].user_using_blocks[user_id]++;
+ssdmodel/ssd.c:2357:		    metadata->plane_meta[plane_num].free_blocks--;
+ssdmodel/ssd.c:2358:		    metadata->tot_free_blocks--;
+ssdmodel/ssd.c:2362:		plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2371:		+ (metadata->element_number * currdisk->params.blocks_per_element * currdisk->params.pages_per_block);
+ssdmodel/ssd.c:2382:        	    ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd.c:2383:	            metadata->block_usage[block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd.c:2384:        	    metadata->block_usage[block].bsn[user_id] = metadata->bsn++;	//*jian modify
+ssdmodel/ssd.c:2385:		    metadata->block_usage[block].user_id = user_id;
+ssdmodel/ssd.c:2389:        	plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd.c:2390:	        metadata->block_usage[block].page[pp_index] = j;
+ssdmodel/ssd.c:2394:		metadata->block_usage[block].page_user_id[pp_index] = curr->user_id;
+ssdmodel/ssd.c:2397:        	metadata->block_usage[block].num_valid ++;
+ssdmodel/ssd.c:2398:	        metadata->plane_meta[plane_num].valid_pages ++;
+ssdmodel/ssd.c:2399:		metadata->plane_meta[plane_num].free_pages[user_id] --;
+ssdmodel/ssd.c:2403:		metadata->active_page[user_id] = ppage;//*jian add
+ssdmodel/ssd.c:2404:		metadata->plane_meta[plane_num].active_page[user_id] = ppage;
+ssdmodel/ssd.c:2446:			int plane_num = metadata->block_usage[i].plane_num;
+ssdmodel/ssd.c:2447:			if(metadata->block_usage[i].user_id == user_id)
+ssdmodel/ssd.c:2450:				metadata->plane_meta[plane_num].user_id = 0;
+ssdmodel/ssd.c:2456:				metadata->element_user_id = 0;
+ssdmodel/ssd.c:2458:				if((metadata->block_usage[i].state == SSD_BLOCK_SEALED) ||
+ssdmodel/ssd.c:2459:			   	(metadata->block_usage[i].state == SSD_BLOCK_INUSE)	)
+ssdmodel/ssd.c:2464:						lpn = metadata->block_usage[i].page[pp];
+ssdmodel/ssd.c:2468:							metadata->block_usage[i].num_valid --;
+ssdmodel/ssd.c:2469:							metadata->plane_meta[plane_num].valid_pages --;
+ssdmodel/ssd.c:2470:							metadata->block_usage[i].page[pp] = -1;
+ssdmodel/ssd.c:2473:					metadata->block_usage[i].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd.c:2474:					ASSERT(metadata->block_usage[i].num_valid == 0);
+ssdmodel/ssd.c:2476:				metadata->block_usage[i].user_id = 0;
+ssdmodel/ssd.c:2478:			metadata->active_page[user_id] = -1;//*jian add
+ssdmodel/ssd.c:2479:                	metadata->plane_meta[plane_num].active_page[user_id] = -1;
+ssdmodel/ssd_clean.c:14:    return (metadata->block_usage[from_blk].plane_num == metadata->block_usage[to_blk].plane_num);
+ssdmodel/ssd_clean.c:23:    return ((ssd_bit_on(metadata->free_blocks, bitpos)) && (metadata->block_usage[blk].state == SSD_BLOCK_SEALED));
+ssdmodel/ssd_clean.c:53:            if (ssd_last_page_in_block(metadata->active_page[user_id], s)) {
+ssdmodel/ssd_clean.c:60:	    if(metadata->plane_meta[plane_num].active_page[user_id] != metadata->active_page[user_id])
+ssdmodel/ssd_clean.c:63:		fprintf(stderr,"metadata->plane_meta[plane_num].active_page[user_id] = %d\n",metadata->plane_meta[plane_num].active_page[user_id]);
+ssdmodel/ssd_clean.c:64:		fprintf(stderr,"metadata->active_page[user_id]=%d\n",metadata->active_page[user_id]);
+ssdmodel/ssd_clean.c:65:            	ASSERT(metadata->plane_meta[plane_num].active_page[user_id] == metadata->active_page[user_id]);	//*jian modify 
+ssdmodel/ssd_clean.c:69:		metadata->active_page[user_id] = metadata->plane_meta[plane_num].active_page[user_id];
+ssdmodel/ssd_clean.c:71:            if (ssd_last_page_in_block(metadata->active_page[user_id], s)) {
+ssdmodel/ssd_clean.c:84:    cost += _ssd_write_page_osr(s, metadata, lpn,metadata->block_usage[from_blk].page_user_id[pp_index]);
+ssdmodel/ssd_clean.c:92:    if(metadata->plane_meta[plane_num].free_pages[user_id] <= 0)
+ssdmodel/ssd_clean.c:94:        metadata->plane_meta[plane_num].free_pages[0] -= SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:95:        metadata->plane_meta[plane_num].free_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:96:        metadata->plane_meta[plane_num].using_nonallocating_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:97:	ASSERT(metadata->plane_meta[plane_num].free_pages[0] >= 0);
+ssdmodel/ssd_clean.c:99:        metadata->plane_meta[plane_num].free_pages[user_id] --;
+ssdmodel/ssd_clean.c:113:    int user_id = metadata->block_usage[blk].user_id;
+ssdmodel/ssd_clean.c:123:    xfer_cost = ssd_crossover_cost(s, metadata, blk, SSD_PAGE_TO_BLOCK(metadata->active_page[user_id], s));
+ssdmodel/ssd_clean.c:128:    ASSERT(metadata->block_usage[blk].page[pp_index] == -1);
+ssdmodel/ssd_clean.c:147:    metadata->block_usage[blk].rem_lifetime --;
+ssdmodel/ssd_clean.c:148:    metadata->block_usage[blk].time_of_last_erasure = time;
+ssdmodel/ssd_clean.c:150:    if (metadata->block_usage[blk].rem_lifetime < 0) {
+ssdmodel/ssd_clean.c:152:            metadata->block_usage[blk].rem_lifetime);
+ssdmodel/ssd_clean.c:164:    int user_id = metadata->block_usage[blk].user_id;
+ssdmodel/ssd_clean.c:170:    ssd_clear_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_clean.c:171:    metadata->block_usage[blk].state = SSD_BLOCK_CLEAN;
+ssdmodel/ssd_clean.c:172:    metadata->block_usage[blk].bsn[metadata->user_id] = 0;
+ssdmodel/ssd_clean.c:173:    metadata->tot_free_blocks ++;
+ssdmodel/ssd_clean.c:174:    metadata->plane_meta[plane_num].free_blocks ++;
+ssdmodel/ssd_clean.c:179:    if(metadata->plane_meta[plane_num].using_nonallocating_pages[user_id] >= SSD_DATA_PAGES_PER_BLOCK(s))
+ssdmodel/ssd_clean.c:182:	metadata->plane_meta[plane_num].using_nonallocating_pages[user_id] -= SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:183:	metadata->plane_meta[plane_num].free_pages[0] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:185:    else if(metadata->plane_meta[plane_num].using_nonallocating_pages[user_id] > 0)
+ssdmodel/ssd_clean.c:189:	/*metadata->free_pages[0] += metadata->using_nonallocating_pages[user_id];
+ssdmodel/ssd_clean.c:190:	want_free_pages -= metadata->using_nonallocating_pages[user_id];
+ssdmodel/ssd_clean.c:191:	metadata->using_nonallocating_pages[user_id] = 0;
+ssdmodel/ssd_clean.c:193:	metadata->free_pages[user_id] += want_free_pages;*/
+ssdmodel/ssd_clean.c:198:	metadata->plane_meta[plane_num].free_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:205:	    metadata->user_using_blocks[user_id]--;
+ssdmodel/ssd_clean.c:206:	    metadata->plane_meta[plane_num].user_using_blocks[user_id]--;
+ssdmodel/ssd_clean.c:229:    metadata->block_usage[blk].user_id = 0;
+ssdmodel/ssd_clean.c:232:    ASSERT(metadata->block_usage[blk].num_valid == 0);
+ssdmodel/ssd_clean.c:292:        ASSERT(metadata->block_usage[block].plane_num == plane_num);
+ssdmodel/ssd_clean.c:293:        tot_lifetime += metadata->block_usage[block].rem_lifetime;
+ssdmodel/ssd_clean.c:310:        tot_lifetime += metadata->block_usage[i].rem_lifetime;
+ssdmodel/ssd_clean.c:397:	if(metadata->plane_meta[metadata->block_usage[blk].plane_num].user_id != metadata->user_id)
+ssdmodel/ssd_clean.c:402:        if (metadata->block_usage[blk].plane_num != plane_num) {
+ssdmodel/ssd_clean.c:407:    block_life = metadata->block_usage[blk].rem_lifetime;
+ssdmodel/ssd_clean.c:419:	if (metadata->block_usage[blk].user_id > 0)
+ssdmodel/ssd_clean.c:421:		if (metadata->block_usage[blk].user_id != metadata->user_id)
+ssdmodel/ssd_clean.c:427:	ptr = find_user(metadata->user_id);
+ssdmodel/ssd_clean.c:431:		if (metadata->block_usage[blk].user_id == metadata->user_id)
+ssdmodel/ssd_clean.c:433:		else if (metadata->block_usage[blk].user_id == 0)
+ssdmodel/ssd_clean.c:440:		if (metadata->block_usage[blk].user_id == metadata->user_id)
+ssdmodel/ssd_clean.c:442:		else if (metadata->block_usage[blk].user_id == 0)
+ssdmodel/ssd_clean.c:477:            if (metadata->block_usage[i].num_valid > 0) {
+ssdmodel/ssd_clean.c:478:                if (metadata->block_usage[i].time_of_last_erasure < oldest_erase_time) {
+ssdmodel/ssd_clean.c:479:                    oldest_erase_time = metadata->block_usage[i].time_of_last_erasure;
+ssdmodel/ssd_clean.c:488:        ASSERT(f1 == metadata->plane_meta[metadata->block_usage[to_blk].plane_num].free_blocks);
+ssdmodel/ssd_clean.c:494:            ASSERT(metadata->block_usage[block].plane_num == plane_num);
+ssdmodel/ssd_clean.c:496:            if (metadata->block_usage[block].num_valid > 0) {
+ssdmodel/ssd_clean.c:497:                if (metadata->block_usage[block].time_of_last_erasure < oldest_erase_time) {
+ssdmodel/ssd_clean.c:498:                    oldest_erase_time = metadata->block_usage[block].time_of_last_erasure;
+ssdmodel/ssd_clean.c:507:        ASSERT(metadata->block_usage[from_blk].plane_num == metadata->block_usage[to_blk].plane_num);
+ssdmodel/ssd_clean.c:512:    cost += _ssd_clean_block_fully(to_blk, metadata->block_usage[to_blk].plane_num, elem_num, metadata, s);
+ssdmodel/ssd_clean.c:517:        ASSERT(f2 == metadata->plane_meta[metadata->block_usage[to_blk].plane_num].free_blocks);
+ssdmodel/ssd_clean.c:523:    cost += metadata->block_usage[from_blk].num_valid * s->params.page_read_latency;
+ssdmodel/ssd_clean.c:525:    cost += metadata->block_usage[from_blk].num_valid * s->params.page_write_latency;
+ssdmodel/ssd_clean.c:534:	metadata->block_usage[to_blk].page_user_id[i] = metadata->block_usage[from_blk].page_user_id[i];
+ssdmodel/ssd_clean.c:535:	ASSERT(metadata->block_usage[to_blk].page_user_id[i] > 0);
+ssdmodel/ssd_clean.c:536:	ptr = find_user(metadata->block_usage[from_blk].page_user_id[i]);
+ssdmodel/ssd_clean.c:544:	int plane_num_temp = metadata->block_usage[from_blk].plane_num;
+ssdmodel/ssd_clean.c:545:	if(metadata->block_usage[from_blk].state == SSD_BLOCK_INUSE)
+ssdmodel/ssd_clean.c:548:		metadata->plane_meta[plane_num_temp].active_page[metadata->user_id] % s->params.pages_per_block;
+ssdmodel/ssd_clean.c:551:	plane_num_temp = metadata->block_usage[to_blk].plane_num;
+ssdmodel/ssd_clean.c:552:   	if(metadata->plane_meta[plane_num_temp].free_pages[metadata->user_id] < using_pages)
+ssdmodel/ssd_clean.c:554:             	metadata->plane_meta[plane_num_temp].free_pages[0] -= SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:555:             	metadata->plane_meta[plane_num_temp].using_nonallocating_pages[metadata->user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:556:             	metadata->plane_meta[plane_num_temp].free_pages[metadata->user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_clean.c:558:		ASSERT(metadata->plane_meta[plane_num_temp].free_pages[0] >= 0);
+ssdmodel/ssd_clean.c:560:        metadata->plane_meta[plane_num_temp].free_pages[metadata->user_id] -= using_pages;
+ssdmodel/ssd_clean.c:562:    metadata->block_usage[to_blk].bsn[metadata->user_id] = metadata->block_usage[from_blk].bsn[metadata->user_id];//*jian modify
+ssdmodel/ssd_clean.c:563:    metadata->block_usage[to_blk].num_valid = metadata->block_usage[from_blk].num_valid;
+ssdmodel/ssd_clean.c:564:    metadata->block_usage[from_blk].num_valid = 0;
+ssdmodel/ssd_clean.c:567:        int lpn = metadata->block_usage[from_blk].page[i];
+ssdmodel/ssd_clean.c:570:		 + (metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block)));
+ssdmodel/ssd_clean.c:572:		 + (metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block);
+ssdmodel/ssd_clean.c:574:        metadata->block_usage[to_blk].page[i] = metadata->block_usage[from_blk].page[i];
+ssdmodel/ssd_clean.c:576:	metadata->block_usage[to_blk].page_user_id[i] = metadata->block_usage[from_blk].page_user_id[i];
+ssdmodel/ssd_clean.c:577:	ASSERT(metadata->block_usage[to_blk].page_user_id[i] > 0);
+ssdmodel/ssd_clean.c:578:	ptr = find_user(metadata->block_usage[from_blk].page_user_id[i]);
+ssdmodel/ssd_clean.c:582:    metadata->block_usage[to_blk].state = metadata->block_usage[from_blk].state;
+ssdmodel/ssd_clean.c:584:    metadata->block_usage[to_blk].user_id = metadata->block_usage[from_blk].user_id;
+ssdmodel/ssd_clean.c:588:    ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_clean.c:589:    metadata->tot_free_blocks --;
+ssdmodel/ssd_clean.c:590:    metadata->plane_meta[metadata->block_usage[to_blk].plane_num].free_blocks --;
+ssdmodel/ssd_clean.c:592:    int user_id = metadata->user_id;
+ssdmodel/ssd_clean.c:593:    metadata->user_using_blocks[metadata->user_id]++;
+ssdmodel/ssd_clean.c:594:    metadata->plane_meta[metadata->block_usage[to_blk].plane_num].user_using_blocks[metadata->user_id]++;
+ssdmodel/ssd_clean.c:616:        ASSERT(f2 == metadata->plane_meta[metadata->block_usage[to_blk].plane_num].free_blocks);
+ssdmodel/ssd_clean.c:621:    ASSERT(metadata->block_usage[from_blk].num_valid == 0);
+ssdmodel/ssd_clean.c:633:    metadata->tot_migrations ++;
+ssdmodel/ssd_clean.c:634:    metadata->tot_pgs_migrated += metadata->block_usage[to_blk].num_valid;
+ssdmodel/ssd_clean.c:635:    metadata->mig_cost += cost;
+ssdmodel/ssd_clean.c:689:            if (metadata->block_usage[i].num_valid <= min_valid) {
+ssdmodel/ssd_clean.c:690:                ASSERT(i == metadata->block_usage[i].block_num);
+ssdmodel/ssd_clean.c:691:                ll_insert_at_head(greedy_list, (void*)&metadata->block_usage[i]);
+ssdmodel/ssd_clean.c:692:                min_valid = metadata->block_usage[i].num_valid;
+ssdmodel/ssd_clean.c:701:		fprintf(stderr,"(u %d) block[%d]=%d\t",metadata->block_usage[i].user_id,i,metadata->block_usage[i].num_valid);
+ssdmodel/ssd_clean.c:706:	fprintf(stderr,"(%d)free_pages=%d\t",0,metadata->free_pages[0]);
+ssdmodel/ssd_clean.c:707:	fprintf(stderr,"(%d)free_pages=%d\t",1,metadata->free_pages[1]);
+ssdmodel/ssd_clean.c:708:	fprintf(stderr,"(%d)free_pages=%d\n",2,metadata->free_pages[2]);
+ssdmodel/ssd_clean.c:709:	fprintf(stderr,"(%d)using_pages=%d\t",1,metadata->using_nonallocating_pages[1]);
+ssdmodel/ssd_clean.c:710:	fprintf(stderr,"(%d)using_pages=%d\n",2,metadata->using_nonallocating_pages[2]);
+ssdmodel/ssd_clean.c:711:	fprintf(stderr,"ele_user_id = %d\n",metadata->user_id);
+ssdmodel/ssd_clean.c:769:    //fprintf(stderr, "want GC user_id = %d metadata->user_id =%d (simtime = %f)\n", metadata->block_usage[block].user_id , metadata->user_id,simtime);//*jian debug
+ssdmodel/ssd_clean.c:781:            if (metadata->block_usage[i].num_valid < min_valid) {
+ssdmodel/ssd_clean.c:782:                min_valid = metadata->block_usage[i].num_valid;
+ssdmodel/ssd_clean.c:789:    	ASSERT(metadata->block_usage[block].user_id > 0);//*jian add
+ssdmodel/ssd_clean.c:810:    plane_metadata *pm = &metadata->plane_meta[plane_num];
+ssdmodel/ssd_clean.c:816:    ASSERT(metadata->user_id_2>0);
+ssdmodel/ssd_clean.c:818:    ptr = find_user(metadata->user_id_2);
+ssdmodel/ssd_clean.c:826:    	ASSERT(metadata->user_id == metadata->block_usage[block].user_id);
+ssdmodel/ssd_clean.c:827:	if(metadata->block_usage[block].user_id!=metadata->user_id)
+ssdmodel/ssd_clean.c:831:			if(metadata->block_usage[block].page_user_id[i] != -1)
+ssdmodel/ssd_clean.c:832:			if(metadata->block_usage[block].page_user_id[i] != metadata->block_usage[block].user_id)
+ssdmodel/ssd_clean.c:835:				,metadata->block_usage[block].page_user_id[i],metadata->block_usage[block].user_id);
+ssdmodel/ssd_clean.c:844:    if (metadata->block_usage[block].num_valid > 0) {
+ssdmodel/ssd_clean.c:847:            int lp_num = metadata->block_usage[block].page[i];
+ssdmodel/ssd_clean.c:859:    if (metadata->block_usage[block].num_valid == 0) {
+ssdmodel/ssd_clean.c:871:		ptr = find_user(metadata->block_usage[block].page_user_id[i]);
+ssdmodel/ssd_clean.c:873:		metadata->block_usage[block].page_user_id[i] = -1;
+ssdmodel/ssd_clean.c:886:    plane_metadata *pm = &metadata->plane_meta[plane_num];
+ssdmodel/ssd_clean.c:913:    plane_metadata *pm = &metadata->plane_meta[plane_num];
+ssdmodel/ssd_clean.c:914:    user_time_state *ptr = find_user(metadata->user_id_2);
+ssdmodel/ssd_clean.c:927:    } while (metadata->block_usage[blk].num_valid > 0);
+ssdmodel/ssd_clean.c:938:    plane_metadata *pm = &metadata->plane_meta[plane_num];
+ssdmodel/ssd_clean.c:943:    ASSERT(metadata->block_usage[blk].plane_num == plane_num);
+ssdmodel/ssd_clean.c:964:        int usage = metadata->block_usage[i].num_valid;
+ssdmodel/ssd_clean.c:977:        int usage = metadata->block_usage[i].num_valid;
+ssdmodel/ssd_clean.c:1017:        if ((plane_num != -1) && (metadata->block_usage[blk].plane_num != plane_num)) {
+ssdmodel/ssd_clean.c:1024:            int valid_pages = metadata->block_usage[blk].num_valid;
+ssdmodel/ssd_clean.c:1086:            int block_life = metadata->block_usage[blk].rem_lifetime;
+ssdmodel/ssd_clean.c:1090:            if ((plane_num != -1) && (metadata->block_usage[blk].plane_num != plane_num)) {
+ssdmodel/ssd_clean.c:1123:                cost += _ssd_clean_block_fully(blk, metadata->block_usage[blk].plane_num, elem_num, metadata, s);
+ssdmodel/ssd_clean.c:1229:            if (metadata->plane_meta[plane_num].clean_in_progress) {
+ssdmodel/ssd_clean.c:1230:                metadata->plane_meta[plane_num].clean_in_progress = 0;
+ssdmodel/ssd_clean.c:1231:                metadata->plane_meta[plane_num].clean_in_block = -1;
+ssdmodel/ssd_clean.c:1234:            metadata->active_page[metadata->user_id] = metadata->plane_meta[plane_num].active_page[metadata->user_id];
+二進位格式檔案 ssdmodel/ssd_clean.o 符合
+ssdmodel/ssd_init.c:91:    //metadata->tot_free_blocks = reserved_blocks;
+ssdmodel/ssd_init.c:92:    metadata->tot_free_blocks = currdisk->params.blocks_per_element;
+ssdmodel/ssd_init.c:94:    metadata->element_number = elem_number;
+ssdmodel/ssd_init.c:98:    metadata->gang_num = elem_number / currdisk->params.elements_per_gang;
+ssdmodel/ssd_init.c:99:    g = &currdisk->gang_meta[metadata->gang_num];
+ssdmodel/ssd_init.c:104:    metadata->plane_to_clean = 0;
+ssdmodel/ssd_init.c:105:    metadata->block_alloc_pos = 0;
+ssdmodel/ssd_init.c:106:    metadata->reqs_waiting = 0;
+ssdmodel/ssd_init.c:107:    metadata->tot_migrations = 0;
+ssdmodel/ssd_init.c:108:    metadata->tot_pgs_migrated = 0;
+ssdmodel/ssd_init.c:109:    metadata->mig_cost = 0;
+ssdmodel/ssd_init.c:110:    metadata->user_id = 0;
+ssdmodel/ssd_init.c:111:    metadata->user_id_2 = 0;
+ssdmodel/ssd_init.c:113:    metadata->element_user_id = 0;
+ssdmodel/ssd_init.c:139:        //metadata->plane_meta[i].active_page = blocks_to_skip*currdisk->params.pages_per_block;//*jian modify
+ssdmodel/ssd_init.c:145:		metadata->plane_meta[i].user_allocating_blocks[j] = 0;
+ssdmodel/ssd_init.c:146:		metadata->plane_meta[i].user_using_blocks[j] = 0;
+ssdmodel/ssd_init.c:149:        	metadata->plane_meta[i].active_page[j] = -1;
+ssdmodel/ssd_init.c:153:        //metadata->plane_meta[i].free_blocks = reserved_blocks_per_plane;
+ssdmodel/ssd_init.c:154:        metadata->plane_meta[i].free_blocks = currdisk->params.blocks_per_plane;
+ssdmodel/ssd_init.c:155:        metadata->plane_meta[i].valid_pages = 0;
+ssdmodel/ssd_init.c:156:        metadata->plane_meta[i].clean_in_progress = 0;
+ssdmodel/ssd_init.c:157:        metadata->plane_meta[i].clean_in_block = -1;
+ssdmodel/ssd_init.c:158:        metadata->plane_meta[i].block_alloc_pos = i*currdisk->params.blocks_per_plane;
+ssdmodel/ssd_init.c:159:        metadata->plane_meta[i].parunit_num = i / SSD_PLANES_PER_PARUNIT(currdisk);
+ssdmodel/ssd_init.c:160:        metadata->plane_meta[i].num_cleans = 0;
+ssdmodel/ssd_init.c:162:	metadata->plane_meta[i].user_id = 0; //*jian add
+ssdmodel/ssd_init.c:169:        metadata->parunits[i].plane_to_clean = SSD_PLANES_PER_PARUNIT(currdisk)*i;
+ssdmodel/ssd_init.c:176:            //metadata->active_page = usable_blocks_per_plane * currdisk->params.pages_per_block;
+ssdmodel/ssd_init.c:178:            metadata->active_page[i] = -1;		//*jian modify
+ssdmodel/ssd_init.c:182:            //metadata->active_page = (2 * usable_blocks_per_plane) * currdisk->params.pages_per_block;
+ssdmodel/ssd_init.c:184:            metadata->active_page[i] = -1;		//*jian modify
+ssdmodel/ssd_init.c:188:            //metadata->active_page = (currdisk->params.planes_per_pkg * usable_blocks_per_plane) * currdisk->params.pages_per_block;
+ssdmodel/ssd_init.c:190:            metadata->active_page[i] = -1;		//*jian modify
+ssdmodel/ssd_init.c:198:    ASSERT(metadata->active_page[0] == metadata->plane_meta[0].active_page[0]); //*jian modify
+ssdmodel/ssd_init.c:199:    //active_block = metadata->active_page / currdisk->params.pages_per_block; //*jian modify
+ssdmodel/ssd_init.c:205:    //  reserved_blocks, usable_blocks, metadata->active_page, export_size);
+ssdmodel/ssd_init.c:209:    /*if ((metadata->lba_table = (int *)malloc(tot_blocks* SSD_DATA_PAGES_PER_BLOCK(currdisk) * sizeof(int))) == NULL) {
+ssdmodel/ssd_init.c:210:    //if ((metadata->lba_table = (int *)malloc(tot_blocks * currdisk->params.pages_per_block * sizeof(int))) == NULL) { //*jian modify
+ssdmodel/ssd_init.c:225:    if (!(metadata->free_blocks = (unsigned char *)malloc(bytes_to_alloc))) {
+ssdmodel/ssd_init.c:230:    bzero(metadata->free_blocks, bytes_to_alloc);
+ssdmodel/ssd_init.c:233:    if (!(metadata->block_usage = (block_metadata *)malloc(tot_blocks * sizeof(block_metadata)))) {
+ssdmodel/ssd_init.c:238:    bzero(metadata->block_usage, tot_blocks * sizeof(block_metadata));
+ssdmodel/ssd_init.c:243:        metadata->block_usage[i].block_num = i;
+ssdmodel/ssd_init.c:244:        metadata->block_usage[i].page = (int*)malloc(sizeof(int) * currdisk->params.pages_per_block);
+ssdmodel/ssd_init.c:246:        metadata->block_usage[i].page_user_id = (int*)malloc(sizeof(int) * currdisk->params.pages_per_block);	//*jian modify add
+ssdmodel/ssd_init.c:250:            metadata->block_usage[i].page[j] = -1;
+ssdmodel/ssd_init.c:252:            metadata->block_usage[i].page_user_id[j] = -1;
+ssdmodel/ssd_init.c:259:                metadata->block_usage[i].plane_num = i / currdisk->params.blocks_per_plane;
+ssdmodel/ssd_init.c:263:                metadata->block_usage[i].plane_num = (i/(2*currdisk->params.blocks_per_plane))*2 + i%2;
+ssdmodel/ssd_init.c:267:                metadata->block_usage[i].plane_num = i % currdisk->params.planes_per_pkg;
+ssdmodel/ssd_init.c:276:        metadata->block_usage[i].rem_lifetime = SSD_MAX_ERASURES;
+ssdmodel/ssd_init.c:277:        metadata->block_usage[i].time_of_last_erasure = simtime;
+ssdmodel/ssd_init.c:280:        metadata->block_usage[i].state = SSD_BLOCK_CLEAN;
+ssdmodel/ssd_init.c:285:	ssd_clear_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_init.c:289:        metadata->block_usage[i].bsn[j] = 0;
+ssdmodel/ssd_init.c:300:    metadata->user_using_blocks[i]= 0;
+ssdmodel/ssd_init.c:319:            metadata->block_usage[block].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd_init.c:371:        metadata->lba_table[i] = ppage;
+ssdmodel/ssd_init.c:381:            ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_init.c:382:            metadata->block_usage[block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd_init.c:383:            metadata->block_usage[block].bsn[0] = bsn ++;	//*jian modify
+ssdmodel/ssd_init.c:384:	    metadata->block_usage[block].user_id = 0;
+ssdmodel/ssd_init.c:388:        plane_num = metadata->block_usage[block].plane_num;
+ssdmodel/ssd_init.c:389:        metadata->block_usage[block].page[pp_index] = i;
+ssdmodel/ssd_init.c:390:        metadata->block_usage[block].num_valid ++;
+ssdmodel/ssd_init.c:391:        metadata->plane_meta[plane_num].valid_pages ++;
+ssdmodel/ssd_init.c:395:	metadata->active_page[metadata->user_id] = ppage;//*jian add
+ssdmodel/ssd_init.c:396:        metadata->plane_meta[plane_num].active_page[metadata->user_id] = ppage;
+ssdmodel/ssd_init.c:411:            ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_init.c:412:            metadata->block_usage[active_block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd_init.c:413:            metadata->block_usage[active_block].bsn[0] = bsn ++;
+ssdmodel/ssd_init.c:418:                int plane_active_block = SSD_PAGE_TO_BLOCK((unsigned int)metadata->plane_meta[i].active_page, currdisk);
+ssdmodel/ssd_init.c:421:                ssd_set_bit(metadata->free_blocks, bitpos);
+ssdmodel/ssd_init.c:422:                metadata->block_usage[plane_active_block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd_init.c:423:                metadata->block_usage[plane_active_block].bsn[0] = bsn ++;
+ssdmodel/ssd_init.c:424:                metadata->tot_free_blocks --;
+ssdmodel/ssd_init.c:425:                metadata->plane_meta[i].free_blocks --;
+ssdmodel/ssd_init.c:437:    metadata->bsn = bsn;
+ssdmodel/ssd_init.c:440:	metadata->plane_to_write[i]=0;
+ssdmodel/ssd_init.c:443:		metadata->plane_meta[j].free_pages[i] = 0;
+ssdmodel/ssd_init.c:444:		metadata->plane_meta[j].using_nonallocating_pages[i] = 0;
+ssdmodel/ssd_init.c:446:		metadata->plane_meta[j].free_pages[0] = currdisk->params.blocks_per_plane * SSD_DATA_PAGES_PER_BLOCK(currdisk);
+二進位格式檔案 ssdmodel/ssd_init.o 符合
+二進位格式檔案 ssdmodel/ssd.o 符合
+ssdmodel/ssd_timing.c:45:				if((metadata->plane_meta[j].free_pages[user_id]+metadata->plane_meta[j].free_pages[0])>max_free_pages)
+ssdmodel/ssd_timing.c:48:					(metadata->plane_meta[j].free_pages[user_id]+metadata->plane_meta[j].free_pages[0]);
+ssdmodel/ssd_timing.c:58:		if(metadata->plane_meta[choose_plane].free_pages[user_id] == 0)
+ssdmodel/ssd_timing.c:60:        	        metadata->plane_meta[choose_plane].free_pages[0] -= SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_timing.c:61:                	metadata->plane_meta[choose_plane].using_nonallocating_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_timing.c:62:	                metadata->plane_meta[choose_plane].free_pages[user_id] += SSD_DATA_PAGES_PER_BLOCK(s);
+ssdmodel/ssd_timing.c:64:	       	metadata->plane_meta[choose_plane].free_pages[user_id] --;
+ssdmodel/ssd_timing.c:86:	if(metadata->element_user_id != user_id)
+ssdmodel/ssd_timing.c:90:		fprintf(stderr,"metadata->element_user_id = %d\n",metadata->element_user_id);
+ssdmodel/ssd_timing.c:92:		ASSERT(metadata->element_user_id == user_id);
+ssdmodel/ssd_timing.c:223:        if (!ssd_bit_on(metadata->free_blocks, i)) {
+ssdmodel/ssd_timing.c:240:    ASSERT(f1 == metadata->plane_meta[plane_num].free_blocks);
+ssdmodel/ssd_timing.c:254:        tmp += metadata->plane_meta[i].free_blocks;
+ssdmodel/ssd_timing.c:256:    ASSERT(metadata->tot_free_blocks == tmp);
+ssdmodel/ssd_timing.c:271:	if(pre_metadata->plane_meta[pre_metadata->block_usage[prev_block].plane_num].user_id != metadata->plane_meta[metadata->block_usage[active_block].plane_num].user_id)
+ssdmodel/ssd_timing.c:274:	pre_metadata->block_usage[prev_block].plane_num,metadata->block_usage[active_block].plane_num);
+ssdmodel/ssd_timing.c:279:	fprintf(stderr,"prev user_id = %d ",pre_metadata->plane_meta[metadata->block_usage[prev_block].plane_num].user_id);
+ssdmodel/ssd_timing.c:280:	fprintf(stderr,"active user_id = %d\n",metadata->plane_meta[metadata->block_usage[active_block].plane_num].user_id);
+ssdmodel/ssd_timing.c:281:	ASSERT(pre_metadata->plane_meta[pre_metadata->block_usage[prev_block].plane_num].user_id == metadata->plane_meta[metadata->block_usage[active_block].plane_num].user_id);
+ssdmodel/ssd_timing.c:284:	if(pre_metadata->block_usage[prev_block].bsn[user_id] >= metadata->block_usage[active_block].bsn[user_id])
+ssdmodel/ssd_timing.c:286:	fprintf(stderr,"elem num = %d\n",metadata->element_number);
+ssdmodel/ssd_timing.c:288:	pre_metadata->block_usage[prev_block].plane_num,metadata->block_usage[active_block].plane_num);
+ssdmodel/ssd_timing.c:294:	pre_metadata->block_usage[prev_block].bsn[user_id],metadata->block_usage[active_block].bsn[user_id]);
+ssdmodel/ssd_timing.c:298:        ASSERT(pre_metadata->block_usage[prev_block].bsn[user_id] < metadata->block_usage[active_block].bsn[user_id]);
+ssdmodel/ssd_timing.c:313:        block_valid_pages += metadata->block_usage[block].num_valid;
+ssdmodel/ssd_timing.c:316:    ASSERT(block_valid_pages == metadata->plane_meta[plane_num].valid_pages);
+ssdmodel/ssd_timing.c:426:    int user_id = metadata->user_id;							//*jian modify add
+ssdmodel/ssd_timing.c:430:    unsigned int active_page = metadata->active_page[user_id];
+ssdmodel/ssd_timing.c:433:    unsigned int active_plane = metadata->block_usage[active_block].plane_num;
+ssdmodel/ssd_timing.c:447:        unsigned int prev_plane = pre_metadata->block_usage[prev_block].plane_num;
+ssdmodel/ssd_timing.c:452:        if (pre_metadata->block_usage[prev_block].page[pagepos_in_prev_block] != lpn) {
+ssdmodel/ssd_timing.c:454:                lpn, prev_block, pagepos_in_prev_block,pre_metadata->block_usage[prev_block].page[pagepos_in_prev_block]);
+ssdmodel/ssd_timing.c:457:            pre_metadata->block_usage[prev_block].page[pagepos_in_prev_block] = -1;		//*jian -note clean infor
+ssdmodel/ssd_timing.c:459:    	    //pre_metadata->block_usage[prev_block].page_user_id[pagepos_in_prev_block] = -1;
+ssdmodel/ssd_timing.c:462:	    if(pre_metadata->block_usage[prev_block].user_id != metadata->user_id)
+ssdmodel/ssd_timing.c:464:		fprintf(stderr,"overwrite block_user_id = %d metadata user_id = %d\n",pre_metadata->block_usage[prev_block].user_id,metadata->user_id);
+ssdmodel/ssd_timing.c:470:            pre_metadata->block_usage[prev_block].num_valid --;
+ssdmodel/ssd_timing.c:471:            pre_metadata->plane_meta[prev_plane].valid_pages --;
+ssdmodel/ssd_timing.c:481:    s->page_level_mapping_table[lpn] = active_page + (metadata->element_number * s->params.blocks_per_element * s->params.pages_per_block);
+ssdmodel/ssd_timing.c:484:    metadata->block_usage[active_block].page[pagepos_in_block] = lpn;
+ssdmodel/ssd_timing.c:486:    ASSERT(metadata->user_id_2 > 0);
+ssdmodel/ssd_timing.c:490:    	metadata->block_usage[active_block].page_user_id[pagepos_in_block] = user_id_2;
+ssdmodel/ssd_timing.c:495:    	metadata->block_usage[active_block].page_user_id[pagepos_in_block] = metadata->user_id_2;
+ssdmodel/ssd_timing.c:496:    	ptr = find_user(metadata->user_id_2);
+ssdmodel/ssd_timing.c:500:    metadata->block_usage[active_block].num_valid ++;
+ssdmodel/ssd_timing.c:501:    metadata->plane_meta[active_plane].valid_pages ++;
+ssdmodel/ssd_timing.c:505:    if (metadata->block_usage[active_block].num_valid >= s->params.pages_per_block) {
+ssdmodel/ssd_timing.c:507:            metadata->block_usage[active_block].num_valid, active_block, s->params.pages_per_block);
+ssdmodel/ssd_timing.c:516:    metadata->active_page[user_id] = active_page + 1;
+ssdmodel/ssd_timing.c:517:    metadata->plane_meta[active_plane].active_page[user_id] = metadata->active_page[user_id];
+ssdmodel/ssd_timing.c:521:    if (ssd_last_page_in_block(metadata->active_page[user_id], s)) {
+ssdmodel/ssd_timing.c:530:        metadata->block_usage[active_block].page[s->params.pages_per_block - 1] = -1;
+ssdmodel/ssd_timing.c:531:        metadata->block_usage[active_block].state = SSD_BLOCK_SEALED;
+ssdmodel/ssd_timing.c:549:    unsigned char *free_blocks = metadata->free_blocks;
+ssdmodel/ssd_timing.c:556:        prev_pos = metadata->plane_meta[plane_num].block_alloc_pos;
+ssdmodel/ssd_timing.c:558:        prev_pos = metadata->block_alloc_pos;
+ssdmodel/ssd_timing.c:567:		while(metadata->plane_meta[plane_num].user_id != user_id)
+ssdmodel/ssd_timing.c:570:			prev_pos = metadata->plane_meta[plane_num].block_alloc_pos;
+ssdmodel/ssd_timing.c:578:		ASSERT(metadata->plane_meta[plane_num].user_id == metadata->user_id);
+ssdmodel/ssd_timing.c:596:            metadata->plane_meta[plane_num].block_alloc_pos = plane_num * s->params.blocks_per_plane;
+ssdmodel/ssd_timing.c:597:            prev_pos = metadata->plane_meta[plane_num].block_alloc_pos;
+ssdmodel/ssd_timing.c:608:        metadata->plane_meta[plane_num].block_alloc_pos = \
+ssdmodel/ssd_timing.c:611:        metadata->block_alloc_pos = (bitpos+1) % s->params.blocks_per_element;
+ssdmodel/ssd_timing.c:620:	/*fprintf(stderr,"allocating free block=%d plane=%d element number=%d metadata->tot_free_blocks=%d user_id = %d\n",\
+ssdmodel/ssd_timing.c:621:	*metadata->free_blocks,metadata->block_usage[active_block].plane_num,elem_num,metadata->tot_free_blocks,user_id);
+ssdmodel/ssd_timing.c:622:	ASSERT(*metadata->free_blocks!=-1);*/
+ssdmodel/ssd_timing.c:626:	ASSERT(metadata->plane_meta[plane_num].user_id == user_id);
+ssdmodel/ssd_timing.c:628:        ASSERT(metadata->block_usage[active_block].plane_num == ssd_bitpos_to_plane(bitpos, s));
+ssdmodel/ssd_timing.c:629:        //ASSERT(metadata->block_usage[active_block].bsn == 0); //*jian modify
+ssdmodel/ssd_timing.c:630:        ASSERT(metadata->block_usage[active_block].num_valid == 0);
+ssdmodel/ssd_timing.c:631:        ASSERT(metadata->block_usage[active_block].state == SSD_BLOCK_CLEAN);
+ssdmodel/ssd_timing.c:634:            plane_num = metadata->block_usage[active_block].plane_num;
+ssdmodel/ssd_timing.c:636:            ASSERT(plane_num == metadata->block_usage[active_block].plane_num);
+ssdmodel/ssd_timing.c:639:        pm = &metadata->plane_meta[plane_num];
+ssdmodel/ssd_timing.c:642:        metadata->tot_free_blocks --;
+ssdmodel/ssd_timing.c:648:	metadata->user_using_blocks[user_id]++;
+ssdmodel/ssd_timing.c:675:        metadata->block_usage[active_block].state = SSD_BLOCK_INUSE;
+ssdmodel/ssd_timing.c:676:        metadata->block_usage[active_block].bsn[user_id] = metadata->bsn++;
+ssdmodel/ssd_timing.c:677:	metadata->block_usage[active_block].user_id = user_id;
+ssdmodel/ssd_timing.c:681:        metadata->active_page[user_id] = pm->active_page[user_id];
+ssdmodel/ssd_timing.c:725:            plane_num = pre_metadata->block_usage[prev_block].plane_num;
+ssdmodel/ssd_timing.c:726:            parunit_num = pre_metadata->plane_meta[plane_num].parunit_num;
+ssdmodel/ssd_timing.c:728:		if(pre_metadata->plane_meta[plane_num].user_id != reqs[i]->user_id)
+ssdmodel/ssd_timing.c:732:			fprintf(stderr,"prev_page->user_id = %d req->user->user_id = %d\n",pre_metadata->plane_meta[plane_num].user_id,reqs[i]->user_id);
+ssdmodel/ssd_timing.c:752:	metadata->user_id_2 = reqs[i]->user_id;
+ssdmodel/ssd_timing.c:755:	metadata->user_id = reqs[i]->user_id;
+ssdmodel/ssd_timing.c:759:        metadata->user_id = 1;
+ssdmodel/ssd_timing.c:777:	    ASSERT(pre_metadata->block_usage[prev_block].user_id == user_id);
+ssdmodel/ssd_timing.c:779:            prev_bsn = pre_metadata->block_usage[prev_block].bsn[user_id];
+ssdmodel/ssd_timing.c:782:                plane_num = pre_metadata->block_usage[prev_block].plane_num;
+ssdmodel/ssd_timing.c:785:                j = metadata->plane_to_write[user_id];
+ssdmodel/ssd_timing.c:789:                    plane_metadata *pm = &metadata->plane_meta[j];
+ssdmodel/ssd_timing.c:799:				if(j != metadata->plane_to_write[user_id])
+ssdmodel/ssd_timing.c:808:			_ssd_alloc_active_block(j, elem_num, s,metadata->user_id);
+ssdmodel/ssd_timing.c:809:			//fprintf(outputfile,"j_debug test user_id = %d all_cb = %d plane = %d elem = %d\n",user_id,metadata->active_page[user_id],j,elem_num);
+ssdmodel/ssd_timing.c:813:                    active_bsn = metadata->block_usage[active_block].bsn[user_id];
+ssdmodel/ssd_timing.c:828:                        p = metadata->plane_meta[j].parunit_num;
+ssdmodel/ssd_timing.c:884:                } while (j != metadata->plane_to_write[user_id]);
+ssdmodel/ssd_timing.c:892:                metadata->plane_to_write[user_id] = (plane_num+1) % s->params.planes_per_pkg;
+ssdmodel/ssd_timing.c:898:                parunit_num = metadata->plane_meta[plane_num].parunit_num;
+ssdmodel/ssd_timing.c:941:    metadata->user_id_2 = user_id;
+ssdmodel/ssd_timing.c:943:    metadata->user_id = user_id;
+ssdmodel/ssd_timing.c:946:    metadata->user_id = 1;
+ssdmodel/ssd_timing.c:992:                lpn = ssd_logical_pageno(r->blk, s, metadata->user_id_2);
+ssdmodel/ssd_timing.c:994:		metadata->user_id_2 = r->org_req->user_id;
+ssdmodel/ssd_timing.c:997:		metadata->user_id = r->org_req->user_id;
+ssdmodel/ssd_timing.c:1000:		metadata->user_id = 1;
+ssdmodel/ssd_timing.c:1008:                    if (ssd_last_page_in_block(metadata->plane_meta[plane_num].active_page[user_id], s)) {
+ssdmodel/ssd_timing.c:1009:                        _ssd_alloc_active_block(plane_num, elem_num, s, metadata->user_id);
+ssdmodel/ssd_timing.c:1014:                    metadata->active_page[user_id] = metadata->plane_meta[plane_num].active_page[user_id];
+ssdmodel/ssd_timing.c:1016:                    parunit_op_cost[i] = _ssd_write_page_osr(s, metadata, lpn, metadata->user_id);
+ssdmodel/ssd_timing.c:1076:    int user_id = metadata->user_id;
+ssdmodel/ssd_timing.c:1078:    lpn = ssd_logical_pageno(blkno, s, metadata->user_id_2);
+ssdmodel/ssd_timing.c:1084:    if (ssd_last_page_in_block(metadata->active_page[user_id], s)) {
+ssdmodel/ssd_timing.c:1108:            ssd_last_page_in_block(metadata->active_page[user_id], s)) {
+ssdmodel/ssd_timing.c:1109:            _ssd_alloc_active_block(-1, elem_num, s, metadata->user_id);
+ssdmodel/ssd_timing.c:1115:    cost += _ssd_write_page_osr(s, metadata, lpn, metadata->user_id);
+二進位格式檔案 ssdmodel/ssd_timing.o 符合

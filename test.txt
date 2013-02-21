@@ -1,0 +1,411 @@
+
+*** Output file name: stdout
+*** Input trace format: ascii
+*** I/O trace used: ./ssdmodel/valid/01_0ran_8md_100rand_11m.dis
+*** Synthgen to be used?: 0
+
+disksim_global Global {
+Init Seed = 42,
+Real Seed = 42,
+Stat definition file = statdefs
+} # end of Global spec
+
+disksim_iosim Sim {
+I/O Trace Time Scale = 1.000000
+} # end of Sim spec
+
+disksim_stats Stats {
+iodriver stats = disksim_iodriver_stats {
+Print driver size stats = 1,
+Print driver locality stats = 0,
+Print driver blocking stats = 0,
+Print driver interference stats = 0,
+Print driver queue stats = 1,
+Print driver crit stats = 0,
+Print driver idle stats = 1,
+Print driver intarr stats = 0,
+Print driver streak stats = 1,
+Print driver stamp stats = 1,
+Print driver per-device stats = 0
+   },
+bus stats = disksim_bus_stats {
+Print bus idle stats = 1,
+Print bus arbwait stats = 1
+   },
+ctlr stats = disksim_ctlr_stats {
+Print controller cache stats = 1,
+Print controller size stats = 1,
+Print controller locality stats = 1,
+Print controller blocking stats = 1,
+Print controller interference stats = 1,
+Print controller queue stats = 1,
+Print controller crit stats = 1,
+Print controller idle stats = 1,
+Print controller intarr stats = 0,
+Print controller streak stats = 1,
+Print controller stamp stats = 1,
+Print controller per-device stats = 1
+   },
+device stats = disksim_device_stats {
+Print device queue stats = 1,
+Print device crit stats = 0,
+Print device idle stats = 0,
+Print device intarr stats = 0,
+Print device size stats = 0,
+Print device seek stats = 1,
+Print device latency stats = 1,
+Print device xfer stats = 1,
+Print device acctime stats = 1,
+Print device interfere stats = 0,
+Print device buffer stats = 1
+   },
+process flow stats = disksim_pf_stats {
+Print per-process stats = 0,
+Print per-CPU stats = 0,
+Print all interrupt stats = 0,
+Print sleep stats = 0
+   }
+} # end of Stats spec
+
+disksim_iodriver DRIVER0 {
+type = 1,
+Constant access time = 0.0,
+Scheduler = disksim_ioqueue {
+Scheduling policy = 1,
+Cylinder mapping strategy = 1,
+Write initiation delay = 0.0,
+Read initiation delay = 0.0,
+Sequential stream scheme = 0,
+Maximum concat size = 128,
+Overlapping request scheme = 0,
+Sequential stream diff maximum = 0,
+Scheduling timeout scheme = 0,
+Timeout time/weight = 6,
+Timeout scheduling = 4,
+Scheduling priority scheme = 0,
+Priority scheduling = 4
+   },
+Use queueing in subsystem = 1
+} # end of DRIVER0 spec
+
+disksim_bus BUSTOP {
+type = 1,
+Arbitration type = 1,
+Arbitration time = 0.0,
+Read block transfer time = 0.0,
+Write block transfer time = 0.0,
+Print stats = 1
+} # end of BUSTOP spec
+
+disksim_bus BUSHBA {
+type = 2,
+Arbitration type = 1,
+Arbitration time = 0.001000,
+Read block transfer time = 0.0,
+Write block transfer time = 0.0,
+Print stats = 1
+} # end of BUSHBA spec
+
+disksim_ctlr CTLR0 {
+type = 1,
+Scale for delays = 0.0,
+Bulk sector transfer time = 0.0,
+Maximum queue length = 100,
+Print stats = 1
+} # end of CTLR0 spec
+
+ssdmodel_ssd SSD {
+Reserve pages percentage = 15,
+Minimum free blocks percentage = 5,
+Write policy = 2,
+Cleaning policy = 2,
+Planes per package = 8,
+Blocks per plane = 2048,
+Plane block mapping = 3,
+Copy back = 1,
+Number of parallel units = 1,
+Allocation pool logic = 1,
+Elements per gang = 1,
+Gang share = 1,
+Cleaning in background = 0,
+Command overhead = 0.0,
+Bus transaction latency = 0.0,
+Bulk sector transfer time = 0,
+Flash chip elements = 8,
+Page size = 8,
+Pages per block = 64,
+Blocks per element = 16384,
+Element stride pages = 1,
+Never disconnect = 1,
+Print stats = 1,
+Max queue length = 1000000,
+Scheduler = disksim_ioqueue {
+Scheduling policy = 1,
+Cylinder mapping strategy = 0,
+Write initiation delay = 0,
+Read initiation delay = 0.0,
+Sequential stream scheme = 0,
+Maximum concat size = 0,
+Overlapping request scheme = 0,
+Sequential stream diff maximum = 0,
+Scheduling timeout scheme = 0,
+Timeout time/weight = 0,
+Timeout scheduling = 0,
+Scheduling priority scheme = 0,
+Priority scheduling = 1
+   },
+Timing model = 1,
+Chip xfer latency = 0.000025,
+Page read latency = 0.025000,
+Page write latency = 0.200000,
+Block erase latency = 1.500000
+} # end of SSD spec
+
+instantiate [ 
+   simfoo
+] as Sim
+
+instantiate [ 
+   statfoo
+] as Stats
+
+instantiate [ 
+   ssd0x0
+] as SSD
+
+instantiate [ 
+   bustop
+] as BUSTOP
+
+instantiate [ 
+   busHBA0
+] as BUSHBA
+
+instantiate [ 
+   driver0
+] as DRIVER0
+
+instantiate [ 
+   ctlrHBA0
+] as CTLR0
+
+topospec disksim_iodriver driver0 [ 
+   disksim_bus bustop [ 
+      disksim_ctlr ctlrHBA0 [ 
+         disksim_bus busHBA0 [ 
+            ssdmodel_ssd ssd0x0 [ ]
+         ]
+      ]
+   ]
+]
+
+disksim_logorg org0 {
+Addressing mode = Array,
+Distribution scheme = Striped,
+Redundancy scheme = Noredun,
+devices = [ 
+      ssd0x0
+   ],
+Stripe unit = 128,
+Synch writes for safety = 0,
+Number of copies = 2,
+Copy choice on read = 6,
+RMW vs. reconstruct = 0.500000,
+Parity stripe unit = 128,
+Parity rotation type = 1,
+Time stamp interval = 0.0,
+Time stamp start time = 60000.000000,
+Time stamp stop time = 10000000000.000000,
+Time stamp file name = stamps
+} # end of org0 spec
+
+disksim_pf Proc {
+Number of processors = 1,
+Process-Flow Time Scale = 1.000000
+} # end of Proc spec
+
+disksim_synthio Synthio {
+Number of I/O requests to generate = 10000,
+Maximum time of trace generated = 1000.000000,
+System call/return with each request = 0,
+Think time from call to request = 0.0,
+Think time from request to return = 0.0,
+Generators = [ 
+      disksim_synthgen {
+Storage capacity per device = 6156008,
+devices = [ 
+            org0, 
+            org1, 
+            org2, 
+            org3, 
+            org4, 
+            org5, 
+            org6, 
+            org7, 
+            org8, 
+            org9, 
+            org10, 
+            org11, 
+            org12, 
+            org13
+         ],
+Blocking factor = 8,
+Probability of sequential access = 0.0,
+Probability of local access = 0.0,
+Probability of read access = 0.660000,
+Probability of time-critical request = 0.0,
+Probability of time-limited request = 0.0,
+Time-limited think times = [ 
+            normal, 
+            30.000000, 
+            100.000000
+         ],
+General inter-arrival times = [ 
+            exponential, 
+            0.0, 
+            5.000000
+         ],
+Sequential inter-arrival times = [ 
+            normal, 
+            0.0, 
+            0.0
+         ],
+Local inter-arrival times = [ 
+            exponential, 
+            0.0, 
+            0.0
+         ],
+Local distances = [ 
+            normal, 
+            0.0, 
+            40000.000000
+         ],
+Sizes = [ 
+            exponential, 
+            0.0, 
+            8.000000
+         ]
+      }
+   ]
+} # end of Synthio spec
+
+loadparams complete
+Initialization complete
+Time= 1000.000000 (user_id = 1) (Throughput 50.875000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 188.039290 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 1000.000000 (user_id = 2) (Throughput 50.500000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 253.137495 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 12.646400
+Time= 2000.000000 (user_id = 1) (Throughput 50.343750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 323.863684 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 3.801600
+Time= 2000.000000 (user_id = 2) (Throughput 50.875000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 579.604069 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 3000.000000 (user_id = 1) (Throughput 50.687500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 498.065075 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 3000.000000 (user_id = 2) (Throughput 50.156250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 881.539497 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 13.094400
+Time= 4000.000000 (user_id = 1) (Throughput 50.343750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 601.682062 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 4.249600
+Time= 4000.000000 (user_id = 2) (Throughput 50.875000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1180.806609 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 5000.000000 (user_id = 1) (Throughput 50.687500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 791.132045 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.294400
+Time= 5000.000000 (user_id = 2) (Throughput 50.531250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1500.647575 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 6000.000000 (user_id = 1) (Throughput 50.718750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 903.291845 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 6000.000000 (user_id = 2) (Throughput 50.500000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1738.436314 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 8.563200
+Time= 7000.000000 (user_id = 1) (Throughput 50.281250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 990.312943 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 16.832000
+Time= 7000.000000 (user_id = 2) (Throughput 50.812500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1978.716984 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 8000.000000 (user_id = 1) (Throughput 50.781250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1031.872802 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 8000.000000 (user_id = 2) (Throughput 50.187500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2336.236706 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 11.456000
+Time= 9000.000000 (user_id = 1) (Throughput 50.218750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1071.038762 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 19.724800
+Time= 9000.000000 (user_id = 2) (Throughput 51.000000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2706.290509 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 10000.000000 (user_id = 1) (Throughput 51.187500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1074.522252 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 10000.000000 (user_id = 2) (Throughput 50.000000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2970.479795 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 27.993600
+Time= 11000.000000 (user_id = 1) (Throughput 49.843750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1120.929664 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 33.817600
+Time= 11000.000000 (user_id = 2) (Throughput 51.375000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3196.909207 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 12000.000000 (user_id = 1) (Throughput 51.218750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1223.695216 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 12000.000000 (user_id = 2) (Throughput 49.656250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3460.263205 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 28.441600
+Time= 13000.000000 (user_id = 1) (Throughput 49.812500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1346.057971 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 34.265600
+Time= 13000.000000 (user_id = 2) (Throughput 51.406250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3725.568809 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 14000.000000 (user_id = 1) (Throughput 51.468750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1450.767702 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 14000.000000 (user_id = 2) (Throughput 49.718750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 4008.043500 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 32.755200
+Time= 15000.000000 (user_id = 1) (Throughput 49.843750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1553.619428 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 23.910400
+Time= 15000.000000 (user_id = 2) (Throughput 51.375000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 4313.892061 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 16000.000000 (user_id = 1) (Throughput 51.187500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1681.697897 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 16000.000000 (user_id = 2) (Throughput 50.031250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 4657.618377 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 17.510400
+Time= 17000.000000 (user_id = 1) (Throughput 49.843750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1783.430985 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 24.358400
+Time= 17000.000000 (user_id = 2) (Throughput 51.000000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 4920.194551 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 18000.000000 (user_id = 1) (Throughput 51.187500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1863.861420 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 18000.000000 (user_id = 2) (Throughput 50.031250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 5200.023558 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 17.958400
+Time= 19000.000000 (user_id = 1) (Throughput 50.218750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 1995.978865 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 9.113600
+Time= 19000.000000 (user_id = 2) (Throughput 51.000000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 5443.314860 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 20000.000000 (user_id = 1) (Throughput 50.812500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2093.759352 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 20000.000000 (user_id = 2) (Throughput 50.406250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 5575.755116 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 2.713600
+Time= 21000.000000 (user_id = 1) (Throughput 50.562500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2087.808952 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 21000.000000 (user_id = 2) (Throughput 50.625000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 5781.989360 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 3.648000
+Time= 22000.000000 (user_id = 1) (Throughput 50.468750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2180.426803 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 22000.000000 (user_id = 2) (Throughput 50.406250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 6145.482185 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 3.161600
+Time= 23000.000000 (user_id = 1) (Throughput 50.593750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2259.132550 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 23000.000000 (user_id = 2) (Throughput 50.625000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 6329.985707 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 4.096000
+Time= 24000.000000 (user_id = 1) (Throughput 50.437500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2425.692545 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 9.920000
+Time= 24000.000000 (user_id = 2) (Throughput 50.781250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 6543.181244 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 25000.000000 (user_id = 1) (Throughput 50.937500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2576.323078 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 25000.000000 (user_id = 2) (Throughput 50.250000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 6774.405793 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 18.188800
+Time= 26000.000000 (user_id = 1) (Throughput 50.093750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2717.408000 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 24.012800
+Time= 26000.000000 (user_id = 2) (Throughput 50.968750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 7061.849793 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 27000.000000 (user_id = 1) (Throughput 50.968750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2817.707504 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 27000.000000 (user_id = 2) (Throughput 50.062500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 7261.702751 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 18.636800
+Time= 28000.000000 (user_id = 1) (Throughput 50.062500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 2947.853614 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 24.460800
+Time= 28000.000000 (user_id = 2) (Throughput 51.156250 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 7458.104658 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 29000.000000 (user_id = 1) (Throughput 51.312500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3128.418430 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 29000.000000 (user_id = 2) (Throughput 49.875000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 7715.831066 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 32.729600
+Time= 30000.000000 (user_id = 1) (Throughput 49.750000 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3244.887286 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 33.664000
+Time= 30000.000000 (user_id = 2) (Throughput 51.468750 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 7906.716268 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 31000.000000 (user_id = 1) (Throughput 51.312500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 3336.637731 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 31000.000000 (user_id = 2) (Throughput 49.562500 MB/s) (GC_time 0.000000 ms/s) (Avg_response_time 8138.494138 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 33.177600
+Time= 32000.000000 (user_id = 1) (Throughput 48.812500 MB/s) (GC_time 24.000000 ms/s) (Avg_response_time 3437.352957 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 81.750400
+Time= 32000.000000 (user_id = 2) (Throughput 48.343750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 8446.467392 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 1120) spare time= 0.000000
+Time= 33000.000000 (user_id = 1) (Throughput 47.343750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 3672.794361 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 46.499200
+Time= 33000.000000 (user_id = 2) (Throughput 13.718750 MB/s) (GC_time 2844.600000 ms/s) (Avg_response_time 9033.156279 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11096) spare time= 0.000000
+Time= 34000.000000 (user_id = 1) (Throughput 45.875000 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 3823.514634 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 142.304000
+Time= 34000.000000 (user_id = 2) (Throughput 13.468750 MB/s) (GC_time 2989.800000 ms/s) (Avg_response_time 9837.797246 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11688) spare time= 0.000000
+Time= 35000.000000 (user_id = 1) (Throughput 47.375000 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 3934.662672 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 109.497600
+Time= 35000.000000 (user_id = 2) (Throughput 12.718750 MB/s) (GC_time 2920.200000 ms/s) (Avg_response_time 10640.211141 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11432) spare time= 0.000000
+Time= 36000.000000 (user_id = 1) (Throughput 47.875000 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 4146.273827 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 33.424000
+Time= 36000.000000 (user_id = 2) (Throughput 11.843750 MB/s) (GC_time 2949.000000 ms/s) (Avg_response_time 11410.186545 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11560) spare time= 0.000000
+Time= 37000.000000 (user_id = 1) (Throughput 47.750000 MB/s) (GC_time 300.000000 ms/s) (Avg_response_time 4292.227474 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 37000.000000 (user_id = 2) (Throughput 11.750000 MB/s) (GC_time 2954.400000 ms/s) (Avg_response_time 12229.951034 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11584) spare time= 43.875200
+Time= 38000.000000 (user_id = 1) (Throughput 46.250000 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 4453.419279 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 20.857600
+Time= 38000.000000 (user_id = 2) (Throughput 12.218750 MB/s) (GC_time 3060.000000 ms/s) (Avg_response_time 13079.842051 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12000) spare time= 0.000000
+Time= 39000.000000 (user_id = 1) (Throughput 46.187500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 4640.356478 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 78.508800
+Time= 39000.000000 (user_id = 2) (Throughput 11.875000 MB/s) (GC_time 3076.200000 ms/s) (Avg_response_time 13927.162000 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12072) spare time= 0.000000
+Time= 40000.000000 (user_id = 1) (Throughput 46.281250 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 4790.096320 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 142.531200
+Time= 40000.000000 (user_id = 2) (Throughput 12.000000 MB/s) (GC_time 3074.400000 ms/s) (Avg_response_time 14750.820815 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12064) spare time= 0.000000
+Time= 41000.000000 (user_id = 1) (Throughput 47.062500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 4976.867667 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 134.172800
+Time= 41000.000000 (user_id = 2) (Throughput 11.718750 MB/s) (GC_time 3076.200000 ms/s) (Avg_response_time 15574.519677 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12072) spare time= 0.000000
+Time= 42000.000000 (user_id = 1) (Throughput 47.687500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 5175.464416 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 74.473600
+Time= 42000.000000 (user_id = 2) (Throughput 11.312500 MB/s) (GC_time 2983.200000 ms/s) (Avg_response_time 16347.867767 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11712) spare time= 0.000000
+Time= 43000.000000 (user_id = 1) (Throughput 47.625000 MB/s) (GC_time 300.000000 ms/s) (Avg_response_time 5313.892146 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 5.958400
+Time= 43000.000000 (user_id = 2) (Throughput 11.156250 MB/s) (GC_time 2994.000000 ms/s) (Avg_response_time 17115.840955 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11760) spare time= 0.000000
+Time= 44000.000000 (user_id = 1) (Throughput 47.531250 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 5465.150588 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 44000.000000 (user_id = 2) (Throughput 11.468750 MB/s) (GC_time 2988.600000 ms/s) (Avg_response_time 17936.250063 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11736) spare time= 42.619200
+Time= 45000.000000 (user_id = 1) (Throughput 46.406250 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 5637.444618 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 10.281600
+Time= 45000.000000 (user_id = 2) (Throughput 11.593750 MB/s) (GC_time 3096.000000 ms/s) (Avg_response_time 18753.760118 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12160) spare time= 0.000000
+Time= 46000.000000 (user_id = 1) (Throughput 46.312500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 5807.937845 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 58.153600
+Time= 46000.000000 (user_id = 2) (Throughput 11.375000 MB/s) (GC_time 3106.800000 ms/s) (Avg_response_time 19610.070752 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12208) spare time= 0.000000
+Time= 47000.000000 (user_id = 1) (Throughput 46.468750 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 5954.368744 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 107.507200
+Time= 47000.000000 (user_id = 2) (Throughput 11.562500 MB/s) (GC_time 3094.200000 ms/s) (Avg_response_time 20421.732023 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12152) spare time= 0.000000
+Time= 48000.000000 (user_id = 1) (Throughput 46.312500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6138.474684 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 157.824000
+Time= 48000.000000 (user_id = 2) (Throughput 11.406250 MB/s) (GC_time 3103.200000 ms/s) (Avg_response_time 21303.124224 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12192) spare time= 0.000000
+Time= 49000.000000 (user_id = 1) (Throughput 47.468750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6303.183081 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 115.238400
+Time= 49000.000000 (user_id = 2) (Throughput 11.187500 MB/s) (GC_time 3106.800000 ms/s) (Avg_response_time 22162.470694 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12208) spare time= 0.000000
+Time= 50000.000000 (user_id = 1) (Throughput 47.468750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6440.779574 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 72.652800
+Time= 50000.000000 (user_id = 2) (Throughput 11.125000 MB/s) (GC_time 2997.600000 ms/s) (Avg_response_time 23007.102238 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11776) spare time= 0.000000
+Time= 51000.000000 (user_id = 1) (Throughput 47.593750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6578.747203 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 20.288000
+Time= 51000.000000 (user_id = 2) (Throughput 11.125000 MB/s) (GC_time 2995.800000 ms/s) (Avg_response_time 23833.329431 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11768) spare time= 0.000000
+Time= 52000.000000 (user_id = 1) (Throughput 47.562500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6756.959323 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 0.000000
+Time= 52000.000000 (user_id = 2) (Throughput 11.593750 MB/s) (GC_time 2988.600000 ms/s) (Avg_response_time 24617.005428 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11736) spare time= 28.428800
+Time= 53000.000000 (user_id = 1) (Throughput 46.437500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 6889.012912 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 6.016000
+Time= 53000.000000 (user_id = 2) (Throughput 11.375000 MB/s) (GC_time 3099.600000 ms/s) (Avg_response_time 25441.609489 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12176) spare time= 0.000000
+Time= 54000.000000 (user_id = 1) (Throughput 46.312500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 7081.866688 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 53.888000
+Time= 54000.000000 (user_id = 2) (Throughput 11.468750 MB/s) (GC_time 3099.600000 ms/s) (Avg_response_time 26276.722788 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12176) spare time= 0.000000
+Time= 55000.000000 (user_id = 1) (Throughput 46.437500 MB/s) (GC_time 276.000000 ms/s) (Avg_response_time 7244.929765 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 105.686400
+Time= 55000.000000 (user_id = 2) (Throughput 11.500000 MB/s) (GC_time 3099.600000 ms/s) (Avg_response_time 27115.654350 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12176) spare time= 0.000000
+Time= 56000.000000 (user_id = 1) (Throughput 46.312500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 7394.705448 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 153.558400
+Time= 56000.000000 (user_id = 2) (Throughput 11.531250 MB/s) (GC_time 3096.000000 ms/s) (Avg_response_time 27952.201479 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12160) spare time= 0.000000
+Time= 57000.000000 (user_id = 1) (Throughput 47.562500 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 7589.277011 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 106.083200
+Time= 57000.000000 (user_id = 2) (Throughput 11.375000 MB/s) (GC_time 3097.800000 ms/s) (Avg_response_time 28760.276341 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 12168) spare time= 0.000000
+Time= 58000.000000 (user_id = 1) (Throughput 47.531250 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 7810.547484 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 58.608000
+Time= 58000.000000 (user_id = 2) (Throughput 11.156250 MB/s) (GC_time 2994.000000 ms/s) (Avg_response_time 29555.248729 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11760) spare time= 0.000000
+Time= 59000.000000 (user_id = 1) (Throughput 47.468750 MB/s) (GC_time 288.000000 ms/s) (Avg_response_time 8017.801335 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 0) spare time= 16.022400
+Time= 59000.000000 (user_id = 2) (Throughput 11.187500 MB/s) (GC_time 2992.200000 ms/s) (Avg_response_time 30372.987492 (ms/req)/s) (Avg_bcount 64.000000 ) (Total_live_page_copy 11752) spare time= 0.000000

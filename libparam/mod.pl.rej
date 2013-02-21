@@ -1,0 +1,26 @@
+--- libparam/mod.pl	2008-05-23 13:45:02.000000000 -0700
++++ libparam/mod.pl	2008-05-11 15:09:29.000000000 -0700
+@@ -402,9 +402,6 @@
+     print CODE "(void *)$i";
+     $j++;
+ }
+-if($j == 0) {
+-    print CODE "NULL";
+-}
+ print CODE "\n};\n\n";
+ 
+ print CODE "lp_paramdep_t $MODNAME"."_deps[] = {\n";
+@@ -413,12 +410,9 @@
+     if($j > 0) {
+ 	print CODE ",\n";
+     }
+-    print CODE "$i";
++    print CODE "(void*)$i";
+     $j++;
+ }
+-if($j == 0) {
+-    print CODE "NULL";
+-}
+ print CODE "\n};\n\n";
+ 
+ close(HEADER);
