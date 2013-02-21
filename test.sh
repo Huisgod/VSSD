@@ -56,9 +56,9 @@ echo "$check_disksim_cnt != $run_ssdsim_cnt\n Run disksim\n"
 #fi
 
 	para=./ssdmodel/valid/Intel_toolkit.parv 
-	input=../trace/01_0ran_8md_100rand_11m.dis
+	input=../../trace/01_0ran_8md_100rand_11m.dis
 #	input=../trace/01_0ran_8md_0rand_11m.dis
 	echo "input file : $input"
- 	time ./src/disksim $para stdout  ascii $input  0 1> ./enable_borrow_dead_block.txt
-#    cgdb --args ./src/disksim $para stdout  ascii $input  0
+# 	time ./src/disksim $para stdout  ascii $input  0 1> ./enable_borrow_dead_block.txt
+    cgdb --args ./src/disksim $para stdout  ascii $input  0
 
